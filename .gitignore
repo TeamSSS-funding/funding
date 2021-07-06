@@ -3,6 +3,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=maven,eclipse
 
 ### Eclipse ###
+.classpath
+.project
 .metadata
 bin/
 tmp/
@@ -70,7 +72,7 @@ local.properties
 
 ### Intellij ###
 .idea
-
+*.iml
 ### Maven ###
 target/
 pom.xml.tagK
