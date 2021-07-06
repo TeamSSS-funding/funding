@@ -1,1 +1,1 @@
-"# funding" 
+# Funding
