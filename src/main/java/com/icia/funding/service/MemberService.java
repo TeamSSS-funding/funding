@@ -13,36 +13,53 @@ import com.icia.funding.dto.MemberDTO;
 public class MemberService {
 	
 	@Autowired
-	private MemberDAO mdao;
+	private MemberDAO memberDao;
 	
-	private ModelAndView mav;
+	private ModelAndView modelandview;
 	
 	@Autowired
 	private HttpSession session;
 
 	// 회원가입
 	public ModelAndView memberJoin(MemberDTO member) {
-		mav = new ModelAndView();
-		int insertResult = mdao.memberJoin(member);
-		if(insertResult > 0) {
-			mav.setViewName("login");
+		modelandview = new ModelAndView();
+		
+		int insertResult =0;
+		insertResult = memberDao.memberJoin(member);
+		if(insertResult>0) {
+			modelandview.setViewName("login");
 		} else {
-			mav.setViewName("memberJoin");
+			modelandview.setViewName("joinfail");
 		}
-		return mav;
+		return modelandview;
 	}
 
 	// 로그인
 	public ModelAndView login(MemberDTO member) {
-		mav = new ModelAndView();
-		String loginId = mdao.login(member);
+		modelandview = new ModelAndView();
+		String loginId = memberDao.login(member);
 		if(loginId != null) {
 			session.setAttribute("loginMember", loginId);
-			mav.setViewName("home");
+			modelandview.setViewName("home");
 		} else {
-			mav.setViewName("login");
+			modelandview.setViewName("login");
 		}
-		return mav;
+		return modelandview;
+	}
+	
+	//아이디 중복체크
+	public String idCheck(String m_id) {
+		String checkResult = memberDao.idCheck(m_id);
+		String result = "";
+		
+		if(checkResult == null) {
+			result = "ok";
+			
+		} else {
+			result = "no";
+		}
+		System.out.println(result);
+		return result;
 	}
 
 }
