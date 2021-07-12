@@ -13,5 +13,9 @@
 <a href="memberJoinPage">회원가입</a><br>
 <a href="loginPage">로그인</a><br>
 <a href="projectRequestPage">프로젝트 신청</a><br>
+
+<form method="post" action = "/logout">
+	<input type="submit" value="logout">
+</form>
 </body>
 </html>

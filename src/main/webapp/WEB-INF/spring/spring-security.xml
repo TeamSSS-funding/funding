@@ -9,8 +9,8 @@
         <security:intercept-url pattern="/" access="permitAll"/>
         <security:intercept-url pattern="/users/member" access="hasRole('ROLE_MEMBER')"/>
         <security:intercept-url pattern="/users/admin" access="hasRole('ROLE_ADMIN')"/>
-        <security:form-login login-page="/users/login"
-                             login-processing-url="/users/login-processing" />
+        <security:form-login login-page="/login" login-processing-url="/login" username-parameter="m_id" password-parameter="m_password"/>
+        <security:logout logout-url="/logout" logout-success-url="/"/>
         <security:csrf disabled="true"></security:csrf>
     </security:http>
 

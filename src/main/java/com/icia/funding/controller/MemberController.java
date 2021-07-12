@@ -54,11 +54,12 @@ public class MemberController {
 			
 	
 
-	// 로그인 페이지 요청
-	@RequestMapping(value="/loginPage",method= RequestMethod.GET)
+	@GetMapping("/login")
 	public String loginPage() {
 		return "users/login";
 	}
+
+
 //
 //	// 로그인 처리
 //	@RequestMapping(value="/login")
@@ -67,10 +68,6 @@ public class MemberController {
 //		return modelandview;
 //	}
 
-	@RequestMapping(value="/login-processing")
-	public void loginProcessing(String error){
-
-	}
 
 	@RequestMapping(value="/member",method= RequestMethod.GET)
 	public void doMember(){
@@ -88,5 +85,6 @@ public class MemberController {
 	public String projectRequestPage() {
 		return "projectRequest";
 	}
+
 
 }
