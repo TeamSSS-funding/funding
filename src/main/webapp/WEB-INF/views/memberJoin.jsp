@@ -139,10 +139,12 @@ function idoverlap(){
                     <option value="gmail.com"> gmail.com</option>
                 </select>
     <br>
-        전화번호: <input type = "text" id="m_phone" onkeyup = "phonecheck()"><br>
+        전화번호: <input type = "text" id="m_phone" name="m_phone" onkeyup = "phonecheck()"><br>
   		 <span id = "phoneresult"></span><br>
         <input type="submit" value="가입">
 	</form>
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
 	
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <a href="https://kauth.kakao.com/oauth/authorize?client_id=631b84f94a27727f5c58546dfe62d1d3&amp;redirect_uri=http://localhost:8081/kakao_callback&amp;response_type=code&amp;client_secret=0mR4VqB8bK4jNBSDvv5ceoIE1w8qrB99">

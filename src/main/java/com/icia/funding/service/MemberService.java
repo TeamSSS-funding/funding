@@ -17,21 +17,17 @@ public class MemberService {
 	
 	private ModelAndView modelandview;
 	
-	@Autowired
 	private HttpSession session;
 
 	// 회원가입
-	public ModelAndView memberJoin(MemberDTO member) {
+	public int memberJoin(MemberDTO member) {
 		modelandview = new ModelAndView();
 		
-		int insertResult =0;
-		insertResult = memberDao.memberJoin(member);
-		if(insertResult>0) {
-			modelandview.setViewName("login");
-		} else {
-			modelandview.setViewName("joinfail");
-		}
-		return modelandview;
+		member.setM_type("ROLE_USER");
+
+		int insertResult = memberDao.memberJoin(member);
+
+		return insertResult;
 	}
 
 	// 로그인
@@ -42,7 +38,7 @@ public class MemberService {
 			session.setAttribute("loginMember", loginId);
 			modelandview.setViewName("home");
 		} else {
-			modelandview.setViewName("login");
+			modelandview.setViewName("users/login");
 		}
 		return modelandview;
 	}

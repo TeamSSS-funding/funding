@@ -7,10 +7,12 @@
 <title>로그인</title>
 </head>
 <body>
-	<form action="login" method="post">
+	<form action="${pageContext.request.contextPath}/users/login-processing" method="post">
 		아이디: <input type="text" name="m_id"><br>
 		비밀번호: <input type="password" name="m_password"><br>
 		<input type="submit" value="로그인">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
 	</form>
 </body>
 </html>

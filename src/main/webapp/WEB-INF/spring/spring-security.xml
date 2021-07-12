@@ -6,10 +6,21 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <security:http>
-        <security:form-login />
+        <security:intercept-url pattern="/" access="permitAll"/>
+        <security:intercept-url pattern="/users/member" access="hasRole('ROLE_MEMBER')"/>
+        <security:intercept-url pattern="/users/admin" access="hasRole('ROLE_ADMIN')"/>
+        <security:form-login login-page="/users/login"
+                             login-processing-url="/users/login-processing" />
+        <security:csrf disabled="true"></security:csrf>
     </security:http>
 
     <security:authentication-manager>
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="aaa" password="{noop}aaa" authorities="ROLE_MEMBER"/>
+                <security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER, ROLE_ADMIN"/>
+            </security:user-service>
+        </security:authentication-provider>
     </security:authentication-manager>
 
 </beans>
