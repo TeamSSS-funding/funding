@@ -3,6 +3,6 @@
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.icia.funding.dto.MemberDTO" alias="memberdto"/>
+		<typeAlias type="io.github.mygoodsupporter.domain.Member" alias="Member"/>
 	</typeAliases>
 </configuration>

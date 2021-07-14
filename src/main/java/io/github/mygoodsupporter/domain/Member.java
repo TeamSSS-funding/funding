@@ -1,18 +1,14 @@
-package com.icia.funding.dto;
+package io.github.mygoodsupporter.domain;
 
 import lombok.Data;
 
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Data
-public class MemberDTO {
+public class Member {
 	
 	private String m_k_number;
 	private String m_id;
