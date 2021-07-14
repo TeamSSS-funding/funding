@@ -4,10 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import com.icia.funding.dto.MemberDTO;
 import com.icia.funding.service.MemberService;
@@ -34,9 +31,15 @@ public class MemberController {
 	}
 	
 	// 회원가입 실행
-	@RequestMapping(value="/memberJoin")
+	@RequestMapping(value="/memberJoin",method= RequestMethod.POST)
 	public ModelAndView memberJoin(@ModelAttribute MemberDTO member) {
-		modelandview = memberservice.memberJoin(member);
+		modelandview = new ModelAndView();
+		int insertResult = memberservice.memberJoin(member);
+		if(insertResult>0) {
+			modelandview.setViewName("users/login");
+		} else {
+			modelandview.setViewName("joinfail");
+		}
 		return modelandview;
 	}
 	
@@ -51,23 +54,38 @@ public class MemberController {
 			
 	
 
-	// 로그인 페이지 요청
-	@RequestMapping(value="/loginPage")
+	@GetMapping("/login")
 	public String loginPage() {
-		return "login";
+
+		return "users/login";
 	}
-	
-	// 로그인
-	@RequestMapping(value="/login")
-	public ModelAndView login(@ModelAttribute MemberDTO member) {
-		modelandview = memberservice.login(member);
-		return modelandview;
+
+
+//
+//	// 로그인 처리
+//	@RequestMapping(value="/login")
+//	public ModelAndView login(@ModelAttribute MemberDTO member) {
+//		modelandview = memberservice.login(member);
+//		return modelandview;
+//	}
+
+
+	@RequestMapping(value="/member",method= RequestMethod.GET)
+	public void doMember(){
+
 	}
+
+	@RequestMapping(value="/admin",method= RequestMethod.GET)
+	public void doAdmin(){
+
+	}
+
 	
 	// 프로젝트 신청 화면 요청
 	@RequestMapping(value="/projectRequestPage")
 	public String projectRequestPage() {
 		return "projectRequest";
 	}
+
 
 }
