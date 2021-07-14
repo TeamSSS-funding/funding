@@ -2,6 +2,9 @@ package com.icia.funding.security;
 
 
 import com.icia.funding.dto.MemberDTO;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,20 +15,22 @@ import java.util.Collection;
 import java.util.List;
 
 @SuppressWarnings("serial")
+@Getter @Setter
 public class MemberDetails implements UserDetails {
     private String id;
     private String password;
     private int enabled;
+    private List<String> authorities = new ArrayList<>();
 
     private String email;
-    private List<String> authorities = new ArrayList<>();
+
 
     public MemberDetails(MemberDTO member) {
         this.id = member.getM_id();
-        this.password = member.getM_password();
+        this.password = "";
         this.enabled = member.getEnabled();
-        this.email = member.getM_email();
         this.authorities = member.getAuthorities();
+        this.email = member.getM_email();
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {

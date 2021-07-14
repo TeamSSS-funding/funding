@@ -6,12 +6,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml", "file:src/main/webapp/WEB-INF/spring/spring-security.xml"})
+@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml", "file:../../../../../../main/webapp/WEB-INF/spring/security-context.xml"})
 //@Transactional
 public class MemberServiceTest {
 
