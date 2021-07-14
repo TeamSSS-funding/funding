@@ -17,4 +17,9 @@
 	SELECT M_ID FROM MEMBER WHERE M_ID=#{m_id} AND M_PASSWORD=#{m_password}
 	</select>
 
+	<select id="getMemberById" parameterType="String" resultType="memberdto">
+		SELECT * FROM MEMBER WHERE M_ID=#{m_id}
+	</select>
+
+
 </mapper>
