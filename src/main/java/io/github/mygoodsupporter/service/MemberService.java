@@ -17,16 +17,16 @@ public class MemberService {
 
 	public int join(Member member) {
 
-		member.setM_type("ROLE_USER");
-		String hashedPassword = passwordEncoder.encode(member.getM_password());
-		member.setM_password(hashedPassword);
+		member.setType("ROLE_USER");
+		String hashedPassword = passwordEncoder.encode(member.getPassword());
+		member.setPassword(hashedPassword);
 
 		return memberDao.insertMember(member);
 
 	}
 
-	public String idCheck(String m_id) {
-		Member member = memberDao.getMemberById(m_id);
+	public String idCheck(String id) {
+		Member member = memberDao.getMemberById(id);
 		String result = "";
 		
 		if(member == null) {

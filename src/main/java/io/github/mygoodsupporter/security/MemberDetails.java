@@ -24,11 +24,11 @@ public class MemberDetails implements UserDetails {
 
 
     public MemberDetails(Member member) {
-        this.id = member.getM_id();
-        this.password = member.getM_password();
+        this.id = member.getId();
+        this.password = member.getPassword();
         this.enabled = member.getEnabled();
         this.authorities = member.getAuthorities();
-        this.email = member.getM_email();
+        this.email = member.getEmail();
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -22,12 +22,11 @@ public class MemberServiceTest {
     public void joinTest() {
 
         Member member = new Member();
-        member.setM_id("abba123");
-        member.setM_password("1234");
-        member.setM_name("이름");
-        member.setM_phone("010-2944-4442");
-        member.setM_email("bbbb1234@email.com");
-        member.setM_type("ADMIN");
+        member.setId("abba123");
+        member.setPassword("1234");
+
+        member.setEmail("bbbb1234@email.com");
+        member.setType("ADMIN");
 
         int result = memberService.join(member);
 

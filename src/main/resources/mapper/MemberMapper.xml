@@ -2,13 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMapper">
+	<resultMap id="MemberResultMap" type="Member">
+		<result property="id" column="m_id"/>
+		<result property="password" column="m_password"/>
+		<result property="name" column="m_name"/>
+		<result property="email" column="m_email" />
+		<result property="phone" column="m_phone"/>
+		<result property="type" column="m_type" />
+		<association property="address" javaType="Address">
+			<result property="city" column="city" />
+			<result property="street" column="street" />
+			<result property="zipcode" column="zipcode" />
+		</association>
+	</resultMap>
+
 	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER(M_ID,M_PASSWORD,M_NAME,M_PHONE,M_EMAIL,M_TYPE, ENABLED) VALUES(#{m_id},#{m_password},#{m_name},#{m_phone},#{m_email},#{m_type},1)
+		INSERT INTO MEMBER(M_ID,M_PASSWORD,M_NAME,M_PHONE,M_EMAIL,M_TYPE, ENABLED, CITY, STREET, ZIPCODE)
+		VALUES(#{id},#{password},#{name},#{phone},#{email},#{type},1, #{address.city}, #{address.street}, #{address.zipcode})
 	</insert>
 
-	<select id="getMemberById" parameterType="String" resultType="Member">
-		SELECT * FROM MEMBER WHERE M_ID = #{m_id}
+	<select id="getMemberById" parameterType="String" resultMap="MemberResultMap">
+		SELECT * FROM MEMBER WHERE M_ID = #{id}
 	</select>
 
 </mapper>

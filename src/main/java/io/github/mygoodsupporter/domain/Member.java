@@ -1,23 +1,38 @@
 package io.github.mygoodsupporter.domain;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-@Data
+@NoArgsConstructor
+@Getter @Setter
 public class Member {
 	
-	private String m_k_number;
-	private String m_id;
-	private String m_password;
-	private String m_name;
-	private String m_phone;
-	private String m_email;
-	private String m_type;
+	private String id;
+	private String password;
+	private String email;
+	private String name;
+	private String phone;
+	private String type;
+
+	private Profile profile;
+	private Address address;
+
 	private List<String> authorities = new ArrayList<>();
 	private int enabled;
 
+	@Override
+	public String toString() {
+		return "Member{" +
+				"id='" + id + '\'' +
+				", password='" + password + '\'' +
+				", email='" + email + '\'' +
+				", name='" + name + '\'' +
+				", address=" + address +
+				'}';
+	}
 }

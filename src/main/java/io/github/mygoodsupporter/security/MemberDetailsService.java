@@ -13,7 +13,7 @@ public class MemberDetailsService implements UserDetailsService {
 
     @Autowired
     private MemberDAO memberdao;
-
+    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member member = memberdao.getMemberById(username);

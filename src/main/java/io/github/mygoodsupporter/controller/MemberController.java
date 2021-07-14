@@ -1,5 +1,6 @@
 package io.github.mygoodsupporter.controller;
 
+import io.github.mygoodsupporter.dto.RegistrationForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,8 @@ public class MemberController {
 	
 	// 회원가입 실행
 	@PostMapping("/memberJoin")
-	public String join(@ModelAttribute Member member) {
+	public String join(@ModelAttribute RegistrationForm registrationForm) {
+		Member member = registrationForm.toMember();
 		int insertResult = memberService.join(member);
 
 		if(insertResult>0) {
