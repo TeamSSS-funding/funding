@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-@Transactional
+@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml", "file:src/main/webapp/WEB-INF/spring/spring-security.xml"})
+//@Transactional
 public class MemberServiceTest {
 
     @Autowired
@@ -22,7 +22,7 @@ public class MemberServiceTest {
     public void joinTest() {
 
         MemberDTO member = new MemberDTO();
-        member.setM_id("aa123");
+        member.setM_id("abba123");
         member.setM_password("1234");
         member.setM_name("이름");
         member.setM_phone("010-2944-4442");

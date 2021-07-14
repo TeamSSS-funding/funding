@@ -122,7 +122,7 @@ function idoverlap(){
 
 
 
-<form action="memberJoin" method="post">
+<form action="${pageContext.request.contextPath}/memberJoin" method="post">
 		아이디: <input type="text" name="m_id" id="m_id" onblur="idoverlap()"><br>
 			<span id = idcheck></span><br>
 		비밀번호: <input type="password" name="m_password" id="m_password" onblur="password()"><br>

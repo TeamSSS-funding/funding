@@ -4,7 +4,7 @@
 <mapper namespace="membermapper">
 	<!-- 회원가입 -->
 	<insert id="memberjoin" parameterType="memberdto">
-		INSERT INTO MEMBER(M_ID,M_PASSWORD,M_NAME,M_PHONE,M_EMAIL,M_TYPE) VALUES(#{m_id},#{m_password},#{m_name},#{m_phone},#{m_email},#{m_type})
+		INSERT INTO MEMBER(M_ID,M_PASSWORD,M_NAME,M_PHONE,M_EMAIL,M_TYPE, ENABLED) VALUES(#{m_id},#{m_password},#{m_name},#{m_phone},#{m_email},#{m_type},1)
 	</insert>
 
 			<!-- 아이디 체크 -->

@@ -3,17 +3,24 @@ package com.icia.funding.service;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.funding.dao.MemberDAO;
 import com.icia.funding.dto.MemberDTO;
 
+import java.lang.reflect.Member;
+
 @Service
 public class MemberService {
 	
 	@Autowired
 	private MemberDAO memberDao;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	private ModelAndView modelandview;
 	
@@ -25,7 +32,10 @@ public class MemberService {
 		
 		member.setM_type("ROLE_USER");
 
-		int insertResult = memberDao.memberJoin(member);
+		String endcodedPassword = passwordEncoder.encode(member.getM_password());
+
+		member.setM_password(endcodedPassword);
+        int insertResult = memberDao.memberJoin(member);
 
 		return insertResult;
 	}
@@ -57,5 +67,7 @@ public class MemberService {
 		System.out.println(result);
 		return result;
 	}
+
+
 
 }
