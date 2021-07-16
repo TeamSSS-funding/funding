@@ -1,13 +1,11 @@
 create table MEMBER
 (
-    M_ID NVARCHAR2(50) not null
-        constraint PK_FUNDING
-            primary key,
-    M_PASSWORD NVARCHAR2(50),
-    M_NAME NVARCHAR2(50),
-    M_PHONE NVARCHAR2(50),
-    M_EMAIL NVARCHAR2(500),
-    M_TYPE NVARCHAR2(50),
-    ENABLED NUMBER default 1,
-    AUTHORITY NVARCHAR2(255) default 'ROLE_MEMBER'
+    M_ID VARCHAR(255) not null,
+    M_PASSWORD VARCHAR(50),
+    M_NAME VARCHAR(255),
+    M_PHONE VARCHAR(255),
+    M_EMAIL VARCHAR(500),
+    M_TYPE VARCHAR(255),
+    ENABLED bit default 1,
+    AUTHORITY VARCHAR(255) default 'ROLE_MEMBER'
 );
