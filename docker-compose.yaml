@@ -11,4 +11,4 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./database:/docker-entrypoint-initdb.d
+      - ./database/mariadb:/docker-entrypoint-initdb.d
