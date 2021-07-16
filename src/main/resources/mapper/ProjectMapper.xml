@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Project">
+
+	<insert id="insert" parameterType="Project">
+		insert into
+			project(p_number,p_m_id,p_name,p_price,p_contents,p_startdate,p_enddate,p_imgname)
+		values(p_number.nextval,#{p_m_id},#{p_name},#{p_price},#{p_contents},#{p_startdate},#{p_enddate},#{p_imgname})
+	</insert>
+
+
+</mapper>

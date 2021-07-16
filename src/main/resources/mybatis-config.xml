@@ -5,5 +5,7 @@
 	<typeAliases>
 		<typeAlias type="io.github.mygoodsupporter.domain.Member" alias="Member"/>
 		<typeAlias type="io.github.mygoodsupporter.domain.Address" alias="Address" />
+		<typeAlias type="io.github.mygoodsupporter.domain.Project" alias="Project" />
+		<typeAlias type="io.github.mygoodsupporter.domain.Simsa" alias="Simsa" />
 	</typeAliases>
 </configuration>
