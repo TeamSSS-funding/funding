@@ -1,7 +1,7 @@
-package com.icia.funding.security;
+package io.github.mygoodsupporter.security;
 
-import com.icia.funding.dao.MemberDAO;
-import com.icia.funding.dto.MemberDTO;
+import io.github.mygoodsupporter.dao.MemberDAO;
+import io.github.mygoodsupporter.domain.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,10 +13,10 @@ public class MemberDetailsService implements UserDetailsService {
 
     @Autowired
     private MemberDAO memberdao;
-
+    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MemberDTO member = memberdao.getMemberByID(username);
+        Member member = memberdao.getMemberById(username);
         UserDetails userDetails = new MemberDetails(member);
         log.info("username=" + userDetails.getUsername());
         return userDetails;

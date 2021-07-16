@@ -123,14 +123,14 @@ function idoverlap(){
 
 
 <form action="${pageContext.request.contextPath}/memberJoin" method="post">
-		아이디: <input type="text" name="m_id" id="m_id" onblur="idoverlap()"><br>
+		아이디: <input type="text" name="id" id="m_id" onblur="idoverlap()"><br>
 			<span id = idcheck></span><br>
-		비밀번호: <input type="password" name="m_password" id="m_password" onblur="password()"><br>
-		비밀번호 확인: <input type="password" name="m_pwcheck"><br>
+		비밀번호: <input type="password" name="password" id="m_password" onblur="password()"><br>
+		비밀번호 확인: <input type="password" name="pwcheck"><br>
 			<span id = passwordresult></span><br>
-		이름: <input type="text" name="m_name" id="m_name" onblur="namecheck()"><br>
+		이름: <input type="text" name="name" id="m_name" onblur="namecheck()"><br>
 			<span id = result></span><br>
-		이메일　　　 : <input type="text" name ="m_email">@ 
+		이메일　　　 : <input type="text" name ="email">@
                   <input type="text" id="domain">
                   <select id = "emailaddress" onchange="email()">
                     <option value=""> 직접입력</option>
@@ -139,9 +139,19 @@ function idoverlap(){
                     <option value="gmail.com"> gmail.com</option>
                 </select>
     <br>
-        전화번호: <input type = "text" id="m_phone" name="m_phone" onkeyup = "phonecheck()"><br>
+        전화번호: <input type = "text" id="m_phone" name="phone" onkeyup = "phonecheck()"><br>
   		 <span id = "phoneresult"></span><br>
-        <input type="submit" value="가입">
+
+    <label for="city">City</label>
+    <input id="city" name="city">
+    <label for="street">Street</label>
+    <input id="street" name="street">
+    <label for="zipcode">Zipcode</label>
+    <input id="zipcode" name="zipcode">
+
+
+    <input type="submit" value="가입">
+
 	</form>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 

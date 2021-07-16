@@ -1,6 +1,7 @@
-package com.icia.funding.service;
+package com.github.mygoodsupporter.service;
 
-import com.icia.funding.dto.MemberDTO;
+import io.github.mygoodsupporter.domain.Member;
+import io.github.mygoodsupporter.service.MemberService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +21,14 @@ public class MemberServiceTest {
     @Test
     public void joinTest() {
 
-        MemberDTO member = new MemberDTO();
-        member.setM_id("abba123");
-        member.setM_password("1234");
-        member.setM_name("이름");
-        member.setM_phone("010-2944-4442");
-        member.setM_email("bbbb1234@email.com");
-        member.setM_type("ADMIN");
+        Member member = new Member();
+        member.setId("abba123");
+        member.setPassword("1234");
 
-        int result = memberService.memberJoin(member);
+        member.setEmail("bbbb1234@email.com");
+        member.setType("ADMIN");
+
+        int result = memberService.join(member);
 
         assertEquals(1, result);
     }
