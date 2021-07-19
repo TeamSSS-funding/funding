@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,6 +8,9 @@
 <title>프로젝트 신청</title>
 </head>
 <body>
+<sec:authentication property="username"></sec:authentication>
+<sec:authentication property="id"></sec:authentication>
+<sec:authentication property="email"></sec:authentication>
 	<form action="projectRequest" method="post">
 		프로젝트 제목 <input type="text" name="p_name"><br>
 		카테고리 선택 <input type="radio" name="p_c_name" value="fashion">패션
