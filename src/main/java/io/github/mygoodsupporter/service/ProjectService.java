@@ -29,16 +29,16 @@ public class ProjectService {
 
         String savePath = "E:\\soure_hsh\\mygoodsupporter\\src\\main\\resources\\upload\\"+proimagename;
 
-
         if(!proimage.isEmpty()) {
-            proimage.transferTo(new File(savePath));
-        }
+                proimage.transferTo(new File(savePath));
+            }
 
         pdto.setP_imagename(proimagename);
+
         pdao.projectRequest(pdto);
 
-        mav.addObject(pdto);
-        mav.setViewName("redirect:/projectSimsa");
+        mav.addObject("pdto", pdto);
+        mav.setViewName("redirect:/projectList");
 
         return mav;
     }

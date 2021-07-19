@@ -18,7 +18,7 @@
 		프로젝트 마감일 <input type="date" name="p_enddate"><br>
 		목표금액 <input type="number" name="p_price" min="0" max="999999999" step="50000"><br>
 		프로젝트 상세설명 <textarea name="p_contents" rows="10" cols="20"></textarea><br>
-		첨부파일 <input type="file" name="p_imgname"><br>
+		첨부파일 <input type="file" name="p_image"><br>
 		<input type="submit" value="신청">
 	</form>
 </body>
