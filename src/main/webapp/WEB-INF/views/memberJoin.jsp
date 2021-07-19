@@ -135,7 +135,8 @@ function idoverlap(){
                     <option value="hanmail.net"> hanmail.net</option>
                     <option value="gmail.com"> gmail.com</option>
                 </select>
-    <br>
+        <br>
+
         전화번호: <input type = "text" id="m_phone" name="phone" onkeyup = "phonecheck()"><br>
   		 <span id = "phoneresult"></span><br>
 
