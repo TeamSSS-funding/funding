@@ -1,15 +1,21 @@
 package io.github.mygoodsupporter.controller;
 
 import io.github.mygoodsupporter.domain.Project;
+import io.github.mygoodsupporter.security.MemberDetails;
 import io.github.mygoodsupporter.service.ProjectService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.security.Principal;
 
+@Slf4j
 @Controller
 public class ProjectController {
 
@@ -18,9 +24,20 @@ public class ProjectController {
 
     private ModelAndView mav;
 
+    //로그인 아이디 불러오기
+    @GetMapping("/principal")
+    @ResponseBody
+    public String currentUserNameByPrincipal(Principal principal) {
+        MemberDetails memberDetails = (MemberDetails) principal;
+        log.info("Member[id=" + memberDetails.getId() + ", " + memberDetails.getUsername() + "]");
+        return memberDetails.getId();
+    }
+
     // 프로젝트 신청 화면 요청
     @RequestMapping(value="/projectRequestPage")
-    public String projectRequestPage() {
+    public String projectRequestPage(Principal principal) {
+        MemberDetails memberDetails = (MemberDetails) principal;
+        log.debug("Member[id=" + memberDetails.getId() + ", " + memberDetails.getUsername() + "]");
         return "projectRequest";
     }
 

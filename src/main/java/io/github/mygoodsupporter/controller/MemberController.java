@@ -38,8 +38,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/idcheck")
-	public @ResponseBody String idCheck(@RequestParam("m_id")String m_id) {
-		String result = memberService.idCheck(m_id);
+	public @ResponseBody String idCheck(@RequestParam("id")String id) {
+		String result = memberService.idCheck(id);
 		return result;
 	}
 
