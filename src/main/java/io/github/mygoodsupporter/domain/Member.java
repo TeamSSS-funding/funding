@@ -20,9 +20,8 @@ public class Member {
 	private String type;
 
 	private Profile profile;
-	private Address address;
 
-	private List<String> authorities = new ArrayList<>();
+	private List<Authority> authorities = new ArrayList<>();
 	private int enabled;
 
 	@Override
@@ -32,7 +31,7 @@ public class Member {
 				", password='" + password + '\'' +
 				", email='" + email + '\'' +
 				", name='" + name + '\'' +
-				", address=" + address +
+//				", address=" + address +
 				'}';
 	}
 }

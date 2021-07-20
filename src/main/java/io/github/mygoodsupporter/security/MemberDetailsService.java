@@ -18,7 +18,6 @@ public class MemberDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member member = memberdao.getMemberById(username);
         UserDetails userDetails = new MemberDetails(member);
-        log.info("username=" + userDetails.getUsername());
         return userDetails;
     }
 }

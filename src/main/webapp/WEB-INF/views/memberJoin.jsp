@@ -21,7 +21,7 @@ function idoverlap(){
 	$.ajax({
 		type: 'post',
 		url: 'idcheck',
-		data: {'m_id': inputId},
+		data: {'id': inputId},
 		dataType: 'text',
 		async: false,
 		success: function(idcheck){
@@ -127,25 +127,17 @@ function idoverlap(){
 			<span id = passwordresult></span><br>
 		이름: <input type="text" name="name" id="m_name" onblur="namecheck()"><br>
 			<span id = result></span><br>
-		이메일　　　 : <input type="text" name ="email">@
-                  <input type="text" id="domain" name="domain">
-                  <select id = "emailaddress" onchange="email1()">
-                    <option value=""> 직접입력</option>
-                    <option value="naver.com"> naver.com</option>
-                    <option value="hanmail.net"> hanmail.net</option>
-                    <option value="gmail.com"> gmail.com</option>
-                </select>
-        <br>
+		이메일　　　 : <input type="text" name ="email"><br>
 
         전화번호: <input type = "text" id="m_phone" name="phone" onkeyup = "phonecheck()"><br>
   		 <span id = "phoneresult"></span><br>
 
-    <label for="city">City</label>
-    <input id="city" name="city">
-    <label for="street">Street</label>
-    <input id="street" name="street">
-    <label for="zipcode">Zipcode</label>
-    <input id="zipcode" name="zipcode">
+<%--    <label for="city">City</label>--%>
+<%--    <input id="city" name="city">--%>
+<%--    <label for="street">Street</label>--%>
+<%--    <input id="street" name="street">--%>
+<%--    <label for="zipcode">Zipcode</label>--%>
+<%--    <input id="zipcode" name="zipcode">--%>
 
 
     <input type="submit" value="가입">

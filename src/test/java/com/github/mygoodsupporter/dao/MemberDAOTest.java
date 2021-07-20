@@ -20,14 +20,10 @@ public class MemberDAOTest {
     MemberDAO memberDAO;
 
     @Test
-    public void AssociationTest() {
-        Member member = memberDAO.getMemberById("hhh123");
+    public void loadMemberTest() {
+        Member member = memberDAO.getMemberById("nnn");
 
-        System.out.println(member.getAddress().getCity());
-        System.out.println(member.getAddress().getZipcode());
-        System.out.println(member.getAddress().getStreet());
 
     }
-
 
 }

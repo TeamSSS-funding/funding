@@ -39,7 +39,8 @@ public class MemberControllerTest {
                 .param("m_password", "password1!")
                 .param("m_name", "ccc123")
                 .param("m_phone", "010-5555-5455")
-                .param("m_email", "ccc123@naver.com")
+                .param("emailId", "ccc123")
+                .param("domain", "naver.com")
                 .param("m_type", "ROLE_ADMIN");
 
         mockMvc.perform(request)

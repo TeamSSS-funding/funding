@@ -42,7 +42,7 @@ public class ProjectController {
     public String projectRequestPage(Principal principal) {
         MemberDetails memberDetails = (MemberDetails) principal;
         log.debug("Member[id=" + memberDetails.getId() + ", " + memberDetails.getUsername() + "]");
-        return "projectRequest";
+        return "project/projectRequest";
     }
 
     //프로젝트 신청페이지

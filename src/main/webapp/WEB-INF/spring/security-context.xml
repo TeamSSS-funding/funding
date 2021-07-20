@@ -10,6 +10,7 @@
     <security:http auto-config="true" use-expressions="true">
         <security:intercept-url pattern="/" access="permitAll"/>
         <security:intercept-url pattern="/memberJoinPage" access="permitAll()"/>
+        <security:intercept-url pattern="/memberJoin" access="permitAll()"/>
         <security:intercept-url pattern="/idcheck" access="permitAll"/>
         <security:intercept-url pattern="/login" access="permitAll()"/>
         <security:intercept-url pattern="/logout" access="isAuthenticated()"/>

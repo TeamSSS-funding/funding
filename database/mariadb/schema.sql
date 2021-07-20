@@ -8,9 +8,9 @@ create table member
     M_TYPE varchar(255) null,
     ENABLED bit default b'1' null,
     AUTHORITY varchar(255) default 'ROLE_MEMBER' null,
-    CITY varchar(255) null,
-    STREET varchar(255) null,
-    ZIPCODE varchar(255) null
+    EMAILID varchar(255) null,
+    DOMAIN varchar(255) null,
+
 );
 
 create table authority (

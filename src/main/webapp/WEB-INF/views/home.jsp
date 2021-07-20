@@ -40,7 +40,7 @@
 	<div>
 		<sec:authorize access="hasRole('ROLE_USER')">
 			<sec:authentication property="principal.username" />
-			<sec:authentication property="principal.authorities" />
+
 			This content will only be visible to users who have the "ROLE_USER" authority in their list of <tt>GrantedAuthority</tt>s.
 		</sec:authorize>
 	</div>
@@ -52,13 +52,9 @@
 	<div>
 		<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
 			<sec:authentication property="principal.username" />
-			user admin
+			<sec:authentication property="principal.authorities" />
 		</sec:authorize>
 	</div>
-
-
-
-
 
 
 </div>
