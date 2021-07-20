@@ -1,7 +1,5 @@
 package io.github.mygoodsupporter.dto;
 
-import io.github.mygoodsupporter.domain.Address;
-import io.github.mygoodsupporter.domain.Email;
 import io.github.mygoodsupporter.domain.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
