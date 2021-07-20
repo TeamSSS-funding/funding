@@ -20,7 +20,7 @@ public class MemberController {
 
 	// 회원가입 페이지 이동
 
-	@RequestMapping(value="/memberJoinPage")
+	@GetMapping(value="/memberJoinPage")
 	public String memberJoinPage() {
 		return "memberJoin";
 	}
@@ -48,4 +48,5 @@ public class MemberController {
 
 		return "users/login";
 	}
+
 }

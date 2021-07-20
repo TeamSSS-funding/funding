@@ -2,20 +2,15 @@ package io.github.mygoodsupporter.dao;
 
 import io.github.mygoodsupporter.domain.Member;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+@Mapper
 @Repository
-@RequiredArgsConstructor
-public class MemberDAO {
+public interface MemberDAO {
 
-	private final SqlSessionTemplate sql;
+	int insertMember(Member member);
 
-	public int insertMember(Member member) {
-		return sql.insert("MemberMapper.insertMember",member);
-	}
-
-	public Member getMemberById(String m_id) {
-		return sql.selectOne("getMemberById", m_id);
-	}
+	Member getMemberById(String m_id);
 }
