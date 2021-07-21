@@ -25,7 +25,7 @@ public class MemberServiceTest {
         member.setId("abba123");
         member.setPassword("1234");
 
-        member.setEmail("bbbb1234@email.com");
+
         member.setType("ADMIN");
 
         int result = memberService.join(member);

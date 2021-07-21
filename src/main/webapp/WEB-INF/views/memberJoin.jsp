@@ -21,7 +21,7 @@ function idoverlap(){
 	$.ajax({
 		type: 'post',
 		url: 'idcheck',
-		data: {'m_id': inputId},
+		data: {'id': inputId},
 		dataType: 'text',
 		async: false,
 		success: function(idcheck){
@@ -62,7 +62,7 @@ function idoverlap(){
 	
 
 	
-    function password(){
+    function password1(){
         
         var password = document.getElementById('m_password').value;
         var pwdresult = document.getElementById('passwordresult');
@@ -109,7 +109,7 @@ function idoverlap(){
 
     }
     
-    function email(){
+    function email1(){
         var email = document.getElementById('emailaddress').value;
         document.getElementById('domain').value = email;
   
@@ -119,43 +119,30 @@ function idoverlap(){
 
 <body>
 
-
-
-
 <form action="${pageContext.request.contextPath}/memberJoin" method="post">
 		아이디: <input type="text" name="id" id="m_id" onblur="idoverlap()"><br>
 			<span id = idcheck></span><br>
-		비밀번호: <input type="password" name="password" id="m_password" onblur="password()"><br>
+		비밀번호: <input type="password" name="password" id="m_password" onblur="password1()"><br>
 		비밀번호 확인: <input type="password" name="pwcheck"><br>
 			<span id = passwordresult></span><br>
 		이름: <input type="text" name="name" id="m_name" onblur="namecheck()"><br>
 			<span id = result></span><br>
-		이메일　　　 : <input type="text" name ="email">@
-                  <input type="text" id="domain">
-                  <select id = "emailaddress" onchange="email()">
-                    <option value=""> 직접입력</option>
-                    <option value="naver.com"> naver.com</option>
-                    <option value="hanmail.net"> hanmail.net</option>
-                    <option value="gmail.com"> gmail.com</option>
-                </select>
-    <br>
+		이메일　　　 : <input type="text" name ="email"><br>
+
         전화번호: <input type = "text" id="m_phone" name="phone" onkeyup = "phonecheck()"><br>
   		 <span id = "phoneresult"></span><br>
 
-    <label for="city">City</label>
-    <input id="city" name="city">
-    <label for="street">Street</label>
-    <input id="street" name="street">
-    <label for="zipcode">Zipcode</label>
-    <input id="zipcode" name="zipcode">
+<%--    <label for="city">City</label>--%>
+<%--    <input id="city" name="city">--%>
+<%--    <label for="street">Street</label>--%>
+<%--    <input id="street" name="street">--%>
+<%--    <label for="zipcode">Zipcode</label>--%>
+<%--    <input id="zipcode" name="zipcode">--%>
 
 
     <input type="submit" value="가입">
 
 	</form>
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-
-	
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <a href="https://kauth.kakao.com/oauth/authorize?client_id=631b84f94a27727f5c58546dfe62d1d3&amp;redirect_uri=http://localhost:8081/kakao_callback&amp;response_type=code&amp;client_secret=0mR4VqB8bK4jNBSDvv5ceoIE1w8qrB99">
 <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222">
@@ -170,8 +157,6 @@ function loginWithKakao() {
     })
 }      
 </script>
-
-
 
 </body>
 </html>

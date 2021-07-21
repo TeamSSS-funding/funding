@@ -1,5 +1,6 @@
 package io.github.mygoodsupporter.service;
 
+import io.github.mygoodsupporter.domain.Authority;
 import io.github.mygoodsupporter.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,12 +18,19 @@ public class MemberService {
 
 	public int join(Member member) {
 
-		member.setType("ROLE_USER");
+
 		String hashedPassword = passwordEncoder.encode(member.getPassword());
 		member.setPassword(hashedPassword);
 
-		return memberDao.insertMember(member);
+		member.getAuthorities().add(new Authority(member.getId(),"ROLE_USER"));
 
+		int result =  memberDao.insertMember(member);
+
+		for (Authority authority : member.getAuthorities()) {
+			memberDao.insertAuthority(authority);
+		}
+
+		return result;
 	}
 
 	public String idCheck(String id) {

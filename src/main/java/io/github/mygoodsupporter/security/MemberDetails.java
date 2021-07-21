@@ -1,6 +1,7 @@
 package io.github.mygoodsupporter.security;
 
 
+import io.github.mygoodsupporter.domain.Authority;
 import io.github.mygoodsupporter.domain.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +19,7 @@ public class MemberDetails implements UserDetails {
     private String id;
     private String password;
     private int enabled;
-    private List<String> authorities = new ArrayList<>();
+    private List<Authority> authorities = new ArrayList<>();
 
     private String email;
 
@@ -28,17 +29,16 @@ public class MemberDetails implements UserDetails {
         this.password = member.getPassword();
         this.enabled = member.getEnabled();
         this.authorities = member.getAuthorities();
-        this.email = member.getEmail();
+//        this.email = member.getEmail();
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<GrantedAuthority> authList = new ArrayList<GrantedAuthority>();
 
-        for (String authority: authorities) {
-            authList.add(new SimpleGrantedAuthority(authority));
+        for (Authority authority: authorities) {
+            authList.add(new SimpleGrantedAuthority(authority.getAuthority()));
         }
 
-        authList.add(new SimpleGrantedAuthority("ROLE_USER"));
         return authList;
     }
 

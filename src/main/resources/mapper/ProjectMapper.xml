@@ -6,7 +6,7 @@
 	<insert id="insert" parameterType="Project">
 		insert into
 			project(p_number,p_m_id,p_name,p_price,p_contents,p_startdate,p_enddate,p_imgname)
-		values(p_number.nextval,#{p_m_id},#{p_name},#{p_price},#{p_contents},#{p_startdate},#{p_enddate},#{p_imgname})
+		values(NEXT VALUE FOR project_seq,#{p_m_id},#{p_name},#{p_price},#{p_contents},#{p_startdate},#{p_enddate},#{p_imgname})
 	</insert>
 
 
