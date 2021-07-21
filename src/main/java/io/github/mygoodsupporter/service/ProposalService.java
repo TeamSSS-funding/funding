@@ -1,6 +1,7 @@
 package io.github.mygoodsupporter.service;
 
 import io.github.mygoodsupporter.dao.ProposalMapper;
+import io.github.mygoodsupporter.domain.Project;
 import io.github.mygoodsupporter.domain.Proposal;
 import io.github.mygoodsupporter.dto.CreateProposalForm;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 public class ProposalService {
 
     private final ProposalMapper proposalMapper;
+    private final ProjectService projectService;
 
     @Transactional
     public Long submitProposal(String memberId, CreateProposalForm form) {
@@ -35,8 +37,16 @@ public class ProposalService {
         Proposal proposal = proposalMapper.getProposalById(proposalId);
 
         proposal.approved();
-
         proposalMapper.updateProposal(proposal);
+
+        Project project = Project.builder()
+                .name(proposal.getTitle())
+                .content(proposal.getDescription())
+                .memberId(proposal.getMemberId())
+                .targetAmount(proposal.getTargetAmount())
+                .build();
+
+        projectService.openProject(project);
     }
 
     @Transactional
