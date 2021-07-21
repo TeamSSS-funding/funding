@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -29,13 +31,25 @@ public class ProjectService {
     }
 
     @Transactional
-    public void supportProject(String memberId, String projectSlug, int amount) {
+    public void supportProject(String memberId, String slug, int amount) {
         Member member = memberDAO.getMemberById(memberId);
-        Project project = projectDAO.getProjectBySlug(projectSlug);
+        Project project = projectDAO.getProjectBySlug(slug);
 
         project.supportProject(amount);
 
         projectDAO.update(project);
 
+    }
+
+    public List<Project> getProjects() {
+        return projectDAO.getProjects();
+    }
+
+    public Project getProjectById(Long id) {
+        return projectDAO.getProjectById(id);
+    }
+
+    public Project getProjectBySlug(String slug) {
+        return projectDAO.getProjectBySlug(slug);
     }
 }
