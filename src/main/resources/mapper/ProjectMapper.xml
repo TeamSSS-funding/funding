@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Project">
+<mapper namespace="io.github.mygoodsupporter.dao.ProjectDAO">
+
+	<resultMap id="ProjectResultMap" type="Project">
+		<id property="id" column="id"/>
+	</resultMap>
+
+	<select id="getProjects" resultMap="ProjectResultMap">
+		SELECT id, member_id, name, slug, target_amount, current_amount, content
+		FROM project
+	</select>
+
+	<select id="getProjectById" resultMap="ProjectResultMap">
+		SELECT id, member_id, name, slug, target_amount, current_amount, content
+		FROM project
+		WHERE id = #{id}
+	</select>
+
+	<select id="getProjectBySlug" parameterType="String" resultMap="ProjectResultMap">
+		SELECT id, member_id, name, slug, target_amount, current_amount, content
+		FROM project
+		WHERE slug= #{slug}
+	</select>
 
 	<insert id="insert" parameterType="Project">
-		insert into
-			project(p_number,p_m_id,p_name,p_price,p_contents,p_startdate,p_enddate,p_imgname)
-		values(NEXT VALUE FOR project_seq,#{p_m_id},#{p_name},#{p_price},#{p_contents},#{p_startdate},#{p_enddate},#{p_imgname})
+		INSERT INTO project
+		    (id, member_id, name, slug, target_amount, current_amount, content)
+		VALUES
+		    (nextval(project_seq), #{member_id}, #{name}, #{slug}, #{targetAmount}, #{currrentAmount}, #{content})
 	</insert>
 
+	<update id="update" parameterType="Project">
+		UPDATE project SET
+			member_id = #{memberId},
+			name = #{name},
+			slug = #{slug},
+			target_amount = #{targetAmount},
+			current_amount = #{currentAmount},
+			content = #{content}
+		WHERE id = #{id}
+	</update>
 
 </mapper>

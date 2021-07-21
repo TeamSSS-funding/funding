@@ -34,6 +34,7 @@ create table project
     id int(10) primary key not null,
     member_id varchar(255) not null,
     name varchar(255) not null,
+    slug varchar(255) not null,
     target_amount int(10) not null,
     current_amount int(10) not null,
     content varchar(255) not null,
