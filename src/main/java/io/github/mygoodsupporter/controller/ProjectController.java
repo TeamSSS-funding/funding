@@ -4,57 +4,44 @@ import io.github.mygoodsupporter.dao.MemberDAO;
 import io.github.mygoodsupporter.domain.Project;
 import io.github.mygoodsupporter.security.MemberDetails;
 import io.github.mygoodsupporter.service.ProjectService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
-import java.security.Principal;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 public class ProjectController {
 
-    @Autowired
-    private ProjectService ps;
-    @Autowired
-    private MemberDAO memberDAO;
-    private ModelAndView mav;
+    private final ProjectService projectService;
 
-    //로그인 아이디 불러오기
-    @GetMapping("/principal")
-    @ResponseBody
-    public String currentUserNameByPrincipal(Principal principal, @AuthenticationPrincipal MemberDetails memberDetails) {
-        log.debug("MemberDetails:" + memberDetails.getId() + " " + memberDetails.getUsername() + " " + memberDetails.getEmail());
-        log.debug(principal.getName());
+    private final MemberDAO memberDAO;
 
-        return principal.getName() + "MemberDetails:" + memberDetails.getId() + " " + memberDetails.getUsername() + " " + memberDetails.getEmail();
-    }
-
-    // 프로젝트 신청 화면 요청
+    // 프로젝트 신청 화면 요청 메이커
     @RequestMapping(value="/projectRequestPage")
     public String projectRequestPage(@AuthenticationPrincipal MemberDetails memberDetails) {
-        log.debug("Member[id=" + memberDetails.getId() + ", " + memberDetails.getUsername() + "]");
+        log.debug(memberDetails.getId());
+        log.debug(memberDetails.getEmail());
+        log.debug(memberDetails.getUsername());
+        log.debug(memberDetails.getAuthorities().toString());
         return "projects/projectRequest";
     }
 
-    //프로젝트 신청페이지
+    //프로젝트 신청페이지 메이커
     @RequestMapping(value="/projectRequest")
-    public ModelAndView projectRequest(@ModelAttribute Project pdto) throws IllegalStateException, IOException {
-        mav = ps.projectRequest(pdto);
-        return mav;
+    public String projectRequest(@AuthenticationPrincipal MemberDetails memberDetails, @ModelAttribute Project pdto, Model model){
+        //현재 로그인된 아이디 가져옴
+        Project project = new Project();
+        project.setMemberId(memberDetails.getId());
+
+        pdto = projectService.projectRequest(pdto);
+        model.addAttribute("pdto", pdto);
+        return "projects/projectList";
     }
 
-    //프로젝트 심사 페이지
-    @RequestMapping(value="/projects/projectSimsa")
-    public ModelAndView projectSimsa(@ModelAttribute Project pdto) {
-        mav = ps.projectSimsa(pdto);
-        return mav;
-    }
 }
