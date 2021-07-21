@@ -51,7 +51,7 @@ public class ProjectController {
     public String getProjects(Model model) {
         List<Project> projects = projectService.getProjects();
 
-        model.addAttribute("pdto", projects);
+        model.addAttribute("projects", projects);
         return "projects/projectList";
     }
 
