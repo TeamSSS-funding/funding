@@ -21,4 +21,12 @@ public class Proposal {
         this.targetAmount = targetAmount;
         this.status = ProposalStatus.PENDING;
     }
+
+    public void approved() {
+        setStatus(ProposalStatus.APPROVED);
+    }
+
+    public void rejected() {
+        setStatus(ProposalStatus.REJECTED);
+    }
 }
