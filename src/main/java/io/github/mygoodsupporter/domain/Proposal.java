@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Simsa {
+public class Proposal {
     private int s_number;
     private int s_p_number;
     private String s_result;
