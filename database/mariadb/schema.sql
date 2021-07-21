@@ -38,6 +38,7 @@ create table project
     target_amount int(10) not null,
     current_amount int(10) not null,
     content varchar(255) not null,
+    status varchar(255) not null,
     start_date date,
     end_date date,
     constraint project_member_m_id_fk

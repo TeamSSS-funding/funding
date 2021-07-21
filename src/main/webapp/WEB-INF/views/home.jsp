@@ -14,7 +14,9 @@
 <a href="memberJoinPage">회원가입</a><br>
 <a href="login">로그인</a><br>
 <a href="projectRequestPage">프로젝트 신청</a><br>
-
+<a href="${pageContext.request.contextPath}/projects">프로젝트 보기</a><br>
+<a href="${pageContext.request.contextPath}/proposals/new">제안서 보기</a><br>
+<a href="${pageContext.request.contextPath}/proposals/new">제안 하기</a><br>
 
 <sec:authorize access="isAuthenticated()">
 	<form method="post" action = "/logout">

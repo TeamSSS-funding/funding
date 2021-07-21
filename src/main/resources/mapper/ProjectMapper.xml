@@ -5,30 +5,37 @@
 
 	<resultMap id="ProjectResultMap" type="Project">
 		<id property="id" column="id"/>
+		<result property="memberId" column="member_id"/>
+		<result property="name" column="name"/>
+		<result property="slug" column="slug"/>
+		<result property="targetAmount" column="target_amount"/>
+		<result property="currentAmount" column="current_amount"/>
+		<result property="content" column="content"/>
+		<result property="status" column="status"/>
 	</resultMap>
 
 	<select id="getProjects" resultMap="ProjectResultMap">
-		SELECT id, member_id, name, slug, target_amount, current_amount, content
+		SELECT id, member_id, name, slug, target_amount, current_amount, content, status
 		FROM project
 	</select>
 
 	<select id="getProjectById" resultMap="ProjectResultMap">
-		SELECT id, member_id, name, slug, target_amount, current_amount, content
+		SELECT id, member_id, name, slug, target_amount, current_amount, content, status
 		FROM project
 		WHERE id = #{id}
 	</select>
 
 	<select id="getProjectBySlug" parameterType="String" resultMap="ProjectResultMap">
-		SELECT id, member_id, name, slug, target_amount, current_amount, content
+		SELECT id, member_id, name, slug, target_amount, current_amount, content, status
 		FROM project
 		WHERE slug= #{slug}
 	</select>
 
 	<insert id="insert" parameterType="Project">
 		INSERT INTO project
-		    (id, member_id, name, slug, target_amount, current_amount, content)
+		    (id, member_id, name, slug, target_amount, current_amount, content, status)
 		VALUES
-		    (nextval(project_seq), #{member_id}, #{name}, #{slug}, #{targetAmount}, #{currrentAmount}, #{content})
+		    (nextval(project_seq), #{memberId}, #{name}, #{slug}, #{targetAmount}, #{currentAmount}, #{content}, #{status})
 	</insert>
 
 	<update id="update" parameterType="Project">
@@ -38,7 +45,8 @@
 			slug = #{slug},
 			target_amount = #{targetAmount},
 			current_amount = #{currentAmount},
-			content = #{content}
+			content = #{content},
+		    status = #{status}
 		WHERE id = #{id}
 	</update>
 
