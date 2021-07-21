@@ -17,7 +17,7 @@ public class ProposalService {
     private final ProposalMapper proposalMapper;
 
     @Transactional
-    Long submitProposal(String memberId, CreateProposalForm form) {
+    public Long submitProposal(String memberId, CreateProposalForm form) {
         Proposal proposal = Proposal.builder()
                 .memberId(memberId)
                 .title(form.getTitle())
@@ -31,7 +31,7 @@ public class ProposalService {
     }
 
     @Transactional
-    void approveProposal(Long proposalId) {
+    public void approveProposal(Long proposalId) {
         Proposal proposal = proposalMapper.getProposalById(proposalId);
 
         proposal.approved();
@@ -40,19 +40,19 @@ public class ProposalService {
     }
 
     @Transactional
-    void rejectProposal(Long proposalId) {
+    public void rejectProposal(Long proposalId) {
         Proposal proposal = proposalMapper.getProposalById(proposalId);
         proposal.rejected();
         proposalMapper.updateProposal(proposal);
     }
 
-    Proposal getProposalById(Long proposalId) {
+    public Proposal getProposalById(Long proposalId) {
         return proposalMapper.getProposalById(proposalId);
     }
-    Proposal getProposalByMemberId(String memberId) {
+    public Proposal getProposalByMemberId(String memberId) {
         return proposalMapper.getProposalByMemberId(memberId);
     }
-    List<Proposal> getProposals() {
+    public List<Proposal> getProposals() {
         return proposalMapper.getProposals();
     }
 }
