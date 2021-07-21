@@ -1,22 +1,19 @@
 package io.github.mygoodsupporter.dao;
 
 import io.github.mygoodsupporter.domain.Project;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Mapper
 @Repository
-public class ProjectDAO {
-    @Autowired
-    private SqlSessionTemplate sql;
+public interface ProjectDAO {
 
-    //프로젝트 정보 insert
-    public int projectRequest(Project pdto) {
-        return sql.insert("Project.insert", pdto);
-    }
+    List<Project> getProjects();
+    Project getProjectById(Long id);
+    Project getProjectBySlug(String slug);
 
-    //프로젝트 심사 insert
-    public int projectSimsa(Project pdto) {
-        return sql.insert("Simsa.insert", pdto);
-    }
+    int insert(Project project);
+    void update(Project project);
 }
