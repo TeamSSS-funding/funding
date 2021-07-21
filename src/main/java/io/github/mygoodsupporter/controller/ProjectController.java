@@ -39,10 +39,9 @@ public class ProjectController {
 
     // 프로젝트 신청 화면 요청
     @RequestMapping(value="/projectRequestPage")
-    public String projectRequestPage(Principal principal) {
-        MemberDetails memberDetails = (MemberDetails) principal;
+    public String projectRequestPage(@AuthenticationPrincipal MemberDetails memberDetails) {
         log.debug("Member[id=" + memberDetails.getId() + ", " + memberDetails.getUsername() + "]");
-        return "project/projectRequest";
+        return "projects/projectRequest";
     }
 
     //프로젝트 신청페이지
@@ -53,7 +52,7 @@ public class ProjectController {
     }
 
     //프로젝트 심사 페이지
-    @RequestMapping(value="/projectSimsa")
+    @RequestMapping(value="/projects/projectSimsa")
     public ModelAndView projectSimsa(@ModelAttribute Project pdto) {
         mav = ps.projectSimsa(pdto);
         return mav;

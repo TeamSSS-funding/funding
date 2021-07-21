@@ -49,4 +49,10 @@ public class MemberController {
 		return "users/login";
 	}
 
+	@GetMapping("/admin")
+	public String Admin(Member member){
+
+		return "/users";
+	}
+
 }

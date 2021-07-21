@@ -23,7 +23,6 @@ public class MemberDetails implements UserDetails {
 
     private String email;
 
-
     public MemberDetails(Member member) {
         this.id = member.getId();
         this.password = member.getPassword();

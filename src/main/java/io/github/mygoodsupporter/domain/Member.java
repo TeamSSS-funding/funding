@@ -17,9 +17,8 @@ public class Member {
 	private String email;
 	private String name;
 	private String phone;
-	private String type;
 
-	private Profile profile;
+
 
 	private List<Authority> authorities = new ArrayList<>();
 	private int enabled;
