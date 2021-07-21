@@ -7,12 +7,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml", "file:../../../../../../main/webapp/WEB-INF/spring/security-context.xml"})
-//@Transactional
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@Transactional
 public class MemberServiceTest {
 
     @Autowired
@@ -24,9 +25,6 @@ public class MemberServiceTest {
         Member member = new Member();
         member.setId("abba123");
         member.setPassword("1234");
-
-
-        member.setType("ADMIN");
 
         int result = memberService.join(member);
 
