@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml", "file:../../../../../../main/webapp/WEB-INF/spring/security-context.xml"})
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Transactional
 public class MemberServiceTest {
 
