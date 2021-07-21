@@ -16,23 +16,26 @@
 
 	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER(M_ID,M_PASSWORD,M_NAME,M_PHONE,m_email)
-		VALUES(#{id},#{password},#{name},#{phone},#{email})
+		INSERT INTO member
+			(m_id, m_password, m_name, m_phone, m_email)
+		VALUES (#{id}, #{password}, #{name}, #{phone}, #{email})
 	</insert>
 
 	<select id="getMemberById" parameterType="String" resultMap="MemberResultMap">
-		SELECT
-			member.m_id as m_id,
-			m_password as m_password,
-			m_name as m_name,
-			m_phone as m_phone,
-			m_email as m_email,
-			authority
-		FROM MEMBER LEFT OUTER JOIN Authority on member.m_id = authority.M_ID
-		WHERE member.M_ID = #{id};
+		SELECT m.m_id       as m_id,
+			   m.m_password as m_password,
+			   m.m_name     as m_name,
+			   m.m_phone    as m_phone,
+			   m.m_email    as m_email,
+			   a.authority  as authority
+		FROM member m
+				 LEFT OUTER JOIN authority a ON m.m_id = a.m_id
+		WHERE m.M_ID = #{id};
 	</select>
 
 	<insert id="insertAuthority" parameterType="Authority">
-		INSERT INTO authority(M_ID, AUTHORITY) VALUES (#{memberId}, #{authority})
+		INSERT INTO authority
+			(m_id, authority)
+		VALUES (#{memberId}, #{authority})
 	</insert>
 </mapper>
