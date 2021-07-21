@@ -17,7 +17,7 @@
         <security:intercept-url pattern="/principal" access="isAuthenticated()"/>
         <security:intercept-url pattern="/project**" access="isAuthenticated()"/>
         <security:intercept-url pattern="/projects/**" access="isAuthenticated()"/>
-        <security:intercept-url pattern="/projectSimsaADMIN" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/proposals/**" access="isAuthenticated()"/>
         <security:intercept-url pattern="/users/member/**" access="hasRole('ROLE_MEMBER')"/>
         <security:intercept-url pattern="/users/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/**" access="denyAll" />
