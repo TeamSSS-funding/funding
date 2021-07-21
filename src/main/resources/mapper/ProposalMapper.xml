@@ -3,6 +3,32 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.github.mygoodsupporter.dao.ProposalMapper">
 
+	<resultMap id="ProposalResultMap" type="Proposal">
+		<id property="id" column="id"/>
+		<result property="memberId" column="member_id"/>
+		<result property="title" column="title"/>
+		<result property="description" column="description"/>
+		<result property="targetAmount" column="target_amount"/>
+		<result property="status" column="status"/>
+	</resultMap>
+
+	<select id="getProposals" resultMap="ProposalResultMap">
+		SELECT id, member_id, title, description, target_amount, status
+		FROM proposal
+	</select>
+
+	<select id="getProposalById" parameterType="Long" resultMap="ProposalResultMap">
+		SELECT id, member_id, title, description, target_amount, status
+		FROM proposal
+		WHERE id = #{proposalId}
+	</select>
+
+	<select id="getProposalByMemberId" parameterType="String" resultMap="ProposalResultMap">
+		SELECT id, member_id, title, description, target_amount, status
+		FROM proposal
+		WHERE member_id = #{memberId}
+	</select>
+
 	<insert id="insertProposal" parameterType="Proposal" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO proposal
 		    (member_id, title, description, target_amount, status)
