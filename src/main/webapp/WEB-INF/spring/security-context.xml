@@ -33,6 +33,5 @@
     </security:authentication-manager>
 
     <bean id="memberDetailsService" class="io.github.mygoodsupporter.security.MemberDetailsService"/>
-    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
 </beans>
