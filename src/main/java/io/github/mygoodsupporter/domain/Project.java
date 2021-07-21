@@ -1,21 +1,36 @@
 package io.github.mygoodsupporter.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.*;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
 public class Project {
 
-    private int p_number;
-    private String p_m_id;
-    private String p_name;
-    private int p_price;
-    private String p_contents;
-    private String p_startdate;
-    private String p_enddate;
+    private Long id;
+    private String memberId;
+    private String name;
+    private int targetAmount;
+    private int currentAmount;
+    private String content;
+    private String startDate;
+    private String endDate;
+    private ProjectStatus status;
 
-    private MultipartFile p_image;
-    private String p_imagename;
+    @Builder
+    public Project(String memberId, String name, int targetAmount, String content) {
+        this.memberId = memberId;
+        this.name = name;
+        this.targetAmount = targetAmount;
+        this.currentAmount = 0;
+        this.content = content;
+        this.status = ProjectStatus.FUNDING;
+    }
+
+    public void supportProject(int amount) {
+        currentAmount += amount;
+        if (currentAmount >= targetAmount) {
+            status = ProjectStatus.SUCCEED;
+        }
+    }
 }
