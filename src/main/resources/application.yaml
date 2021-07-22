@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/mygoodsupporter
+    username: mygoodsupporter
+    password: mygoodsupporter
+    driver-class-name: org.mariadb.jdbc.Driver
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+mybatis:
+  mapper-locations: mapper/*.xml
+  type-aliases-package: io.github.mygoodsupporter.domain
+  configuration:
+    cache-enabled: true
+    default-statement-timeout: 3000
+    use-generated-keys: true
+
+logging:
+  level:
+    org.springframework: info
+    org.springframework.security: debug
+    io.github.mygoodsupporter: debug
