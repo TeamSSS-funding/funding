@@ -16,3 +16,9 @@ mybatis:
     cache-enabled: true
     default-statement-timeout: 3000
     use-generated-keys: true
+
+logging:
+  level:
+    org.springframework: debug
+    org.springframework.security: debug
+    io.github.mygoodsupporter: debug
