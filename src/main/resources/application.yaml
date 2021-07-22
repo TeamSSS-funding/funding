@@ -8,3 +8,11 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+
+mybatis:
+  mapper-locations: mapper/*.xml
+  type-aliases-package: io.github.mygoodsupporter.domain
+  configuration:
+    cache-enabled: true
+    default-statement-timeout: 3000
+    use-generated-keys: true
