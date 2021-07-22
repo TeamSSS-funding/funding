@@ -55,4 +55,8 @@ public class MemberController {
 		return "/users";
 	}
 
+	@GetMapping("/deliveryWritePage")
+	public String writePage() {
+		return "deiliveryWrite";
+	}
 }
