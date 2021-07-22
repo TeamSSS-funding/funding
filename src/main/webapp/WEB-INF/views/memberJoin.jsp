@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,45 +119,79 @@ function idoverlap(){
 
 
 <body>
-
 <form action="${pageContext.request.contextPath}/memberJoin" method="post">
-		아이디: <input type="text" name="id" id="m_id" onblur="idoverlap()"><br>
-			<span id = idcheck></span><br>
-		비밀번호: <input type="password" name="password" id="m_password" onblur="password1()"><br>
-		비밀번호 확인: <input type="password" name="pwcheck"><br>
-			<span id = passwordresult></span><br>
-		이름: <input type="text" name="name" id="m_name" onblur="namecheck()"><br>
-			<span id = result></span><br>
-		이메일　　　 : <input type="text" name ="email"><br>
+<section class="text-gray-600 body-font">
+	<div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
 
-        전화번호: <input type = "text" id="m_phone" name="phone" onkeyup = "phonecheck()"><br>
-  		 <span id = "phoneresult"></span><br>
+		<div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col mx-auto w-full mt-10 md:mt-0">
+			<h2 class="text-gray-900 text-lg font-medium title-font mb-5">회원가입</h2>
+			<div class="relative mb-4">
+				<label for="m_id" class="leading-7 text-sm text-gray-600">아이디</label>
+				<input type="text" id="m_id" name="id" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+				<span id = idcheck></span><br>
+			</div>
+			<div class="relative mb-4">
+				<label for="m_password" class="leading-7 text-sm text-gray-600">비밀번호</label>
+				<input type="password" id="m_password" name="password" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+			</div>
+			<div class="relative mb-4">
+				<label for="pwcheck" class="leading-7 text-sm text-gray-600">비밀번호 체크</label>
+				<input type="password" name="pwcheck" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+				<span id = passwordresult></span>
+			</div>
+			<div class="relative mb-4">
+				<label for="m_name" class="leading-7 text-sm text-gray-600">이름</label>
+				<input type="text" id="m_name" name="name" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+				<span id = result></span>
+			</div>
+			<div class="relative mb-4">
+				<label for="email" class="leading-7 text-sm text-gray-600">이메일</label>
+				<input type="text" name="email" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+			</div>
+			<div class="relative mb-4">
+				<label for="full-name" class="leading-7 text-sm text-gray-600">전화번호</label>
+				<input type="text" id="m_phone" name="phone" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+				<span id = "phoneresult"></span>
+			</div>
+			<button class="text-black bg-yellow-300 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-400 rounded text-lg">회원가입</button>
 
-<%--    <label for="city">City</label>--%>
-<%--    <input id="city" name="city">--%>
-<%--    <label for="street">Street</label>--%>
-<%--    <input id="street" name="street">--%>
-<%--    <label for="zipcode">Zipcode</label>--%>
-<%--    <input id="zipcode" name="zipcode">--%>
+		</div>
+	</div>
+</section>
+</form>
+
+<%--<form action="${pageContext.request.contextPath}/memberJoin" method="post">--%>
+<%--		아이디: <input type="text" name="id" id="m_id" onblur="idoverlap()"><br>--%>
+<%--			<span id = idcheck></span><br>--%>
+<%--		비밀번호: <input type="password" name="password" id="m_password" onblur="password1()"><br>--%>
+<%--		비밀번호 확인: <input type="password" name="pwcheck"><br>--%>
+<%--			<span id = passwordresult></span><br>--%>
+<%--		이름: <input type="text" name="name" id="m_name" onblur="namecheck()"><br>--%>
+<%--			<span id = result></span><br>--%>
+<%--		이메일　　　 : <input type="text" name ="email"><br>--%>
+
+<%--        전화번호: <input type = "text" id="m_phone" name="phone" onkeyup = "phonecheck()"><br>--%>
+<%--  		 <span id = "phoneresult"></span><br>--%>
 
 
-    <input type="submit" value="가입">
 
-	</form>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<a href="https://kauth.kakao.com/oauth/authorize?client_id=631b84f94a27727f5c58546dfe62d1d3&amp;redirect_uri=http://localhost:8081/kakao_callback&amp;response_type=code&amp;client_secret=0mR4VqB8bK4jNBSDvv5ceoIE1w8qrB99">
-<img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222">
-</a>
-<script>
-Kakao.init('6d3d4490cc515e838c6039dfcd781f48'); //★ 수정 할 것 : SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
-console.log(Kakao.isInitialized()); // SDK 초기화 여부를 판단합니다.
+<%--    <input type="submit" value="가입">--%>
 
-function loginWithKakao() {
-    Kakao.Auth.authorize({
-        redirectUri: encodeURI('http://localhost:8081/kakao_callback') 
-    })
-}      
-</script>
+<%--	</form>--%>
+<%--<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>--%>
+<%--<a href="https://kauth.kakao.com/oauth/authorize?client_id=631b84f94a27727f5c58546dfe62d1d3&amp;redirect_uri=http://localhost:8081/kakao_callback&amp;response_type=code&amp;client_secret=0mR4VqB8bK4jNBSDvv5ceoIE1w8qrB99">--%>
+<%--<img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222">--%>
+<%--</a>--%>
+<%--<script>--%>
+<%--Kakao.init('6d3d4490cc515e838c6039dfcd781f48'); //★ 수정 할 것 : SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.--%>
+<%--console.log(Kakao.isInitialized()); // SDK 초기화 여부를 판단합니다.--%>
+
+<%--function loginWithKakao() {--%>
+<%--    Kakao.Auth.authorize({--%>
+<%--        redirectUri: encodeURI('http://localhost:8081/kakao_callback') --%>
+<%--    })--%>
+<%--}      --%>
+<%--</script>--%>
 
 </body>
 </html>
