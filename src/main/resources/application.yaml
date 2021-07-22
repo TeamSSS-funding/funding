@@ -19,6 +19,6 @@ mybatis:
 
 logging:
   level:
-    org.springframework: debug
+    org.springframework: info
     org.springframework.security: debug
     io.github.mygoodsupporter: debug
