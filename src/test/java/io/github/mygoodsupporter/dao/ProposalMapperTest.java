@@ -3,19 +3,16 @@ package io.github.mygoodsupporter.dao;
 import io.github.mygoodsupporter.domain.Member;
 import io.github.mygoodsupporter.domain.Proposal;
 import io.github.mygoodsupporter.domain.ProposalStatus;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@SpringBootTest
 @Transactional
 public class ProposalMapperTest {
 
