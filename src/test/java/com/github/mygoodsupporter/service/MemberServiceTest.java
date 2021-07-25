@@ -2,8 +2,7 @@ package com.github.mygoodsupporter.service;
 
 import io.github.mygoodsupporter.domain.Member;
 import io.github.mygoodsupporter.service.MemberService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -11,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Transactional
 public class MemberServiceTest {
 
