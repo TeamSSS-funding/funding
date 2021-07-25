@@ -1,4 +1,4 @@
-package com.github.mygoodsupporter.service;
+package io.github.mygoodsupporter.service;
 
 import io.github.mygoodsupporter.domain.Member;
 import io.github.mygoodsupporter.service.MemberService;

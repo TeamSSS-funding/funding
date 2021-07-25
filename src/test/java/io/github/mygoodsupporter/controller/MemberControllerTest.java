@@ -1,4 +1,4 @@
-package com.github.mygoodsupporter.controller;
+package io.github.mygoodsupporter.controller;
 
 
 import org.junit.jupiter.api.BeforeEach;

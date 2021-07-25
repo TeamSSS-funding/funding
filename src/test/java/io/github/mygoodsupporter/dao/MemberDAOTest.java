@@ -1,4 +1,4 @@
-package com.github.mygoodsupporter.dao;
+package io.github.mygoodsupporter.dao;
 
 import io.github.mygoodsupporter.dao.MemberDAO;
 import io.github.mygoodsupporter.domain.Member;
