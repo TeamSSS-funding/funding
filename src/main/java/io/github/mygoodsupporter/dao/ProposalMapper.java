@@ -2,12 +2,10 @@ package io.github.mygoodsupporter.dao;
 
 import io.github.mygoodsupporter.domain.Proposal;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Mapper
-@Repository
 public interface ProposalMapper {
 
     List<Proposal> getProposals();
