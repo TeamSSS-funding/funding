@@ -7,53 +7,15 @@ import org.springframework.web.bind.annotation.*;
 import io.github.mygoodsupporter.domain.Member;
 import io.github.mygoodsupporter.service.MemberService;
 
+import javax.validation.Valid;
+
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
 	
 	private final MemberService memberService;
 
-	@RequestMapping(value ="/")
-	public String home() {
-		return "home";
-	}
 
-	// 회원가입 페이지 이동
-
-	@GetMapping(value="/memberJoinPage")
-	public String memberJoinPage() {
-		return "memberJoin";
-	}
-	
-	// 회원가입 실행
-	@PostMapping("/memberJoin")
-	public String join(@ModelAttribute RegistrationForm registrationForm) {
-		Member member = registrationForm.toMember();
-		int insertResult = memberService.join(member);
-
-		if(insertResult>0) {
-			return "users/login";
-		}
-		return "joinfail";
-	}
-	
-	@RequestMapping(value="/idcheck")
-	public @ResponseBody String idCheck(@RequestParam("id")String id) {
-		String result = memberService.idCheck(id);
-		return result;
-	}
-
-	@GetMapping("/login")
-	public String loginPage() {
-
-		return "users/login";
-	}
-
-	@GetMapping("/admin")
-	public String Admin(Member member){
-
-		return "/users";
-	}
 
 	@GetMapping("/deliveryWritePage")
 	public String writePage() {
