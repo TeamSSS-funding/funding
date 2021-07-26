@@ -22,7 +22,7 @@
 			<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-400 rounded-full" viewBox="0 0 24 24">
 				<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
 			</svg>
-			<span class="ml-3 text-xl">mygoodsupporter</span>
+			<span class="ml-3 text-xl"><a href="/"> mygoodsupporter</a></span>
 		</a>
 		<nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
 			<a class="mr-5 hover:text-gray-900">진행중인 프로젝트</a>
@@ -60,7 +60,7 @@
 			&nbsp;
 			<div class="center">
 				<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-				<a href="https://kauth.kakao.com/oauth/authorize?client_id=631b84f94a27727f5c58546dfe62d1d3&amp;redirect_uri=http://localhost:8081/oauth_kakao&response_type=code">
+				<a href="https://kauth.kakao.com/oauth/authorize?client_id=631b84f94a27727f5c58546dfe62d1d3&redirect_uri=http://localhost:8080/oauth_kakao&response_type=code">
 					<img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222">
 				</a>
 			</div>
