@@ -2,6 +2,7 @@ package io.github.mygoodsupporter.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final MemberDetailsService memberDetailsService;
 
+
     public SecurityConfig(MemberDetailsService memberDetailsService) {
         this.memberDetailsService = memberDetailsService;
     }
@@ -24,11 +26,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/login").permitAll()
                 .antMatchers("/oauth_kakao").permitAll()
-                .antMatchers("/memberJoinPage").permitAll()
-                .antMatchers("/memberJoin").permitAll()
+                .antMatchers("/join").permitAll()
                 .antMatchers("/idcheck").permitAll()
                 .antMatchers("/projects").permitAll()
+                .antMatchers("/test").permitAll()
                 .antMatchers("/projects**").authenticated()
+                .antMatchers("/projects/**").authenticated()
                 .antMatchers("/users/member/**").hasRole("USER")
                 .antMatchers("/users/admin/**").hasRole("ADMIN")
                 .antMatchers("/**").denyAll()
@@ -55,4 +58,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
 }

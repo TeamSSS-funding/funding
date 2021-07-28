@@ -60,7 +60,7 @@
 			&nbsp;
 			<div class="center">
 				<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-				<a href="https://kauth.kakao.com/oauth/authorize?client_id=631b84f94a27727f5c58546dfe62d1d3&redirect_uri=http://localhost:8080/oauth_kakao&response_type=code">
+				<a href="https://kauth.kakao.com/oauth/authorize?client_id=631b84f94a27727f5c58546dfe62d1d3&redirect_uri=http://localhost:8080/oauth_kakao&response_type=code&scope=account_email">
 					<img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222">
 				</a>
 			</div>

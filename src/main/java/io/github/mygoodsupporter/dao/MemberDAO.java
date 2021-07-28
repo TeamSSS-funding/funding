@@ -12,4 +12,6 @@ public interface MemberDAO {
 	Member getMemberById(String m_id);
 
 	int insertAuthority(Authority authority);
+
+
 }

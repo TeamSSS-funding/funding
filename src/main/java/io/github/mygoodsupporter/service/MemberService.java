@@ -16,6 +16,8 @@ public class MemberService {
 	private final MemberDAO memberDao;
 	private final PasswordEncoder passwordEncoder;
 
+
+
 	public int join(Member member) {
 
 
@@ -44,4 +46,9 @@ public class MemberService {
 		}
 		return result;
 	}
+
+	public Member getMemberById(String id) {
+		return memberDao.getMemberById(id);
+	}
+
 }

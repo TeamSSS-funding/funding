@@ -128,6 +128,8 @@
 <a href="${pageContext.request.contextPath}/proposals/new">프로젝트 제안서 보기</a><br>
 <a href="${pageContext.request.contextPath}/proposals/new">프로젝트 신청 하기</a><br>
 
+
+
 <sec:authorize access="isAuthenticated()">
 	<form method="post" action = "/logout">
 		<input type="submit" value="logout">
