@@ -17,6 +17,7 @@ mybatis:
   configuration:
     cache-enabled: true
     default-statement-timeout: 3000
+    map-underscore-to-camel-case: true
     use-generated-keys: true
 
 cloud:

@@ -28,7 +28,7 @@ public class MemberDetails implements UserDetails {
         this.password = member.getPassword();
         this.enabled = member.getEnabled();
         this.authorities = member.getAuthorities();
-//        this.email = member.getEmail();
+        this.email = member.getEmail();
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
