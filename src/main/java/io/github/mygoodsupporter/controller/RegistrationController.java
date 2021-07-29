@@ -88,7 +88,7 @@ public class RegistrationController {
         return memberService.idCheck(id);
     }
 
-    @GetMapping(value = "/oauth_kakao")
+    @GetMapping(value = "/login/oauth_kakao")
     public String KakaoCallback(String code) {
         RestTemplate restTemplate = new RestTemplate();
 
@@ -100,7 +100,7 @@ public class RegistrationController {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
         params.add("client_id", "631b84f94a27727f5c58546dfe62d1d3");
-        params.add("redirect_uri", "http://localhost:8080/oauth_kakao");
+        params.add("redirect_uri", "http://localhost:8080/login/oauth_kakao");
         params.add("code", code);
 
         //HttpHeader와 HttpBody를 하나의 오브젝트에 담기
@@ -122,8 +122,8 @@ public class RegistrationController {
         } catch (JsonProcessingException e){
             e.printStackTrace();
         }
-        System.out.println("카카오 엑세스 토큰:"+ oauthToken.getAccess_token());
 
+        log.debug("카카오 엑세스 토큰:"+ oauthToken.getAccess_token());
 
         RestTemplate restTemplate2 = new RestTemplate();
 
@@ -144,7 +144,8 @@ public class RegistrationController {
                 KakaoProfileRequest,
                 String.class
         );
-        System.out.println(response2.getBody());
+
+        log.debug(response2.getBody());
 
         ObjectMapper objectMapper2 = new ObjectMapper();
         KakaoProfile kakaoProfile = null;
@@ -156,12 +157,12 @@ public class RegistrationController {
         }
 
         //user오브젝트: username,password,email
-        System.out.println("카카오 아이디(번호):"+kakaoProfile.getId());
-        System.out.println("카카오 닉네임:"+kakaoProfile.getKakao_account().getProfile().getNickname());
+        log.debug("카카오 아이디(번호):"+kakaoProfile.getId());
+        log.debug("카카오 닉네임:"+kakaoProfile.getKakao_account().getProfile().getNickname());
 
-        System.out.println("마이서포터 유저네임:" +kakaoProfile.getClass().getName()+"_"+kakaoProfile.getId());
+        log.debug("마이서포터 유저네임:" +kakaoProfile.getClass().getName()+"_"+kakaoProfile.getId());
         UUID rubbishPassword = UUID.randomUUID();
-        System.out.println("마이서포터 패스워드:" + rubbishPassword);
+        log.debug("마이서포터 패스워드:" + rubbishPassword);
 
 
         Member KakaoMember = new Member();
@@ -175,18 +176,18 @@ public class RegistrationController {
 //       가입자 혹은 비가입자 체크해서 처리
         Member originUser = memberService.getMemberById(kakaoProfile.getId().toString());
         if(originUser == null) {
-            System.out.println("자동 회원가입 진행");
+            log.debug("자동 회원가입 진행");
             memberService.join(KakaoMember);
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(KakaoMember.getId(),rubbishPassword.toString()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } else {
-            System.out.println("이미 가입된 사용자");
+            log.debug("이미 가입된 사용자");
             UserDetails userDetails = new MemberDetails(originUser);
-            System.out.println("userdetail정보"+ userDetails.getAuthorities());
+            log.debug("userdetail정보"+ userDetails.getAuthorities());
             Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-        System.out.println(KakaoMember.getPassword());
+        log.debug(KakaoMember.getPassword());
         //로그인처리
 
 
