@@ -1,12 +1,11 @@
 package io.github.mygoodsupporter.service;
 
-import io.github.mygoodsupporter.domain.Authority;
-import io.github.mygoodsupporter.domain.Member;
+import io.github.mygoodsupporter.dao.MemberDAO;
+import io.github.mygoodsupporter.domain.member.Authority;
+import io.github.mygoodsupporter.domain.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import io.github.mygoodsupporter.dao.MemberDAO;
 
 
 @Service

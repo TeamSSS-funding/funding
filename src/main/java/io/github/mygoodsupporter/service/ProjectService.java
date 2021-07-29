@@ -2,8 +2,8 @@ package io.github.mygoodsupporter.service;
 
 import io.github.mygoodsupporter.dao.MemberDAO;
 import io.github.mygoodsupporter.dao.ProjectDAO;
-import io.github.mygoodsupporter.domain.Member;
 import io.github.mygoodsupporter.domain.Project;
+import io.github.mygoodsupporter.domain.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

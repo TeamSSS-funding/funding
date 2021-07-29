@@ -1,7 +1,7 @@
 package io.github.mygoodsupporter.dao;
 
-import io.github.mygoodsupporter.domain.Authority;
-import io.github.mygoodsupporter.domain.Member;
+import io.github.mygoodsupporter.domain.member.Authority;
+import io.github.mygoodsupporter.domain.member.Member;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

@@ -1,12 +1,13 @@
 package io.github.mygoodsupporter.dto;
 
 
-import io.github.mygoodsupporter.domain.Member;
+import io.github.mygoodsupporter.domain.member.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @NoArgsConstructor
 @Getter @Setter
