@@ -18,7 +18,7 @@ public class MemberService {
 
 
 
-	public int join(Member member) {
+	public int create(Member member) {
 
 
 		String hashedPassword = passwordEncoder.encode(member.getPassword());

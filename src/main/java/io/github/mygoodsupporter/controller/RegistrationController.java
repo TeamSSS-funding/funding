@@ -74,7 +74,7 @@ public class RegistrationController {
         }
 
         Member member = registrationForm.toMember();
-        int insertResult = memberService.join(member);
+        int insertResult = memberService.create(member);
 
         if(insertResult>0) {
             return "users/login";
@@ -177,7 +177,7 @@ public class RegistrationController {
         Member originUser = memberService.getMemberById(kakaoProfile.getId().toString());
         if(originUser == null) {
             log.debug("자동 회원가입 진행");
-            memberService.join(KakaoMember);
+            memberService.create(KakaoMember);
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(KakaoMember.getId(),rubbishPassword.toString()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } else {

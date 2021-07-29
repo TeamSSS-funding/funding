@@ -22,7 +22,7 @@ public class MemberServiceTest {
         member.setId("abba123");
         member.setPassword("1234");
 
-        int result = memberService.join(member);
+        int result = memberService.create(member);
 
         assertThat(result).isEqualTo(1);
     }
