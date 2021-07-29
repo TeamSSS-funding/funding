@@ -88,6 +88,10 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
+dist/
+
+# Tailwind build output
+!dist/tailwind.css
 
 # Gatsby files
 .cache/
