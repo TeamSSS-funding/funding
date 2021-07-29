@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginProcessingUrl("/login")
                     .usernameParameter("m_id")
                     .passwordParameter("m_password")
+                .permitAll()
                 .and()
 
                     .logout()
