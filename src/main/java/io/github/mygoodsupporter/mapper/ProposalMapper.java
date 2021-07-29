@@ -1,4 +1,4 @@
-package io.github.mygoodsupporter.dao;
+package io.github.mygoodsupporter.mapper;
 
 import io.github.mygoodsupporter.domain.Proposal;
 import org.apache.ibatis.annotations.Mapper;

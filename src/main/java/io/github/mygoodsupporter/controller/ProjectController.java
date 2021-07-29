@@ -1,9 +1,9 @@
 package io.github.mygoodsupporter.controller;
 
-import io.github.mygoodsupporter.dao.MemberDAO;
 import io.github.mygoodsupporter.domain.Project;
 import io.github.mygoodsupporter.dto.SupportProjectForm;
-import io.github.mygoodsupporter.security.MemberDetails;
+import io.github.mygoodsupporter.mapper.UserMapper;
+import io.github.mygoodsupporter.security.UserDetails;
 import io.github.mygoodsupporter.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,24 +22,24 @@ public class ProjectController {
 
     private final ProjectService projectService;
 
-    private final MemberDAO memberDAO;
+    private final UserMapper userMapper;
 
     // 프로젝트 신청 화면 요청 메이커
     @RequestMapping(value="/projectRequestPage")
-    public String projectRequestPage(@AuthenticationPrincipal MemberDetails memberDetails) {
-        log.debug(memberDetails.getId());
-        log.debug(memberDetails.getEmail());
-        log.debug(memberDetails.getUsername());
-        log.debug(memberDetails.getAuthorities().toString());
+    public String projectRequestPage(@AuthenticationPrincipal UserDetails userDetails) {
+        log.debug(userDetails.getUsername());
+        log.debug(userDetails.getEmail());
+        log.debug(userDetails.getUsername());
+        log.debug(userDetails.getAuthorities().toString());
         return "projects/projectRequest";
     }
 
     //프로젝트 신청페이지 메이커
     @RequestMapping(value="/projectRequest")
-    public String projectRequest(@AuthenticationPrincipal MemberDetails memberDetails, @ModelAttribute Project pdto, Model model){
+    public String projectRequest(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute Project pdto, Model model){
         //현재 로그인된 아이디 가져옴
         Project project = new Project();
-        project.setMemberId(memberDetails.getId());
+        project.setUserId(userDetails.getId());
 
         pdto = projectService.projectRequest(pdto);
         model.addAttribute("pdto", pdto);
@@ -64,9 +64,9 @@ public class ProjectController {
     }
 
     @PostMapping("/projects/{slug}/support")
-    public String supportProject(@PathVariable("slug") String slug, @AuthenticationPrincipal MemberDetails memberDetails,
+    public String supportProject(@PathVariable("slug") String slug, @AuthenticationPrincipal UserDetails userDetails,
                                  SupportProjectForm form, Model model) {
-        String memberId =  memberDetails.getId();
+        String memberId =  userDetails.getUsername();
 
         projectService.supportProject(memberId, slug, form.getAmount());
 

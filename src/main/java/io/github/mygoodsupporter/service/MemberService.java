@@ -1,8 +1,8 @@
 package io.github.mygoodsupporter.service;
 
-import io.github.mygoodsupporter.dao.MemberDAO;
-import io.github.mygoodsupporter.domain.member.Authority;
-import io.github.mygoodsupporter.domain.member.Member;
+import io.github.mygoodsupporter.domain.user.Authority;
+import io.github.mygoodsupporter.domain.user.User;
+import io.github.mygoodsupporter.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,33 +12,31 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MemberService {
 
-	private final MemberDAO memberDao;
+	private final UserMapper userMapper;
 	private final PasswordEncoder passwordEncoder;
 
+	public int create(User user) {
 
 
-	public int create(Member member) {
+		String hashedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(hashedPassword);
 
+		user.getAuthorities().add(new Authority(user.getUsername(),"ROLE_USER"));
 
-		String hashedPassword = passwordEncoder.encode(member.getPassword());
-		member.setPassword(hashedPassword);
+		int result =  userMapper.insertUser(user);
 
-		member.getAuthorities().add(new Authority(member.getId(),"ROLE_USER"));
-
-		int result =  memberDao.insertMember(member);
-
-		for (Authority authority : member.getAuthorities()) {
-			memberDao.insertAuthority(authority);
+		for (Authority authority : user.getAuthorities()) {
+			userMapper.insertAuthority(authority);
 		}
 
 		return result;
 	}
 
 	public String idCheck(String id) {
-		Member member = memberDao.getMemberById(id);
+		User user = userMapper.getUserByUsername(id);
 		String result = "";
 		
-		if(member == null) {
+		if(user == null) {
 			result = "ok";
 		} else {
 			result = "no";
@@ -46,8 +44,8 @@ public class MemberService {
 		return result;
 	}
 
-	public Member getMemberById(String id) {
-		return memberDao.getMemberById(id);
+	public User getUserByUsername(String username) {
+		return userMapper.getUserByUsername(username);
 	}
 
 }

@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringBootTest
-public class MemberControllerTest {
+public class UserControllerTest {
 
     @Autowired
     WebApplicationContext was;

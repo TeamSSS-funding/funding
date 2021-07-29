@@ -1,16 +1,17 @@
-create table member
+create table user
 (
-    m_id       varchar(255)     PRIMARY KEY not null,
-    m_password varchar(255)     not null,
-    m_name     varchar(255)     not null,
-    m_phone    varchar(255)     not null,
-    m_email    varchar(500)     null,
+    id         bigint(20) PRIMARY KEY AUTO_INCREMENT,
+    username       varchar(255)     UNIQUE not null,
+    password varchar(255)     not null,
+    name     varchar(255)     not null,
+    phone    varchar(255)     not null,
+    email    varchar(500)     null,
     ENABLED    bit default b'1' null
 );
 
 create table authority
 (
-    m_id      varchar(255),
+    username      varchar(255),
     authority varchar(255)
 );
 
@@ -31,8 +32,8 @@ CREATE SEQUENCE project_seq
 
 create table project
 (
-    id int(10) primary key not null,
-    member_id varchar(255) not null,
+    id bigint(20) primary key not null,
+    user_id bigint(20) not null,
     name varchar(255) not null,
     slug varchar(255) not null,
     target_amount int(10) not null,
@@ -42,5 +43,5 @@ create table project
     start_date date,
     end_date date,
     constraint project_member_m_id_fk
-        foreign key (member_id) references member (m_id)
+        foreign key (user_id) references user (id)
 );

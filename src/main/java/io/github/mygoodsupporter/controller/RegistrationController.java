@@ -1,6 +1,6 @@
 package io.github.mygoodsupporter.controller;
 
-import io.github.mygoodsupporter.domain.member.Member;
+import io.github.mygoodsupporter.domain.user.User;
 import io.github.mygoodsupporter.dto.RegistrationForm;
 import io.github.mygoodsupporter.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -48,8 +48,8 @@ public class RegistrationController {
             return "join";
         }
 
-        Member member = registrationForm.toMember();
-        int insertResult = memberService.create(member);
+        User user = registrationForm.toUser();
+        int insertResult = memberService.create(user);
 
         if(insertResult>0) {
             return "users/login";

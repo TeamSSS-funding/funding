@@ -7,15 +7,15 @@ import lombok.*;
 @Setter
 public class Proposal {
     private Long id;
-    private String memberId;
+    private Long userId;
     private String title;
     private String description;
     private int targetAmount;
     private ProposalStatus status;
 
     @Builder
-    public Proposal(String memberId, String title, String description, int targetAmount) {
-        this.memberId = memberId;
+    public Proposal(Long userId, String title, String description, int targetAmount) {
+        this.userId = userId;
         this.title = title;
         this.description = description;
         this.targetAmount = targetAmount;

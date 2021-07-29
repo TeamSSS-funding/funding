@@ -1,9 +1,9 @@
 package io.github.mygoodsupporter.service;
 
-import io.github.mygoodsupporter.dao.ProposalMapper;
 import io.github.mygoodsupporter.domain.Project;
 import io.github.mygoodsupporter.domain.Proposal;
 import io.github.mygoodsupporter.dto.CreateProposalForm;
+import io.github.mygoodsupporter.mapper.ProposalMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,14 +19,14 @@ public class ProposalService {
     private final ProjectService projectService;
 
     @Transactional
-    public Long submitProposal(String memberId, CreateProposalForm form) {
+    public Long submitProposal(Long userId, CreateProposalForm form) {
         Proposal proposal = Proposal.builder()
-                .memberId(memberId)
+                .userId(userId)
                 .title(form.getTitle())
                 .description(form.getDescription())
                 .targetAmount(form.getTargetAmount())
                 .build();
-        proposal.setMemberId(memberId);
+        proposal.setUserId(userId);
         proposalMapper.insertProposal(proposal);
 
         return proposal.getId();
@@ -42,7 +42,7 @@ public class ProposalService {
         Project project = Project.builder()
                 .name(proposal.getTitle())
                 .content(proposal.getDescription())
-                .memberId(proposal.getMemberId())
+                .userId(proposal.getUserId())
                 .targetAmount(proposal.getTargetAmount())
                 .build();
 

@@ -27,7 +27,7 @@
                                     ${proposal.id}
                                 </a>
                             </td>
-                            <td class="pa3">${proposal.memberId}</td>
+                            <td class="pa3">${proposal.userId}</td>
                             <td class="pa3">
                                 <a href="/proposals/${proposal.id}">
                                     ${proposal.title}

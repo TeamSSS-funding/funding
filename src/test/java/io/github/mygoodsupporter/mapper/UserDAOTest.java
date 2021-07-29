@@ -1,6 +1,6 @@
-package io.github.mygoodsupporter.dao;
+package io.github.mygoodsupporter.mapper;
 
-import io.github.mygoodsupporter.domain.member.Member;
+import io.github.mygoodsupporter.domain.user.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,14 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Transactional
-public class MemberDAOTest {
+public class UserDAOTest {
 
     @Autowired
-    MemberDAO memberDAO;
+    UserMapper userMapper;
 
     @Test
     public void loadMemberTest() {
-        Member member = memberDAO.getMemberById("nnn");
+        User user = userMapper.getUserByUsername("nnn");
     }
 
 }

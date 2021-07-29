@@ -1,9 +1,9 @@
 package io.github.mygoodsupporter.service;
 
-import io.github.mygoodsupporter.dao.MemberDAO;
-import io.github.mygoodsupporter.dao.ProjectDAO;
 import io.github.mygoodsupporter.domain.Project;
-import io.github.mygoodsupporter.domain.member.Member;
+import io.github.mygoodsupporter.domain.user.User;
+import io.github.mygoodsupporter.mapper.ProjectDAO;
+import io.github.mygoodsupporter.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ProjectService {
 
     private final ProjectDAO projectDAO;
-    private final MemberDAO memberDAO;
+    private final UserMapper userMapper;
 
     //프로젝트 정보 입력
     public Project projectRequest(Project pdto) {
@@ -32,7 +32,7 @@ public class ProjectService {
 
     @Transactional
     public void supportProject(String memberId, String slug, int amount) {
-        Member member = memberDAO.getMemberById(memberId);
+        User user = userMapper.getUserByUsername(memberId);
         Project project = projectDAO.getProjectBySlug(slug);
 
         project.supportProject(amount);

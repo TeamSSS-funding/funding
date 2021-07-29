@@ -1,8 +1,8 @@
-package io.github.mygoodsupporter.dao;
+package io.github.mygoodsupporter.mapper;
 
 import io.github.mygoodsupporter.domain.Proposal;
 import io.github.mygoodsupporter.domain.ProposalStatus;
-import io.github.mygoodsupporter.domain.member.Member;
+import io.github.mygoodsupporter.domain.user.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,15 +17,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProposalMapperTest {
 
     @Autowired
-    MemberDAO memberDAO;
+    UserMapper userMapper;
     @Autowired
     ProposalMapper proposalMapper;
 
     @Test
     public void getProposalById() {
         //given
-        Member member = createMember();
-        Proposal proposal = createProposal(member.getId());
+        User user = createMember();
+        Proposal proposal = createProposal(user.getId());
         proposalMapper.insertProposal(proposal);
 
         //when
@@ -33,7 +33,7 @@ public class ProposalMapperTest {
 
         //then
         assertThat(other.getId()).isEqualTo(proposal.getId());
-        assertThat(other.getMemberId()).isEqualTo(proposal.getMemberId());
+        assertThat(other.getUserId()).isEqualTo(proposal.getUserId());
         assertThat(other.getTitle()).isEqualTo(proposal.getTitle());
         assertThat(other.getDescription()).isEqualTo(proposal.getDescription());
         assertThat(other.getTargetAmount()).isEqualTo(proposal.getTargetAmount());
@@ -42,23 +42,23 @@ public class ProposalMapperTest {
     @Test
     public void getProposalByMemberId() {
         //given
-        Member member = createMember();
-        Proposal proposal = createProposal(member.getId());
+        User user = createMember();
+        Proposal proposal = createProposal(user.getId());
         proposalMapper.insertProposal(proposal);
 
         //when
-        Proposal other = proposalMapper.getProposalByMemberId(member.getId());
+        Proposal other = proposalMapper.getProposalByMemberId(user.getUsername());
 
         //then
         assertThat(other.getId()).isEqualTo(proposal.getId());
-        assertThat(other.getMemberId()).isEqualTo(proposal.getMemberId());
+        assertThat(other.getUserId()).isEqualTo(proposal.getUserId());
     }
 
     @Test
     public void getProposals() {
         //given
-        Member member = createMember();
-        Proposal proposal = createProposal(member.getId());
+        User user = createMember();
+        Proposal proposal = createProposal(user.getId());
         proposalMapper.insertProposal(proposal);
 
         //when
@@ -73,8 +73,8 @@ public class ProposalMapperTest {
     @Test
     public void insertProposal() {
         //given
-        Member member = createMember();
-        Proposal proposal = createProposal(member.getId());
+        User user = createMember();
+        Proposal proposal = createProposal(user.getId());
 
         //when
         proposalMapper.insertProposal(proposal);
@@ -91,8 +91,8 @@ public class ProposalMapperTest {
     @Test
     public void deleteProposal() {
         //given
-        Member member = createMember();
-        Proposal proposal = createProposal(member.getId());
+        User user = createMember();
+        Proposal proposal = createProposal(user.getId());
         proposalMapper.insertProposal(proposal);
 
         //when
@@ -103,20 +103,20 @@ public class ProposalMapperTest {
         assertThat(other).isNull();
     }
 
-    private Member createMember() {
-        Member member = new Member();
-        member.setId("mocha");
-        member.setPassword("mocha");
-        member.setName("mocha");
-        member.setEmail("mocha@safecornerscoffee.com");
-        member.setPhone("010-1111-1111");
-        memberDAO.insertMember(member);
-        return member;
+    private User createMember() {
+        User user = new User();
+        user.setUsername("mocha");
+        user.setPassword("mocha");
+        user.setName("mocha");
+        user.setEmail("mocha@safecornerscoffee.com");
+        user.setPhone("010-1111-1111");
+        userMapper.insertUser(user);
+        return user;
     }
 
-    private Proposal createProposal(String memberId) {
+    private Proposal createProposal(Long userId) {
         return Proposal.builder()
-                .memberId(memberId)
+                .userId(userId)
                 .title("coffee me")
                 .description("coffee me")
                 .targetAmount(3500)

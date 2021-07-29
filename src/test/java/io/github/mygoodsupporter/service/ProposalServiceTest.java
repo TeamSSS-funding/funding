@@ -1,11 +1,11 @@
 package io.github.mygoodsupporter.service;
 
-import io.github.mygoodsupporter.dao.MemberDAO;
-import io.github.mygoodsupporter.dao.ProposalMapper;
 import io.github.mygoodsupporter.domain.Proposal;
 import io.github.mygoodsupporter.domain.ProposalStatus;
-import io.github.mygoodsupporter.domain.member.Member;
+import io.github.mygoodsupporter.domain.user.User;
 import io.github.mygoodsupporter.dto.CreateProposalForm;
+import io.github.mygoodsupporter.mapper.ProposalMapper;
+import io.github.mygoodsupporter.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,24 +23,24 @@ public class ProposalServiceTest {
     @Autowired
     ProposalMapper proposalMapper;
     @Autowired
-    MemberDAO memberDAO;
+    UserMapper userMapper;
 
     @Test
     public void summitProposal() {
         //given
-        Member member = createMember("mocha");
+        User user = createMember("mocha");
         CreateProposalForm form = new CreateProposalForm();
         form.setTitle("coffee me");
         form.setDescription("coffee me");
         form.setTargetAmount(3500);
 
         //when
-        Long proposalId = proposalService.submitProposal(member.getId(), form);
+        Long proposalId = proposalService.submitProposal(user.getId(), form);
 
         //then
         Proposal proposal = proposalMapper.getProposalById(proposalId);
         assertThat(proposal.getId()).isEqualTo(proposalId);
-        assertThat(proposal.getMemberId()).isEqualTo(member.getId());
+        assertThat(proposal.getUserId()).isEqualTo(user.getId());
         assertThat(proposal.getTitle()).isEqualTo(form.getTitle());
         assertThat(proposal.getDescription()).isEqualTo(form.getDescription());
         assertThat(proposal.getTargetAmount()).isEqualTo(form.getTargetAmount());
@@ -49,8 +49,8 @@ public class ProposalServiceTest {
 
     public void acceptProposal() {
         //given
-        Member member = createMember("mocha");
-        Proposal proposal = createProposal(member.getId());
+        User user = createMember("mocha");
+        Proposal proposal = createProposal(user.getId());
         proposalMapper.insertProposal(proposal);
 
         //when
@@ -63,8 +63,8 @@ public class ProposalServiceTest {
 
     public void rejectProposal() {
         //given
-        Member member = createMember("mocha");
-        Proposal proposal = createProposal(member.getId());
+        User user = createMember("mocha");
+        Proposal proposal = createProposal(user.getId());
         proposalMapper.insertProposal(proposal);
 
         //when
@@ -75,22 +75,22 @@ public class ProposalServiceTest {
         assertThat(rejected.getStatus()).isEqualTo(ProposalStatus.REJECTED);
     }
 
-    public Member createMember(String name) {
-        Member member = new Member();
+    public User createMember(String name) {
+        User user = new User();
 
-        member.setId(name);
-        member.setPassword(name);
-        member.setName(name);
-        member.setEmail(name + "@mygoodsupporter.github.io");
-        member.setPhone("010-1111-1111");
+        user.setUsername(name);
+        user.setPassword(name);
+        user.setName(name);
+        user.setEmail(name + "@mygoodsupporter.github.io");
+        user.setPhone("010-1111-1111");
 
-        memberDAO.insertMember(member);
-        return member;
+        userMapper.insertUser(user);
+        return user;
     }
 
-    public Proposal createProposal(String memberId) {
+    public Proposal createProposal(Long userId) {
         Proposal proposal = Proposal.builder()
-                .memberId(memberId)
+                .userId(userId)
                 .title("coffee me")
                 .description("coffee me")
                 .targetAmount(3300)

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequiredArgsConstructor
-public class MemberController {
+public class UserController {
 
 
 }
