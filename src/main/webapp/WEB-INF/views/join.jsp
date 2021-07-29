@@ -122,7 +122,7 @@ function idoverlap(){
 
 <body>
 
-<form:form action="${pageContext.request.contextPath}/memberJoin" method="post" modelAttribute="registrationForm">
+<form:form action="${pageContext.request.contextPath}/join" method="post" modelAttribute="registrationForm">
 <section class="text-gray-600 body-font">
 	<div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
 		<div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col mx-auto w-full mt-10 md:mt-0">

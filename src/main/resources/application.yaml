@@ -32,10 +32,5 @@ logging:
     org.springframework.security: debug
     io.github.mygoodsupporter: debug
 
-cloud:
-  aws:
-    s3:
-      bucket: mygoodsupporter
-      region:
-      static: ap-northeast-2
+
 
