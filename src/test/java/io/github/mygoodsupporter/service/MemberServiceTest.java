@@ -1,6 +1,6 @@
 package io.github.mygoodsupporter.service;
 
-import io.github.mygoodsupporter.domain.Member;
+import io.github.mygoodsupporter.domain.member.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +22,7 @@ public class MemberServiceTest {
         member.setId("abba123");
         member.setPassword("1234");
 
-        int result = memberService.join(member);
+        int result = memberService.create(member);
 
         assertThat(result).isEqualTo(1);
     }

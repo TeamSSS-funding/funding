@@ -26,8 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/dist/**").permitAll()
                 .antMatchers("/authentication").permitAll()
-                .antMatchers("/", "/login").permitAll()
-                .antMatchers("/oauth_kakao").permitAll()
+                .antMatchers("/", "/login/**").permitAll()
                 .antMatchers("/joinPage").permitAll()
                 .antMatchers("/join").permitAll()
                 .antMatchers("/main.js").permitAll()
@@ -45,9 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginProcessingUrl("/login")
                     .usernameParameter("m_id")
                     .passwordParameter("m_password")
-                .permitAll()
+                    .permitAll()
                 .and()
-
                     .logout()
                 .and()
                 .csrf().disable();

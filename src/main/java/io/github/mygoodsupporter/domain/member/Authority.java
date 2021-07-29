@@ -1,4 +1,4 @@
-package io.github.mygoodsupporter.domain;
+package io.github.mygoodsupporter.domain.member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

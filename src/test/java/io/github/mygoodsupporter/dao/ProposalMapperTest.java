@@ -1,8 +1,8 @@
 package io.github.mygoodsupporter.dao;
 
-import io.github.mygoodsupporter.domain.Member;
 import io.github.mygoodsupporter.domain.Proposal;
 import io.github.mygoodsupporter.domain.ProposalStatus;
+import io.github.mygoodsupporter.domain.member.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

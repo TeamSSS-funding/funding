@@ -1,8 +1,8 @@
 package io.github.mygoodsupporter.security;
 
 
-import io.github.mygoodsupporter.domain.Authority;
-import io.github.mygoodsupporter.domain.Member;
+import io.github.mygoodsupporter.domain.member.Authority;
+import io.github.mygoodsupporter.domain.member.Member;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package io.github.mygoodsupporter.domain;
+package io.github.mygoodsupporter.domain.kakao;
 
 
 import lombok.Getter;

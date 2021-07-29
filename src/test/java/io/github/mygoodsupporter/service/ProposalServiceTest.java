@@ -2,9 +2,9 @@ package io.github.mygoodsupporter.service;
 
 import io.github.mygoodsupporter.dao.MemberDAO;
 import io.github.mygoodsupporter.dao.ProposalMapper;
-import io.github.mygoodsupporter.domain.Member;
 import io.github.mygoodsupporter.domain.Proposal;
 import io.github.mygoodsupporter.domain.ProposalStatus;
+import io.github.mygoodsupporter.domain.member.Member;
 import io.github.mygoodsupporter.dto.CreateProposalForm;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
