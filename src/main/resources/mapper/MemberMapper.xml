@@ -39,3 +39,4 @@
 		VALUES (#{memberId}, #{authority})
 	</insert>
 </mapper>
+
