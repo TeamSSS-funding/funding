@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    include: aws, local
   datasource:
     url: jdbc:mariadb://localhost:3306/mygoodsupporter
     username: mygoodsupporter
@@ -15,7 +17,14 @@ mybatis:
   configuration:
     cache-enabled: true
     default-statement-timeout: 3000
+    map-underscore-to-camel-case: true
     use-generated-keys: true
+
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+      auto: false
 
 logging:
   level:

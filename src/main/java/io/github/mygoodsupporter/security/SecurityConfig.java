@@ -24,6 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/dist/**").permitAll()
+                .antMatchers("/authentication").permitAll()
                 .antMatchers("/", "/login").permitAll()
                 .antMatchers("/oauth_kakao").permitAll()
                 .antMatchers("/join").permitAll()

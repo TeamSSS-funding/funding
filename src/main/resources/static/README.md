@@ -1,0 +1,1 @@
+# MyGoodSupporter Static Resources
