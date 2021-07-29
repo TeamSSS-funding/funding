@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.mygoodsupporter.domain.Member;
 import io.github.mygoodsupporter.domain.OAuthToken;
-import io.github.mygoodsupporter.domain.kakao.KakaoAccount;
 import io.github.mygoodsupporter.domain.kakao.KakaoProfile;
 import io.github.mygoodsupporter.dto.RegistrationForm;
 import io.github.mygoodsupporter.security.MemberDetails;
@@ -20,7 +19,6 @@ import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -39,7 +37,6 @@ import org.springframework.web.client.RestTemplate;
 import javax.validation.Valid;
 
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,16 +53,16 @@ public class RegistrationController {
 
 
     // 회원가입 페이지 이동
-    @GetMapping(value="/memberJoinPage")
+    @GetMapping(value="/joinPage")
     public String memberJoinPage(Model model) {
 
         model.addAttribute("registrationForm" ,new RegistrationForm());
-        return "memberJoin";
+        return "join";
     }
 
 
     // 회원가입 실행
-    @PostMapping("/memberJoin")
+    @PostMapping("/join")
     public String join(@Valid @ModelAttribute RegistrationForm registrationForm, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()){
@@ -73,7 +70,7 @@ public class RegistrationController {
             for (FieldError fieldError : fieldErrors) {
                 log.debug(fieldError.getDefaultMessage());
             }
-            return "memberJoin";
+            return "join";
         }
 
         Member member = registrationForm.toMember();
