@@ -25,17 +25,13 @@ public class ProjectController {
     private final MemberDAO memberDAO;
 
     // 프로젝트 신청 화면 요청 메이커
-    @RequestMapping(value="/projectRequestPage")
-    public String projectRequestPage(@AuthenticationPrincipal MemberDetails memberDetails) {
-        log.debug(memberDetails.getId());
-        log.debug(memberDetails.getEmail());
-        log.debug(memberDetails.getUsername());
-        log.debug(memberDetails.getAuthorities().toString());
+    @GetMapping(value="/projects/new")
+    public String projectRequestPage() {
         return "projects/projectRequest";
     }
 
     //프로젝트 신청페이지 메이커
-    @RequestMapping(value="/projectRequest")
+    @PostMapping(value="/project/new")
     public String projectRequest(@AuthenticationPrincipal MemberDetails memberDetails, @ModelAttribute Project pdto, Model model){
         //현재 로그인된 아이디 가져옴
         Project project = new Project();

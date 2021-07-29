@@ -7,6 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import io.github.mygoodsupporter.dao.MemberDAO;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 
 @Service
@@ -44,4 +47,27 @@ public class MemberService {
 		}
 		return result;
 	}
+
+	// 회원정보 수정요청
+	public Member update(String id) {
+		return memberDao.select(id);
+	}
+
+	// 회원정보 수정
+	public int updateprocess(Member member) {
+		return memberDao.update(member);
+	}
+
+	// 회원목록 조회
+	public List<Member> memberList() {
+		return memberDao.list();
+	}
+
+//	public Member getMemberById(String id) {
+//		return memberDao.getMemberById(id);
+//	}
+
+
+
+
 }

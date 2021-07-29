@@ -8,9 +8,6 @@
 
 <sec:authentication property="principal" var="member"></sec:authentication>
 
-<p>${member.id}</p>
-<p>${member.email}</p>
-<p>${member}</p>
     <form action="projectRequest" method="post" enctype="multipart/form-data">
         프로젝트 제목 <input type="text" name="p_name"><br>
         프로젝트 신청자 <input type="text" name="p_m_id" value="${member.id}"><br>

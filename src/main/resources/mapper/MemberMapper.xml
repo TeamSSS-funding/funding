@@ -38,4 +38,19 @@
 			(m_id, authority)
 		VALUES (#{memberId}, #{authority})
 	</insert>
+
+	<!-- 회원정보 수정	요청 -->
+	<select id="select" parameterType="String" resultMap="MemberResultMap">
+		SELECT * FROM member where m_id=#{id}
+	</select>
+
+	<!-- 회원정보 수정	-->
+	<update id="update" parameterType="Member">
+		update member set m_phone=#{phone}, m_email=#{email} where m_id=#{id}
+	</update>
+
+	<!-- 회원목록 조회 -->
+	<select id="list" resultMap="MemberResultMap">
+		select * from member
+	</select>
 </mapper>

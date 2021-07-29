@@ -18,7 +18,7 @@
 			<a class="mr-5 hover:text-gray-900">진행중인 프로젝트</a>
 			<a class="mr-5 hover:text-gray-900">오픈예정 프로젝트</a>
 			<a class="mr-5 hover:text-gray-900" href="${pageContext.request.contextPath}/projects">모든 프로젝트</a>
-			<a class="mr-5 hover:text-gray-900" href="projectRequestPage">프로젝트 신청</a>
+			<a class="mr-5 hover:text-gray-900" href="/projects/new">프로젝트 신청</a>
 		</nav>
 		<button class="inline-flex items-center bg-yellow-400 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base mt-4 md:mt-0"><a href="login">로그인</a>
 			<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
@@ -123,11 +123,18 @@
 
 <a href="memberJoinPage">회원가입</a><br>
 <a href="login">로그인</a><br>
-<a href="projectRequestPage">프로젝트 신청</a><br>
+<a href="/projects/new">프로젝트 신청</a><br>
 <a href="${pageContext.request.contextPath}/projects">프로젝트 보기</a><br>
 <a href="${pageContext.request.contextPath}/proposals/new">프로젝트 제안서 보기</a><br>
-<a href="${pageContext.request.contextPath}/proposals/new">프로젝트 신청 하기</a><br>
+<a href="${pageContext.request.contextPath}/projects/new">프로젝트 신청 하기</a><br>
 <a href="deliveryWritePage">배송지 추가</a><br>
+<a href="/users/mypage">마이페이지</a><br>
+<div>
+	<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+
+		<a href="${pageContext.request.contextPath}/users/list">회원목록 조회</a><br>
+	</sec:authorize>
+</div>
 
 <sec:authorize access="isAuthenticated()">
 	<form method="post" action = "/logout">
