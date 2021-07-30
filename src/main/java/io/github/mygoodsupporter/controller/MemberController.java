@@ -20,12 +20,6 @@ public class MemberController {
 	
 	private final MemberService memberService;
 
-	// 배송지 입력 화면 요청
-	@GetMapping(value="/deliveryWritePage")
-	public String writePage() {
-		return "deliveryWrite";
-	}
-
 	// 마이페이지 화면 요청
 	@GetMapping(value="/users/mypage")
 	public String mypage() {

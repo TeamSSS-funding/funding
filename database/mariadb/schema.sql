@@ -45,3 +45,24 @@ create table project
         foreign key (member_id) references member (m_id)
 );
 
+CREATE TABLE address
+(
+    a_number int(10) PRIMARY KEY,
+    a_m_id varchar(255) NOT NULL,
+    a_name varchar(255) NOT NULL,
+    a_phone varchar(255) NOT NULL,
+    a_postcode varchar(255) NOT NULL,
+    a_road varchar(255) NOT NULL,
+    a_jibun varchar(255) NULL,
+    a_detail varchar(255) NOT NULL,
+    a_chamgo varchar(255) NULL,
+    CONSTRAINT fk_address foreign key (a_m_id) REFERENCES member (m_id) ON DELETE CASCADE
+);
+
+CREATE SEQUENCE address_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+

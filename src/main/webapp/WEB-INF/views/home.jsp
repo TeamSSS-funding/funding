@@ -127,7 +127,6 @@
 <a href="${pageContext.request.contextPath}/projects">프로젝트 보기</a><br>
 <a href="${pageContext.request.contextPath}/proposals/new">프로젝트 제안서 보기</a><br>
 <a href="${pageContext.request.contextPath}/projects/new">프로젝트 신청 하기</a><br>
-<a href="deliveryWritePage">배송지 추가</a><br>
 <a href="/users/mypage">마이페이지</a><br>
 <div>
 	<sec:authorize access="hasAnyRole('ROLE_ADMIN')">

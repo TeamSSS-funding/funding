@@ -7,13 +7,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter @Setter
 public class Address {
-    private String city;
-    private String street;
-    private String zipcode;
+    private String number;
+    private String id;
+    private String name;
+    private String phone;
+    private String postcode;
+    private String road;
+    private String jibun;
+    private String detail;
+    private String chamgo;
 
-    public Address(String city, String street, String zipcode) {
-        this.city = city;
-        this.street = street;
-        this.zipcode = zipcode;
-    }
 }
