@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.mygoodsupporter.domain.kakao.KakaoProfile;
 import io.github.mygoodsupporter.domain.kakao.OAuthToken;
-import io.github.mygoodsupporter.domain.member.Member;
-import io.github.mygoodsupporter.security.MemberDetails;
+import io.github.mygoodsupporter.domain.user.User;
+import io.github.mygoodsupporter.security.UserDetails;
 import io.github.mygoodsupporter.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -133,25 +132,25 @@ public class LoginController {
 
     private void kakaoLogin(KakaoProfile kakaoProfile) {
         //       가입자 혹은 비가입자 체크해서 처리
-        Member originUser = memberService.getMemberById(kakaoProfile.getId().toString());
+        User originUser = memberService.getUserByUsername(kakaoProfile.getId().toString());
         if(originUser == null) {
             UUID rubbishPassword = UUID.randomUUID();
             log.debug("마이서포터 패스워드:" + rubbishPassword);
 
 
-            Member KakaoMember = new Member();
-            KakaoMember.setId(String.valueOf(kakaoProfile.getId()));
-            KakaoMember.setName(kakaoProfile.getKakao_account().getProfile().getNickname()+"_"+kakaoProfile.getId());
-            KakaoMember.setPassword(rubbishPassword.toString());
-            KakaoMember.setEmail(kakaoProfile.getKakao_account().getEmail());
-            KakaoMember.setPhone("");
+            User kakaoUser = new User();
+            kakaoUser.setUsername(String.valueOf(kakaoProfile.getId()));
+            kakaoUser.setName(kakaoProfile.getKakao_account().getProfile().getNickname()+"_"+kakaoProfile.getId());
+            kakaoUser.setPassword(rubbishPassword.toString());
+            kakaoUser.setEmail(kakaoProfile.getKakao_account().getEmail());
+            kakaoUser.setPhone("");
             log.debug("자동 회원가입 진행");
-            memberService.create(KakaoMember);
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(KakaoMember.getId(),rubbishPassword.toString()));
+            memberService.create(kakaoUser);
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(kakaoUser.getUsername(),rubbishPassword.toString()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } else {
             log.debug("이미 가입된 사용자");
-            UserDetails userDetails = new MemberDetails(originUser);
+            org.springframework.security.core.userdetails.UserDetails userDetails = new UserDetails(originUser);
             log.debug("userdetail정보"+ userDetails.getAuthorities());
             Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);

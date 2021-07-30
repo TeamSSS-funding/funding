@@ -11,7 +11,7 @@ import lombok.Setter;
 public class Project {
 
     private Long id;
-    private String memberId;
+    private Long userId;
     private String name;
     private String slug;
     private int targetAmount;
@@ -22,8 +22,8 @@ public class Project {
     private ProjectStatus status;
 
     @Builder
-    public Project(String memberId, String name, int targetAmount, String content) {
-        this.memberId = memberId;
+    public Project(Long userId, String name, int targetAmount, String content) {
+        this.userId = userId;
         this.name = name;
         this.slug = name.replace(' ', '-');
         this.targetAmount = targetAmount;

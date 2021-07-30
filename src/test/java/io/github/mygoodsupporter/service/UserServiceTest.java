@@ -1,6 +1,6 @@
 package io.github.mygoodsupporter.service;
 
-import io.github.mygoodsupporter.domain.member.Member;
+import io.github.mygoodsupporter.domain.user.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-public class MemberServiceTest {
+public class UserServiceTest {
 
     @Autowired
     MemberService memberService;
@@ -18,11 +18,11 @@ public class MemberServiceTest {
     @Test
     public void joinTest() {
 
-        Member member = new Member();
-        member.setId("abba123");
-        member.setPassword("1234");
+        User user = new User();
+        user.setUsername("abba123");
+        user.setPassword("1234");
 
-        int result = memberService.create(member);
+        int result = memberService.create(user);
 
         assertThat(result).isEqualTo(1);
     }

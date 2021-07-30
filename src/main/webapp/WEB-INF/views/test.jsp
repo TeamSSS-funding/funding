@@ -9,12 +9,12 @@
 </head>
 <body>
 
-<sec:authentication property="memberDetails" var="member"/>
+<sec:authentication property="userDetails" var="user"/>
 
-<p>${member.id}</p>
-<p>${member.password}</p>
-<p>${member.name}</p>
-<p>${member.email}</p>
-<p>${member.phone}</p>
+<p>${user.id}</p>
+<p>${user.password}</p>
+<p>${user.name}</p>
+<p>${user.email}</p>
+<p>${user.phone}</p>
 </body>
 </html>

@@ -109,7 +109,7 @@ create table project
     P_ENDDATE   date         not null,
     P_IMGNAME   varchar(255) not null,
     constraint project_member_M_ID_fk
-        foreign key (P_M_ID) references member (M_ID)
+        foreign key (P_M_ID) references user (M_ID)
 );
 
 -- 프로젝트 시퀀스

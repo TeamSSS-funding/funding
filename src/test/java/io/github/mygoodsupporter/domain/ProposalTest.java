@@ -12,14 +12,14 @@ public class ProposalTest {
     public void submitProposal() {
         //when
         Proposal proposal = Proposal.builder()
-                .memberId("mocha")
+                .userId(1L)
                 .title("coffee me!")
                 .description("coffee me!")
                 .targetAmount(3500)
                 .build();
 
         //then
-        assertThat(proposal.getMemberId()).isEqualTo("mocha");
+        assertThat(proposal.getUserId()).isEqualTo(1L);
         assertThat(proposal.getTitle()).isEqualTo("coffee me!");
         assertThat(proposal.getDescription()).isEqualTo("coffee me!");
         assertThat(proposal.getTargetAmount()).isEqualTo(3500);
@@ -28,7 +28,7 @@ public class ProposalTest {
 
     private Proposal createProposal() {
         Proposal proposal = Proposal.builder()
-                .memberId("mocha")
+                .userId(1L)
                 .title("coffee me!")
                 .description("coffee me!")
                 .targetAmount(3500)

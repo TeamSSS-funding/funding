@@ -84,14 +84,16 @@
             <sec:authorize access="isAuthenticated()">
                 <div class="w-full p-4 text-center">
                     <p>principal 객체가 UserDetails의 구현체인 경우 아래와 같이 변수로 스코프에 저장한뒤 사용 할 수 있습니다</p>
-                    <sec:authentication property="principal" var="member"></sec:authentication>
-                    <p>${member.id}</p>
-                    <p>${member.email}</p>
+                    <sec:authentication property="principal" var="user"></sec:authentication>
+                    <p>${user.id}</p>
+                    <p>${user.username}</p>
+                    <p>${user.email}</p>
                 </div>
             </sec:authorize>
 
             <sec:authorize access="hasRole('ROLE_USER')">
                 <div class="w-full p-4 text-center">
+                    <sec:authentication property="principal.id" />
                     <sec:authentication property="principal.username" />
                     <sec:authentication property="principal.email"/>
                     <sec:authentication property="principal.authorities"/>
@@ -101,6 +103,7 @@
 
             <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <div class="w-full p-4 text-center">
+                    <sec:authentication property="principal.id" />
                     <sec:authentication property="principal.username" />
                     <sec:authentication property="principal.email"/>
                     <sec:authentication property="principal.authorities"/>
@@ -110,6 +113,7 @@
 
             <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
                 <div class="w-full p-4 text-center">
+                <sec:authentication property="principal.id" />
                 <sec:authentication property="principal.username" />
                 <sec:authentication property="principal.email"/>
                 <sec:authentication property="principal.authorities"/>

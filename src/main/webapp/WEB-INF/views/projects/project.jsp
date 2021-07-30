@@ -15,7 +15,7 @@
             <dt class="f6 b mt2">Title</dt>
             <dd class="ml0">${project.name}</dd>
             <dt class="f6 b mt2">Member Id</dt>
-            <dd class="ml0">${project.memberId}</dd>
+            <dd class="ml0">${project.userId}</dd>
             <dt class="f6 b mt2">Description</dt>
             <dd class="ml0">${project.content}</dd>
             <dt class="f6 b mt2">Current Amount</dt>

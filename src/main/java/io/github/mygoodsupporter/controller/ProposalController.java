@@ -2,7 +2,7 @@ package io.github.mygoodsupporter.controller;
 
 import io.github.mygoodsupporter.domain.Proposal;
 import io.github.mygoodsupporter.dto.CreateProposalForm;
-import io.github.mygoodsupporter.security.MemberDetails;
+import io.github.mygoodsupporter.security.UserDetails;
 import io.github.mygoodsupporter.service.ProposalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,10 +28,10 @@ public class ProposalController {
     }
 
     @PostMapping("/proposals/new")
-    public String submitProposal(@AuthenticationPrincipal MemberDetails memberDetails, CreateProposalForm form) {
-        String memberId = memberDetails.getId();
+    public String submitProposal(@AuthenticationPrincipal UserDetails userDetails, CreateProposalForm form) {
+        Long userId = userDetails.getId();
 
-        proposalService.submitProposal(memberId, form);
+        proposalService.submitProposal(userId, form);
 
         return "redirect:/proposals";
     }

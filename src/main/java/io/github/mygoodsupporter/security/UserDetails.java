@@ -1,13 +1,12 @@
 package io.github.mygoodsupporter.security;
 
 
-import io.github.mygoodsupporter.domain.member.Authority;
-import io.github.mygoodsupporter.domain.member.Member;
+import io.github.mygoodsupporter.domain.user.Authority;
+import io.github.mygoodsupporter.domain.user.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,20 +14,23 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 @Getter @Setter
-public class MemberDetails implements UserDetails {
-    private String id;
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+    private Long id;
+    private String username;
     private String password;
     private int enabled;
     private List<Authority> authorities = new ArrayList<>();
 
     private String email;
 
-    public MemberDetails(Member member) {
-        this.id = member.getId();
-        this.password = member.getPassword();
-        this.enabled = member.getEnabled();
-        this.authorities = member.getAuthorities();
-        this.email = member.getEmail();
+    public UserDetails(User user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.email = user.getEmail();
+
+        this.authorities = user.getAuthorities();
+        this.enabled = user.getEnabled();
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -48,7 +50,7 @@ public class MemberDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return id;
+        return username;
     }
 
     @Override

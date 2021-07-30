@@ -15,7 +15,7 @@
                 <dt class="f6 b mt2">Title</dt>
                 <dd class="ml0">${proposal.title}</dd>
                 <dt class="f6 b mt2">Member Id</dt>
-                <dd class="ml0">${proposal.memberId}</dd>
+                <dd class="ml0">${proposal.userId}</dd>
                 <dt class="f6 b mt2">Description</dt>
                 <dd class="ml0">${proposal.description}</dd>
                 <dt class="f6 b mt2">Target</dt>

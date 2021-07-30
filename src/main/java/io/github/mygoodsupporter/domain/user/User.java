@@ -1,4 +1,4 @@
-package io.github.mygoodsupporter.domain.member;
+package io.github.mygoodsupporter.domain.user;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,28 +10,16 @@ import java.util.List;
 
 @NoArgsConstructor
 @Getter @Setter
+public class User {
 
-public class Member {
-	
-	private String id;
+	private Long id;
+	private String username;
 	private String password;
 	private String email;
 	private String name;
 	private String phone;
 
-
-
 	private List<Authority> authorities = new ArrayList<>();
 	private int enabled;
 
-	@Override
-	public String toString() {
-		return "Member{" +
-				"id='" + id + '\'' +
-				", password='" + password + '\'' +
-				", email='" + email + '\'' +
-				", name='" + name + '\'' +
-//				", address=" + address +
-				'}';
-	}
 }

@@ -6,14 +6,14 @@
 </head>
 <body>
 
-<sec:authentication property="principal" var="member"></sec:authentication>
+<sec:authentication property="principal" var="user"></sec:authentication>
 
-<p>${member.id}</p>
-<p>${member.email}</p>
-<p>${member}</p>
+<p>${user.id}</p>
+<p>${user.email}</p>
+<p>${user}</p>
     <form action="projectRequest" method="post" enctype="multipart/form-data">
         프로젝트 제목 <input type="text" name="p_name"><br>
-        프로젝트 신청자 <input type="text" name="p_m_id" value="${member.id}"><br>
+        프로젝트 신청자 <input type="text" name="p_m_id" value="${user.id}"><br>
         카테고리 선택 <input type="radio" name="p_c_name" value="fashion">패션
         <input type="radio" name="p_c_name" value="food">음식
         <input type="radio" name="p_c_name" value="movie">영화
