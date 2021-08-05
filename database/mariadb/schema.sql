@@ -46,7 +46,7 @@ create table project
         foreign key (user_id) references user (id)
 );
 
-create table cardinfo
+create table card
 (
     id bigint auto_increment
         primary key,

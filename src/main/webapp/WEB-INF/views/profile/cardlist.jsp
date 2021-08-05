@@ -28,26 +28,22 @@
                 </thead>
                 <tbody>
 
-                <c:forEach var = "cardinfo" items="${cardList}">
+                <c:forEach var = "card" items="${cardList}">
                 <tr>
+                    <td class="px-4 py-3">${card.userId}</td>
 
-                    <td class="px-4 py-3">${cardinfo.card_number}</td>
-                    <td class="px-4 py-3">${cardinfo.expired_date}</td>
-                    <td class="px-4 py-3">${cardinfo.card_password}</td>
-                    <td class="px-4 py-3">${cardinfo.date_of_birth}</td>
-                    <td class="px-4 py-3">${cardinfo.userId}</td>
-                    <td class="w-10 text-center"><label>
-                        <input name="plan" type="radio">
-                    </label></td>
+
+                    <td class="px-4 py-3"><a href="cards/${card.id}"> ${card.cardNumber}</a></td>
+                    <td class="px-4 py-3">${card.expiredDate}</td>
+                    <td class="px-4 py-3">${card.cardPassword}</td>
+                    <td class="px-4 py-3">${card.dateOfBirth}</td>
+
                 </tr>
                 </c:forEach>
                 </tbody>
             </table>
         </div>
-        <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-            <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">수정</button>
-            <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">삭제</button>
-        </div>
+
     </div>
 </section>
 
