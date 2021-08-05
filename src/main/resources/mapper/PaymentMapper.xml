@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.mygoodsupporter.mapper.PaymentMapper">
+
+    <!-- 카드 정보 기입 -->
+    <insert id="insertCard" parameterType="Cardinfo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO cardinfo
+            (card_number, expired_date, card_password, date_of_birth,userId)
+        VALUES (#{card_number}, #{expired_date}, #{card_password}, #{date_of_birth}, #{userId})
+    </insert>
+
+    <!-- 카드 정보 조회 -->
+    <select id="cardList" parameterType="Cardinfo" resultMap="CreditCard">
+        SELECT id, card_number, expired_date, card_password, date_of_birth, userId FROM cardinfo WHERE userId = #{userId}
+    </select>
+
+    <resultMap id="CreditCard" type="CardInfo">
+        <id property="id" column="id"/>
+        <result property="card_number" column="card_number"/>
+        <result property="expired_date" column="card_password"/>
+        <result property="date_of_birth" column="date_of_birth"/>
+        <result property="userId" column="userid"/>
+    </resultMap>
+
+    <select id="getCardInfoById" parameterType="Long" resultMap="CreditCard">
+        SELECT id, card_number, expired_date, card_password, date_of_birth, userid
+            FROM cardinfo
+            WHERE id = #{id}
+    </select>
+</mapper>

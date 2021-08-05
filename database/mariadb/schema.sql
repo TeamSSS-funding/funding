@@ -45,3 +45,14 @@ create table project
     constraint project_member_m_id_fk
         foreign key (user_id) references user (id)
 );
+
+create table cardinfo
+(
+    id bigint auto_increment
+        primary key,
+    card_number varchar(255) null,
+    expired_date varchar(255) null,
+    card_password varchar(255) null,
+    date_of_birth varchar(255) null,
+    userId varchar(255) null
+);
