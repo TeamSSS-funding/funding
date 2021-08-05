@@ -45,3 +45,11 @@ create table project
     constraint project_member_m_id_fk
         foreign key (user_id) references user (id)
 );
+
+create table address (
+     id bigint(20) primary key auto_increment,
+     user_id bigint(20) not null ,
+     city varchar(255) not null,
+     street varchar(255) not null,
+     zipcode varchar(255) not null
+);
