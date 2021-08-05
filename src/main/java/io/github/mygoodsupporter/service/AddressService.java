@@ -1,6 +1,7 @@
 package io.github.mygoodsupporter.service;
 
 import io.github.mygoodsupporter.domain.Address;
+import io.github.mygoodsupporter.exception.AddressNotFoundException;
 import io.github.mygoodsupporter.mapper.AddressMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,8 @@ public class AddressService {
     }
 
     @Transactional
-    public void insertAddress(Long userId, String city, String street, String zipcode) {
+    public void createAddress(Long userId, String city, String street, String zipcode) {
+
         Address address = Address.builder()
                 .userId(userId)
                 .city(city)
@@ -38,6 +40,10 @@ public class AddressService {
     @Transactional
     public void updateAddress(Long addressId, String city, String street, String zipcode) {
         Address address = addressMapper.getAddressById(addressId);
+
+        if (address == null) {
+            throw new AddressNotFoundException();
+        }
 
         if (!isEmpty(city)) {
             address.setCity(city);
@@ -60,6 +66,12 @@ public class AddressService {
 
     @Transactional
     public void deleteAddress(Long addressId) {
+        Address address = addressMapper.getAddressById(addressId);
+
+        if (address == null) {
+            throw new AddressNotFoundException();
+        }
+
         addressMapper.deleteAddress(addressId);
     }
 }
