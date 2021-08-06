@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface ProjectDAO {
+public interface ProjectMapper {
 
     List<Project> getProjects();
     Project getProjectById(Long id);
