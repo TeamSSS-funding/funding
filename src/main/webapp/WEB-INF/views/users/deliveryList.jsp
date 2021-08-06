@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>배송지 목록</title>
 </head>
 <style>
     table,th,tr,td {
@@ -26,8 +26,8 @@
             <td>${list.name}</td>
             <td>${list.postcode}<br>${list.road}${list.jibun}${list.detail}${list.chamgo}</td>
             <td>${list.phone}</td>
-            <td><a href="/users/deliveryList/${list.id}/edit">수정</a></td>
-            <td><a href="">삭제</a></td>
+            <td><a href="/users/deliveryList/edit/${list.number}">수정</a></td>
+            <td><a href="/users/deliveryList/delete/${list.number}">삭제</a></td>
         </tr>
     </c:forEach>
 </table>

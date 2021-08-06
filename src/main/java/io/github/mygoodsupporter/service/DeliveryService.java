@@ -23,4 +23,19 @@ public class DeliveryService {
     public List<Address> addressList(Address address) {
         return deliveryDAO.list(address);
     }
+
+    // 배송지 수정 화면 출력
+    public Address addressUpdate(int number) {
+        return deliveryDAO.select(number);
+    }
+
+    // 배송지 수정 처리
+    public int editProcess(Address address) {
+        return deliveryDAO.update(address);
+    }
+
+    // 배송지 삭제
+    public int addressDelete(int number) {
+        return deliveryDAO.delete(number);
+    }
 }

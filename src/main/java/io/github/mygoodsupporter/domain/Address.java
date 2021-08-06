@@ -7,7 +7,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter @Setter
 public class Address {
-    private String number;
+    private int number;
     private String id;
     private String name;
     private String phone;

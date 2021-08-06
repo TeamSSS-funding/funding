@@ -24,4 +24,19 @@
     <select id="list" resultMap="AddressResultMap">
         select * from address where a_m_id=#{id}
     </select>
+
+    <!-- 배송지 수정 화면 출력 -->
+    <select id="select" parameterType="int" resultMap="AddressResultMap">
+        select * from address where a_number=#{number}
+    </select>
+
+    <!-- 배송지 수정 처리 -->
+    <update id="update" parameterType="Address">
+        update address set a_name=#{name}, a_phone=#{phone}, a_postcode=#{postcode}, a_road=#{road}, a_jibun=#{jibun}, a_detail=#{detail}, a_chamgo=#{chamgo} where a_number=#{number}
+    </update>
+
+    <!-- 배송지 삭제 -->
+    <delete id="delete" parameterType="int">
+        delete from address where a_number=#{number}
+    </delete>
 </mapper>

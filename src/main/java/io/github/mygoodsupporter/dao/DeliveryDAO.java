@@ -14,4 +14,13 @@ public interface DeliveryDAO {
 
     // 배송지 목록 조회
     List<Address> list(Address address);
+
+    // 배송지 수정 화면 출력
+    Address select(int number);
+
+    // 배송지 수정 처리
+    int update(Address address);
+
+    // 배송지 삭제
+    int delete(int number);
 }
