@@ -15,24 +15,18 @@ create table authority
     authority varchar(255)
 );
 
-CREATE SEQUENCE project_seq
-    START WITH 1
-    INCREMENT BY 1
-    NOCACHE;
-
 create table project
 (
-    id bigint(20) primary key not null,
+    id bigint(20) primary key auto_increment,
     user_id bigint(20) not null,
-    name varchar(255) not null,
-    slug varchar(255) not null,
-    target_amount int(10) not null,
-    current_amount int(10) not null,
-    content varchar(255) not null,
+    title varchar(255) null,
+    subtitle varchar(255) not null,
+    goal_amount int(10) null,
+    current_amount int(10) null,
     status varchar(255) not null,
     start_date date,
     end_date date,
-    constraint project_member_m_id_fk
+    constraint project_user_user_id_fk
         foreign key (user_id) references user (id)
 );
 
