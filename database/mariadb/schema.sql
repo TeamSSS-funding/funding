@@ -32,11 +32,10 @@ create table project
 
 create table card
 (
-    id bigint auto_increment
-        primary key,
+    id bigint auto_increment primary key,
+    user_id varchar(255) null,
     card_number varchar(255) null,
     expired_date varchar(255) null,
     card_password varchar(255) null,
-    date_of_birth varchar(255) null,
-    userId varchar(255) null
+    date_of_birth varchar(255) null
 );
