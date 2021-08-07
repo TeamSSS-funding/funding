@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Sql("/fixture/mapper/category.test.sql")
+@Sql("/fixture/category/category.test.sql")
 public class CategoryMapperTest {
 
     @Autowired
