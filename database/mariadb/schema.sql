@@ -19,6 +19,7 @@ create table project
 (
     id bigint(20) primary key auto_increment,
     user_id bigint(20) not null,
+    category_id bigint(2) not null,
     title varchar(255) null,
     subtitle varchar(255) not null,
     goal_amount int(10) null,
@@ -27,7 +28,9 @@ create table project
     start_date date,
     end_date date,
     constraint project_user_user_id_fk
-        foreign key (user_id) references user (id)
+        foreign key (user_id) references user (id),
+    constraint project_category_id_fk
+        foreign key (category_id) references category (id)
 );
 
 CREATE TABLE category (
