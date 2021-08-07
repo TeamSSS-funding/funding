@@ -28,7 +28,7 @@ public class CategoryMapperTest {
 
     @Test
     void getCategoryByName() {
-        String name = "cinema";
+        String name = "영화";
         Category category = categoryMapper.getCategoryByName(name);
 
         assertThat(category).isNotNull();
@@ -46,7 +46,7 @@ public class CategoryMapperTest {
 
         //then
         assertThat(category.getId()).isEqualTo(1L);
-        assertThat(category.getName()).isEqualTo("art");
+        assertThat(category.getName()).isEqualTo("영화");
     }
 
     @Test
@@ -64,10 +64,10 @@ public class CategoryMapperTest {
     @Test
     void updateCategory() {
         //given
-        Category category = categoryMapper.getCategoryByName("cinema");
+        Category category = categoryMapper.getCategoryByName("영화");
 
         //when
-        category.setName("film");
+        category.setName("영화음악");
         categoryMapper.updateCategory(category);
 
         //then
@@ -78,7 +78,7 @@ public class CategoryMapperTest {
     @Test
     void deleteCategory() {
         //given
-        Category category = categoryMapper.getCategoryByName("cinema");
+        Category category = categoryMapper.getCategoryByName("영화");
 
         //when
         categoryMapper.deleteCategory(category.getId());
