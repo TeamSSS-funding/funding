@@ -1,6 +1,6 @@
 package io.github.mygoodsupporter.mapper;
 
-import io.github.mygoodsupporter.domain.Project;
+import io.github.mygoodsupporter.domain.project.Project;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -9,7 +9,9 @@ import java.util.List;
 public interface ProjectMapper {
 
     List<Project> getProjects();
-    Project getProjectById(Long id);
+    List<Project> getProjectsByUserId(Long userId);
+
+    Project getProjectById(Long projectId);
 
     void insertProject(Project project);
     void updateProject(Project project);
