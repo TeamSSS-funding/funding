@@ -1,6 +1,6 @@
 package io.github.mygoodsupporter.controller;
 
-import io.github.mygoodsupporter.domain.Project;
+import io.github.mygoodsupporter.domain.project.Project;
 import io.github.mygoodsupporter.dto.SupportProjectForm;
 import io.github.mygoodsupporter.mapper.UserMapper;
 import io.github.mygoodsupporter.security.UserDetails;
@@ -34,7 +34,7 @@ public class ProjectController {
     @RequestMapping(value="/projectRequest")
     public String projectRequest(@ModelAttribute Project pdto, @AuthenticationPrincipal UserDetails userDetails, Model model){
         //현재 로그인된 아이디 가져옴
-        Project project = new Project(userDetails.getId(), pdto.getSubtitle());
+        Project project = new Project(userDetails.getId(), pdto.getCategoryId(), pdto.getSubtitle());
         project.setUserId(userDetails.getId());
 
         pdto = projectService.projectRequest(pdto);
