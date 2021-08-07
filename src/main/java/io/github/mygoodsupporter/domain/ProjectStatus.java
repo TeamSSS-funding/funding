@@ -1,5 +1,5 @@
 package io.github.mygoodsupporter.domain;
 
 public enum ProjectStatus {
-    FUNDING, SUCCEED, FAILED
+    PREPARING, PENDING, APPROVED, REJECTED, FUNDING, SUCCEED, FAILED
 }

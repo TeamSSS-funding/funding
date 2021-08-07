@@ -1,40 +1,37 @@
 package io.github.mygoodsupporter.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@NoArgsConstructor
+import java.time.LocalDateTime;
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
 public class Project {
 
     private Long id;
     private Long userId;
-    private String name;
-    private String slug;
-    private int targetAmount;
+    private String title;
+    private String subtitle;
+    private int goalAmount;
     private int currentAmount;
-    private String content;
-    private String startDate;
-    private String endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private ProjectStatus status;
 
     @Builder
-    public Project(Long userId, String name, int targetAmount, String content) {
+    public Project(Long userId, String subtitle) {
         this.userId = userId;
-        this.name = name;
-        this.slug = name.replace(' ', '-');
-        this.targetAmount = targetAmount;
+        this.title = "";
+        this.subtitle = subtitle;
+        this.goalAmount = 0;
         this.currentAmount = 0;
-        this.content = content;
-        this.status = ProjectStatus.FUNDING;
+        this.status = ProjectStatus.PREPARING;
     }
 
     public void supportProject(int amount) {
         currentAmount += amount;
-        if (currentAmount >= targetAmount) {
+        if (currentAmount >= goalAmount) {
             status = ProjectStatus.SUCCEED;
         }
     }

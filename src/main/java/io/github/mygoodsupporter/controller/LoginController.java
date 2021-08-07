@@ -6,7 +6,7 @@ import io.github.mygoodsupporter.domain.kakao.KakaoProfile;
 import io.github.mygoodsupporter.domain.kakao.OAuthToken;
 import io.github.mygoodsupporter.domain.user.User;
 import io.github.mygoodsupporter.security.UserDetails;
-import io.github.mygoodsupporter.service.MemberService;
+import io.github.mygoodsupporter.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -32,7 +32,7 @@ public class LoginController {
 
     private final AuthenticationManager authenticationManager;
 
-    private final MemberService memberService;
+    private final UserService userService;
 
     @GetMapping("/login")
     public String loginPage() {
@@ -132,7 +132,7 @@ public class LoginController {
 
     private void kakaoLogin(KakaoProfile kakaoProfile) {
         //       가입자 혹은 비가입자 체크해서 처리
-        User originUser = memberService.getUserByUsername(kakaoProfile.getId().toString());
+        User originUser = userService.getUserByUsername(kakaoProfile.getId().toString());
         if(originUser == null) {
             UUID rubbishPassword = UUID.randomUUID();
             log.debug("마이서포터 패스워드:" + rubbishPassword);
@@ -145,7 +145,7 @@ public class LoginController {
             kakaoUser.setEmail(kakaoProfile.getKakao_account().getEmail());
             kakaoUser.setPhone("");
             log.debug("자동 회원가입 진행");
-            memberService.create(kakaoUser);
+            userService.create(kakaoUser);
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(kakaoUser.getUsername(),rubbishPassword.toString()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } else {

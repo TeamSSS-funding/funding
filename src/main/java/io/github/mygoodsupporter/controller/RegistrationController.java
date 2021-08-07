@@ -2,7 +2,7 @@ package io.github.mygoodsupporter.controller;
 
 import io.github.mygoodsupporter.domain.user.User;
 import io.github.mygoodsupporter.dto.RegistrationForm;
-import io.github.mygoodsupporter.service.MemberService;
+import io.github.mygoodsupporter.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,7 +23,7 @@ public class RegistrationController {
 
     private final AuthenticationManager authenticationManager;
 
-    private final MemberService memberService;
+    private final UserService userService;
 
 
 
@@ -49,7 +49,7 @@ public class RegistrationController {
         }
 
         User user = registrationForm.toUser();
-        int insertResult = memberService.create(user);
+        int insertResult = userService.create(user);
 
         if(insertResult>0) {
             return "users/login";
@@ -60,7 +60,7 @@ public class RegistrationController {
     @RequestMapping(value="/idcheck")
     public @ResponseBody
     String idCheck(@RequestParam("id")String id) {
-        return memberService.idCheck(id);
+        return userService.idCheck(id);
     }
 
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class MemberService {
+public class UserService {
 
 	private final UserMapper userMapper;
 	private final PasswordEncoder passwordEncoder;

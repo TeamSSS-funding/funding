@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Sql("file:src/test/java/io/github/mygoodsupporter/mapper/PaymentMapperTest.sql")
+@Sql("/fixture/mapper/PaymentMapperTest.sql")
 public class PaymentMapperTest {
 
     @Autowired
@@ -102,6 +102,5 @@ public class PaymentMapperTest {
         //then
         Card card = paymentMapper.getCardById(cardId);
         assertThat(card).isNull();
-
     }
 }

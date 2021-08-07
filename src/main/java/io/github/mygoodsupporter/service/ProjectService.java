@@ -31,9 +31,9 @@ public class ProjectService {
     }
 
     @Transactional
-    public void supportProject(String memberId, String slug, int amount) {
-        User user = userMapper.getUserByUsername(memberId);
-        Project project = projectMapper.getProjectBySlug(slug);
+    public void supportProject(String username, Long projectId, int amount) {
+        User user = userMapper.getUserByUsername(username);
+        Project project = projectMapper.getProjectById(projectId);
 
         project.supportProject(amount);
 
@@ -49,7 +49,4 @@ public class ProjectService {
         return projectMapper.getProjectById(id);
     }
 
-    public Project getProjectBySlug(String slug) {
-        return projectMapper.getProjectBySlug(slug);
-    }
 }
