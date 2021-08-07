@@ -1,29 +1,28 @@
 package io.github.mygoodsupporter.service;
 
-import io.github.mygoodsupporter.domain.user.User;
+import io.github.mygoodsupporter.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-@SpringBootTest
-@Transactional
+@ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
-    @Autowired
-    MemberService memberService;
+    @InjectMocks
+    UserService userService;
+
+    @Mock
+    UserMapper userMapper;
 
     @Test
-    public void joinTest() {
+    public void createUserTest() {
+        //given
 
-        User user = new User();
-        user.setUsername("abba123");
-        user.setPassword("1234");
+        //when
 
-        int result = memberService.create(user);
+        //then
 
-        assertThat(result).isEqualTo(1);
     }
 }

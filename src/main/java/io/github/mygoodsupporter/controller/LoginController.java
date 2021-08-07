@@ -145,7 +145,7 @@ public class LoginController {
             kakaoUser.setEmail(kakaoProfile.getKakao_account().getEmail());
             kakaoUser.setPhone("");
             log.debug("자동 회원가입 진행");
-            userService.create(kakaoUser);
+            userService.createUser(kakaoUser);
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(kakaoUser.getUsername(),rubbishPassword.toString()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } else {

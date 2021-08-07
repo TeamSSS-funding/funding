@@ -10,7 +10,8 @@ public interface UserMapper {
 	User getUserById(Long userId);
 	User getUserByUsername(String username);
 
-	int insertUser(User user);
+	void insertUser(User user);
+	void deleteUser(long userId);
 
 	void insertAuthority(Authority authority);
 

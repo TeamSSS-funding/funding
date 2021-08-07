@@ -5,15 +5,12 @@ import io.github.mygoodsupporter.dto.RegistrationForm;
 import io.github.mygoodsupporter.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 
 @Slf4j
@@ -21,15 +18,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RegistrationController {
 
-    private final AuthenticationManager authenticationManager;
-
     private final UserService userService;
-
-
 
     // 회원가입 페이지 이동
     @GetMapping(value="/joinPage")
-    public String memberJoinPage(Model model) {
+    public String joinPage(Model model) {
 
         model.addAttribute("registrationForm" ,new RegistrationForm());
         return "join";
@@ -41,26 +34,25 @@ public class RegistrationController {
     public String join(@Valid @ModelAttribute RegistrationForm registrationForm, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()){
-            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-            for (FieldError fieldError : fieldErrors) {
-                log.debug(fieldError.getDefaultMessage());
-            }
             return "join";
         }
 
         User user = registrationForm.toUser();
-        int insertResult = userService.create(user);
+        userService.createUser(user);
 
-        if(insertResult>0) {
-            return "users/login";
-        }
-        return "joinfail";
+        return "redirect:/login";
     }
 
     @RequestMapping(value="/idcheck")
-    public @ResponseBody
-    String idCheck(@RequestParam("id")String id) {
-        return userService.idCheck(id);
+    @ResponseBody
+    public String isDuplicateUsername(@RequestParam("id")String username) {
+
+        boolean isDuplicate = userService.isDuplicatedUsername(username);
+
+        if(!isDuplicate) {
+            return "no";
+        }
+        return "ok";
     }
 
 }
