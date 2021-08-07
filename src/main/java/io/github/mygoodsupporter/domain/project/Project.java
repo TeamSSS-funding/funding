@@ -1,4 +1,4 @@
-package io.github.mygoodsupporter.domain;
+package io.github.mygoodsupporter.domain.project;
 
 import lombok.*;
 
@@ -11,6 +11,7 @@ public class Project {
 
     private Long id;
     private Long userId;
+    private Long categoryId;
     private String title;
     private String subtitle;
     private int goalAmount;
@@ -20,8 +21,9 @@ public class Project {
     private ProjectStatus status;
 
     @Builder
-    public Project(Long userId, String subtitle) {
+    public Project(Long userId, Long categoryId, String subtitle) {
         this.userId = userId;
+        this.categoryId = categoryId;
         this.title = "";
         this.subtitle = subtitle;
         this.goalAmount = 0;
