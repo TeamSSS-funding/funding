@@ -18,15 +18,24 @@ public class ProjectService {
     private final ProjectMapper projectMapper;
     private final UserMapper userMapper;
 
+    public List<Project> getProjects() {
+        return projectMapper.getProjects();
+    }
+
+    public Project getProjectById(Long id) {
+        return projectMapper.getProjectById(id);
+    }
+
     //프로젝트 정보 입력
-    public Project projectRequest(Project pdto) {
-        projectMapper.insert(pdto);
-        return pdto;
+    @Transactional
+    public Project projectRequest(Project project) {
+        projectMapper.insertProject(project);
+        return project;
     }
 
     @Transactional
-    public Long openProject(Project project) {
-        projectMapper.insert(project);
+    public Long createProject(Project project) {
+        projectMapper.insertProject(project);
         return project.getId();
     }
 
@@ -37,16 +46,8 @@ public class ProjectService {
 
         project.supportProject(amount);
 
-        projectMapper.update(project);
+        projectMapper.updateProject(project);
 
-    }
-
-    public List<Project> getProjects() {
-        return projectMapper.getProjects();
-    }
-
-    public Project getProjectById(Long id) {
-        return projectMapper.getProjectById(id);
     }
 
 }

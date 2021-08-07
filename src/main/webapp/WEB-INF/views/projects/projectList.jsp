@@ -25,18 +25,18 @@
                 <c:forEach var="project" items="${projects}">
                     <tr class="stripe-dark">
                         <td class="pa3">
-                            <a href="/projects/${project.slug}">
+                            <a href="/projects/${project.id}">
                                     ${project.id}
                             </a>
                         </td>
                         <td class="pa3">
-                            <a href="/projects/${project.slug}">
-                                    ${project.name}
+                            <a href="/projects/${project.id}">
+                                    ${project.title}
                             </a>
                         </td>
                         <td class="pa3">${project.userId}</td>
                         <td class="pa3">${project.currentAmount}</td>
-                        <td class="pa3">${project.targetAmount}</td>
+                        <td class="pa3">${project.goalAmount}</td>
                         <td class="pa3">${project.status}</td>
                     </tr>
                 </c:forEach>

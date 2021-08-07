@@ -10,8 +10,8 @@ public interface ProjectMapper {
 
     List<Project> getProjects();
     Project getProjectById(Long id);
-    Project getProjectBySlug(String slug);
 
-    int insert(Project project);
-    void update(Project project);
+    void insertProject(Project project);
+    void updateProject(Project project);
+    void deleteProject(Long projectId);
 }

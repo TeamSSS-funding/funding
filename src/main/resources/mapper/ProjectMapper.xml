@@ -3,51 +3,53 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.github.mygoodsupporter.mapper.ProjectMapper">
 
-	<resultMap id="ProjectResultMap" type="Project">
+	<resultMap id="project" type="Project">
 		<id property="id" column="id"/>
-		<result property="memberId" column="user_id"/>
-		<result property="name" column="name"/>
-		<result property="slug" column="slug"/>
-		<result property="targetAmount" column="target_amount"/>
+		<result property="userId" column="user_id"/>
+		<result property="goalAmount" column="goal_amount"/>
 		<result property="currentAmount" column="current_amount"/>
-		<result property="content" column="content"/>
+		<result property="startDate" column="start_date"/>
+		<result property="endDate" column="end_date"/>
 		<result property="status" column="status"/>
 	</resultMap>
 
-	<select id="getProjects" resultMap="ProjectResultMap">
-		SELECT id, user_id, name, slug, target_amount, current_amount, content, status
+	<select id="getProjects" resultMap="project">
+		SELECT id, user_id, title, subtitle, goal_amount, current_amount, status, start_date, end_date
 		FROM project
 	</select>
 
-	<select id="getProjectById" resultMap="ProjectResultMap">
-		SELECT id, user_id, name, slug, target_amount, current_amount, content, status
+	<select id="getProjectById" parameterType="Long" resultMap="project">
+		SELECT id, user_id, title, subtitle, goal_amount, current_amount, status, start_date, end_date
 		FROM project
-		WHERE id = #{id}
+		WHERE id = #{projectId}
 	</select>
 
-	<select id="getProjectBySlug" parameterType="String" resultMap="ProjectResultMap">
-		SELECT id, user_id, name, slug, target_amount, current_amount, content, status
+	<select id="getProjectByUserId" parameterType="Long" resultMap="project">
+		SELECT id, user_id, title, subtitle, goal_amount, current_amount, status, start_date, end_date
 		FROM project
-		WHERE slug= #{slug}
+		WHERE id = #{userId}
 	</select>
 
-	<insert id="insert" parameterType="Project">
+	<insert id="insertProject" parameterType="Project">
 		INSERT INTO project
-		    (id, user_id, name, slug, target_amount, current_amount, content, status)
+		   (user_id, subtitle, status)
 		VALUES
-		    (nextval(project_seq), #{memberId}, #{name}, #{slug}, #{targetAmount}, #{currentAmount}, #{content}, #{status})
+			(#{userId}, #{subtitle}, #{status})
 	</insert>
 
-	<update id="update" parameterType="Project">
+	<update id="updateProject" parameterType="Project">
 		UPDATE project SET
-			user_id = #{memberId},
-			name = #{name},
-			slug = #{slug},
-			target_amount = #{targetAmount},
+			title = #{title},
+			subtitle = #{subtitle},
+			goal_amount = #{goalAmount},
 			current_amount = #{currentAmount},
-			content = #{content},
-		    status = #{status}
+			start_date = #{startDate},
+			end_date = #{endDate},
+			status = #{status}
 		WHERE id = #{id}
 	</update>
 
+	<delete id="deleteProject" parameterType="Long">
+		DELETE FROM project WHERE id = #{id}
+	</delete>
 </mapper>
