@@ -30,6 +30,11 @@ create table project
         foreign key (user_id) references user (id)
 );
 
+CREATE TABLE category (
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
 create table card
 (
     id bigint auto_increment primary key,
