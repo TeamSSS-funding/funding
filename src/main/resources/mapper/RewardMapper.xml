@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.mygoodsupporter.mapper.RewardMapper">
+
+    <resultMap id="reward" type="Reward">
+        <id property="id" column="reward_id"/>
+        <result property="projectId" column="reward_project_id"/>
+        <result property="title" column="reward_title"/>
+        <result property="description" column="reward_description"/>
+        <result property="amount" column="reward_amount"/>
+        <collection property="items" ofType="RewardItem">
+            <id property="id" column="ri_id"/>
+            <result property="rewardId" column="ri_reward_id"/>
+            <result property="quantity" column="ri_quantity"/>
+            <association property="item" javaType="Item">
+                <id property="id" column="item_id"/>
+                <result property="projectId" column="item_project_id"/>
+                <result property="title" column="item_title"/>
+            </association>
+        </collection>
+    </resultMap>
+
+    <select id="getRewardsByProjectId" parameterType="Long" resultMap="reward">
+        SELECT r.id as reward_id,
+               r.project_id as reward_project_id,
+               r.title as reward_title,
+               r.description as reward_description,
+               r.amount as reward_amount,
+               ri.id as ri_id,
+               ri.reward_id as ri_reward_id,
+               ri.quantity as ri_quantity,
+               i.id as item_id,
+               i.project_id as item_project_id,
+               i.title as item_title
+        FROM reward r
+                 LEFT OUTER JOIN reward_item ri on r.id = ri.reward_id
+                 JOIN item i on ri.item_id = i.id
+        WHERE r.project_id = #{projectId}
+    </select>
+
+    <select id="getRewardById" parameterType="Long" resultMap="reward">
+        SELECT r.id as reward_id,
+               r.project_id as reward_project_id,
+               r.title as reward_title,
+               r.description as reward_description,
+               r.amount as reward_amount,
+               ri.id as ri_id,
+               ri.reward_id as ri_reward_id,
+               ri.quantity as ri_quantity,
+               i.id as item_id,
+               i.project_id as item_project_id,
+               i.title as item_title
+        FROM reward r
+            LEFT OUTER JOIN reward_item ri on r.id = ri.reward_id
+            JOIN item i on ri.item_id = i.id
+        WHERE r.id = #{rewardId}
+    </select>
+
+    <insert id="insertReward" parameterType="Reward" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO reward
+            (project_id, title, description, amount)
+        VALUES
+            (#{projectId}, #{title}, #{description}, #{amount})
+    </insert>
+
+    <update id="updateReward" parameterType="Reward">
+        UPDATE reward SET
+            title = #{title},
+            description = #{description},
+            amount = #{amount}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteReward" parameterType="Reward">
+        DELETE FROM reward WHERE id = #{id}
+    </delete>
+
+    <resultMap id="rewardItem" type="RewardItem">
+        <id property="id" column="reward_item_id"/>
+        <result property="rewardId" column="reward_item_reward_id"/>
+        <result property="quantity" column="reward_item_quantity"/>
+        <association property="item" javaType="Item">
+            <id property="id" column="item_id"/>
+            <result property="projectId" column="item_project_id"/>
+            <result property="title" column="item_title"/>
+        </association>
+    </resultMap>
+
+    <select id="getRewardItemById" parameterType="Long" resultMap="rewardItem">
+        SELECT ri.id as reward_item_id,
+               ri.reward_id as reward_item_reward_id,
+               ri.quantity as reward_item_quantity,
+               i.id as item_id,
+               i.project_id as item_project_id,
+               i.title as item_title
+        FROM reward_item ri
+            JOIN item i on i.id = ri.item_id
+        WHERE ri.id = #{rewardItemId}
+    </select>
+
+    <insert id="insertRewardItem" parameterType="RewardItem" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO reward_item
+            (reward_id, item_id, quantity)
+        VALUES
+            (#{rewardId}, #{item.id}, #{quantity})
+    </insert>
+
+    <update id="updateRewardItem" parameterType="RewardItem">
+        UPDATE reward_item SET
+         quantity = #{quantity}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteRewardItem" parameterType="Long">
+        DELETE FROM reward_item WHERE id = #{rewardItemId}
+    </delete>
+
+</mapper>

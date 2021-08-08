@@ -11,7 +11,7 @@ create table user
 
 create table authority
 (
-    username      varchar(255),
+    username varchar(255),
     authority varchar(255)
 );
 
@@ -46,6 +46,26 @@ create table item
     constraint item_project_id_fk
         foreign key (project_id) references project (id)
             on delete cascade
+);
+
+CREATE TABLE reward (
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    project_id BIGINT(20),
+    title VARCHAR(255),
+    description VARCHAR(255),
+    amount INT(11),
+    CONSTRAINT reward_project_id_fk
+        FOREIGN KEY (project_id) references project (id)
+            ON DELETE CASCADE
+);
+
+CREATE TABLE reward_item (
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    reward_id BIGINT(20),
+    item_id BIGINT(20),
+    quantity int(11),
+    CONSTRAINT reward_item_reward_id_fk FOREIGN KEY (reward_id) REFERENCES reward (id) ON DELETE CASCADE,
+    CONSTRAINT reward_item_item_id_fk FOREIGN KEY (item_id) REFERENCES item (id) ON DELETE CASCADE
 );
 
 create table card

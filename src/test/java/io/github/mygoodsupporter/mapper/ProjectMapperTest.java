@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Sql("/fixture/project/project.test.sql")
+@Sql("/fixture/project/project.fixture.sql")
 public class ProjectMapperTest {
 
     @Autowired

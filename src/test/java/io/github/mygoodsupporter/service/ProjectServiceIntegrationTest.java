@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
-@Sql("/fixture/project/project.test.sql")
+@Sql("/fixture/project/project.fixture.sql")
 public class ProjectServiceIntegrationTest {
 
     @Autowired

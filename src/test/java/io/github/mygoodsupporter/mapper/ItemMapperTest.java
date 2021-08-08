@@ -15,8 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @SqlGroup({
-        @Sql("/fixture/project/project.test.sql"),
-        @Sql("/fixture/project/item.test.sql")
+        @Sql("/fixture/project/project.fixture.sql"),
+        @Sql("/fixture/project/item.fixture.sql")
 })
 public class ItemMapperTest {
 
