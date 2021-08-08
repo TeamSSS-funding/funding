@@ -38,6 +38,16 @@ CREATE TABLE category (
     name VARCHAR(255) UNIQUE NOT NULL
 );
 
+create table item
+(
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    project_id BIGINT(20),
+    title varchar(255),
+    constraint item_project_id_fk
+        foreign key (project_id) references project (id)
+            on delete cascade
+);
+
 create table card
 (
     id bigint auto_increment primary key,
