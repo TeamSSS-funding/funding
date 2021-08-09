@@ -3,6 +3,7 @@ package io.github.mygoodsupporter.service.project;
 import io.github.mygoodsupporter.domain.project.Reward;
 import io.github.mygoodsupporter.mapper.ItemMapper;
 import io.github.mygoodsupporter.mapper.RewardMapper;
+import io.github.mygoodsupporter.repository.RewardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class RewardService {
 
+    private final RewardRepository rewardRepository;
     private final RewardMapper rewardMapper;
     private final ItemMapper itemMapper;
 
@@ -26,18 +28,19 @@ public class RewardService {
     }
 
     @Transactional
-    public Long createReward() {
-        return null;
+    public Long createReward(Reward reward) {
+        rewardRepository.saveReward(reward);
+        return reward.getId();
     }
 
     @Transactional
-    public void updateReward() {
-
+    public void updateReward(Reward reward) {
+        rewardRepository.updateReward(reward);
     }
 
     @Transactional
-    public void deleteReward() {
-
+    public void deleteReward(Long rewardId) {
+        rewardRepository.deleteReward(rewardId);
     }
 
 }
