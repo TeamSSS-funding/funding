@@ -1,6 +1,7 @@
 package io.github.mygoodsupporter.service;
 
 import io.github.mygoodsupporter.domain.Card;
+import io.github.mygoodsupporter.dto.CardDTO;
 import io.github.mygoodsupporter.mapper.PaymentMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,11 @@ public class PaymentService {
     private final PaymentMapper paymentMapper;
 
     @Transactional
-    public void createCard(Card card) {
-        paymentMapper.insertCard(card);
+    public void createCard(CardDTO dto) {
+
+        Card card = dto.toCard();
+        paymentMapper.insertCard(card)
+        ;
     }
 
     public Card getCardById(Long id){
@@ -35,4 +39,6 @@ public class PaymentService {
     public void deleteCard(Long id){
         paymentMapper.deleteCard(id);
     }
+
+
 }
