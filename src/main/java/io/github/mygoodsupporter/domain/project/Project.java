@@ -14,7 +14,7 @@ public class Project {
     private Long categoryId;
     private String title;
     private String subtitle;
-    private int goalAmount;
+    private int targetAmount;
     private int currentAmount;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
@@ -26,14 +26,14 @@ public class Project {
         this.categoryId = categoryId;
         this.title = "";
         this.subtitle = subtitle;
-        this.goalAmount = 0;
+        this.targetAmount = 0;
         this.currentAmount = 0;
         this.status = ProjectStatus.PREPARING;
     }
 
     public void supportProject(int amount) {
         currentAmount += amount;
-        if (currentAmount >= goalAmount) {
+        if (currentAmount >= targetAmount) {
             status = ProjectStatus.SUCCEED;
         }
     }

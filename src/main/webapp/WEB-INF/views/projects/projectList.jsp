@@ -36,7 +36,7 @@
                         </td>
                         <td class="pa3">${project.userId}</td>
                         <td class="pa3">${project.currentAmount}</td>
-                        <td class="pa3">${project.goalAmount}</td>
+                        <td class="pa3">${project.targetAmount}</td>
                         <td class="pa3">${project.status}</td>
                     </tr>
                 </c:forEach>

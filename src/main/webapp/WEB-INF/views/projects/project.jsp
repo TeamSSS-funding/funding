@@ -19,7 +19,7 @@
             <dt class="f6 b mt2">Current Amount</dt>
             <dd class="ml0">${project.currentAmount}</dd>
             <dt class="f6 b mt2">Target Amount</dt>
-            <dd class="ml0">${project.goalAmount}</dd>
+            <dd class="ml0">${project.targetAmount}</dd>
             <dt class="f6 b mt2">Status</dt>
             <dd class="ml0">${project.status}</dd>
         </dl>

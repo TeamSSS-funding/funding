@@ -7,7 +7,7 @@
 		<id property="id" column="id"/>
 		<result property="userId" column="user_id"/>
 		<result property="categoryId" column="category_id"/>
-		<result property="goalAmount" column="goal_amount"/>
+		<result property="targetAmount" column="target_amount"/>
 		<result property="currentAmount" column="current_amount"/>
 		<result property="startDate" column="start_date"/>
 		<result property="endDate" column="end_date"/>
@@ -15,18 +15,18 @@
 	</resultMap>
 
 	<select id="getProjects" resultMap="project">
-		SELECT id, user_id, category_id, title, subtitle, goal_amount, current_amount, status, start_date, end_date
+		SELECT id, user_id, category_id, title, subtitle, target_amount, current_amount, status, start_date, end_date
 		FROM project
 	</select>
 
 	<select id="getProjectById" parameterType="Long" resultMap="project">
-		SELECT id, user_id, category_id, title, subtitle, goal_amount, current_amount, status, start_date, end_date
+		SELECT id, user_id, category_id, title, subtitle, target_amount, current_amount, status, start_date, end_date
 		FROM project
 		WHERE id = #{projectId}
 	</select>
 
 	<select id="getProjectsByUserId" parameterType="Long" resultMap="project">
-		SELECT id, user_id, category_id, title, subtitle, goal_amount, current_amount, status, start_date, end_date
+		SELECT id, user_id, category_id, title, subtitle, target_amount, current_amount, status, start_date, end_date
 		FROM project
 		WHERE user_id = #{userId}
 	</select>
@@ -44,7 +44,7 @@
 				<if test="categoryId != null">category_id = #{categoryId},</if>
 				<if test="title != null">title = #{title},</if>
 				<if test="subtitle != null">subtitle = #{subtitle},</if>
-				<if test="goalAmount != null"> goal_amount= #{goalAmount},</if>
+				<if test="targetAmount != null"> target_amount= #{targetAmount},</if>
 				<if test="currentAmount != null">current_amount = #{currentAmount},</if>
 				<if test="status != null">status = #{status}</if>
 			</set>

@@ -22,7 +22,7 @@ create table project
     category_id bigint(2) not null,
     title varchar(255) null,
     subtitle varchar(255) not null,
-    goal_amount int(10) null,
+    target_amount int(10) null,
     current_amount int(10) null,
     status varchar(255) not null,
     start_date date,
