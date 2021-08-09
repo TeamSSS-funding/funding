@@ -16,6 +16,7 @@ public interface RewardMapper {
     void updateReward(Reward reward);
     void deleteReward(Long rewardId);
 
+    List<RewardItem> getRewardItemsByRewardId(Long rewardId);
     RewardItem getRewardItemById(Long rewardItemId);
 
     void insertRewardItem(RewardItem item);

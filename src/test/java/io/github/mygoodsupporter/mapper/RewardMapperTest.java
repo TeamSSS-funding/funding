@@ -111,6 +111,13 @@ public class RewardMapperTest {
     }
 
     @Test
+    void getRewardItemsByRewardId() {
+        List<RewardItem> rewardItems = rewardMapper.getRewardItemsByRewardId(3L);
+
+        assertThat(rewardItems).hasSize(2);
+    }
+
+    @Test
     void getRewardItemById() {
         RewardItem rewardItem = rewardMapper.getRewardItemById(4L);
 

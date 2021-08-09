@@ -87,6 +87,18 @@
         </association>
     </resultMap>
 
+    <select id="getRewardItemsByRewardId" parameterType="Long" resultMap="rewardItem">
+        SELECT ri.id as reward_item_id,
+               ri.reward_id as reward_item_reward_id,
+               ri.quantity as reward_item_quantity,
+               i.id as item_id,
+               i.project_id as item_project_id,
+               i.title as item_title
+        FROM reward_item ri
+                 JOIN item i on i.id = ri.item_id
+        WHERE ri.reward_id = #{rewardId}
+    </select>
+
     <select id="getRewardItemById" parameterType="Long" resultMap="rewardItem">
         SELECT ri.id as reward_item_id,
                ri.reward_id as reward_item_reward_id,

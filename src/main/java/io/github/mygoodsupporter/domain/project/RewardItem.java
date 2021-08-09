@@ -2,6 +2,7 @@ package io.github.mygoodsupporter.domain.project;
 
 import lombok.*;
 
+@EqualsAndHashCode(of={"id"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter @Setter
 public class RewardItem {
