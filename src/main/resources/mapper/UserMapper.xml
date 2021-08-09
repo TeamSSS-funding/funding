@@ -22,6 +22,19 @@
 		VALUES (#{username}, #{password}, #{name}, #{phone}, #{email})
 	</insert>
 
+	<select id="getUserById" parameterType="Long" resultMap="UserResultMap">
+		SELECT u.id			as id,
+			   u.username       as username,
+			   u.password as password,
+			   u.name     as name,
+			   u.phone    as phone,
+			   u.email    as email,
+			   a.authority  as authority
+		FROM user u
+				 LEFT OUTER JOIN authority a ON u.username = a.username
+		WHERE u.id = #{id};
+	</select>
+
 	<select id="getUserByUsername" parameterType="String" resultMap="UserResultMap">
 		SELECT u.id			as id,
 		       u.username       as username,
@@ -34,6 +47,7 @@
 				 LEFT OUTER JOIN authority a ON u.username = a.username
 		WHERE u.username = #{username};
 	</select>
+
 
 	<insert id="insertAuthority" parameterType="Authority">
 		INSERT INTO authority

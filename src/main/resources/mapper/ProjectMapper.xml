@@ -1,53 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mygoodsupporter.mapper.ProjectDAO">
+<mapper namespace="io.github.mygoodsupporter.mapper.ProjectMapper">
 
-	<resultMap id="ProjectResultMap" type="Project">
+	<resultMap id="project" type="Project">
 		<id property="id" column="id"/>
-		<result property="memberId" column="member_id"/>
-		<result property="name" column="name"/>
-		<result property="slug" column="slug"/>
-		<result property="targetAmount" column="target_amount"/>
+		<result property="userId" column="user_id"/>
+		<result property="categoryId" column="category_id"/>
+		<result property="goalAmount" column="goal_amount"/>
 		<result property="currentAmount" column="current_amount"/>
-		<result property="content" column="content"/>
+		<result property="startDate" column="start_date"/>
+		<result property="endDate" column="end_date"/>
 		<result property="status" column="status"/>
 	</resultMap>
 
-	<select id="getProjects" resultMap="ProjectResultMap">
-		SELECT id, member_id, name, slug, target_amount, current_amount, content, status
+	<select id="getProjects" resultMap="project">
+		SELECT id, user_id, category_id, title, subtitle, goal_amount, current_amount, status, start_date, end_date
 		FROM project
 	</select>
 
-	<select id="getProjectById" resultMap="ProjectResultMap">
-		SELECT id, member_id, name, slug, target_amount, current_amount, content, status
+	<select id="getProjectById" parameterType="Long" resultMap="project">
+		SELECT id, user_id, category_id, title, subtitle, goal_amount, current_amount, status, start_date, end_date
 		FROM project
-		WHERE id = #{id}
+		WHERE id = #{projectId}
 	</select>
 
-	<select id="getProjectBySlug" parameterType="String" resultMap="ProjectResultMap">
-		SELECT id, member_id, name, slug, target_amount, current_amount, content, status
+	<select id="getProjectsByUserId" parameterType="Long" resultMap="project">
+		SELECT id, user_id, category_id, title, subtitle, goal_amount, current_amount, status, start_date, end_date
 		FROM project
-		WHERE slug= #{slug}
+		WHERE user_id = #{userId}
 	</select>
 
-	<insert id="insert" parameterType="Project">
-		INSERT INTO project
-		    (id, member_id, name, slug, target_amount, current_amount, content, status)
+	<insert id="insertProject" parameterType="Project" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO project (user_id, category_id, subtitle, status)
 		VALUES
-		    (nextval(project_seq), #{memberId}, #{name}, #{slug}, #{targetAmount}, #{currentAmount}, #{content}, #{status})
+			(#{userId}, #{categoryId}, #{subtitle}, #{status})
 	</insert>
 
-	<update id="update" parameterType="Project">
-		UPDATE project SET
-			member_id = #{memberId},
-			name = #{name},
-			slug = #{slug},
-			target_amount = #{targetAmount},
-			current_amount = #{currentAmount},
-			content = #{content},
-		    status = #{status}
+	<update id="updateProject" parameterType="Project">
+		UPDATE project
+			<set>
+				<if test="userId != null">user_id = #{userId},</if>
+				<if test="categoryId != null">category_id = #{categoryId},</if>
+				<if test="title != null">title = #{title},</if>
+				<if test="subtitle != null">subtitle = #{subtitle},</if>
+				<if test="goalAmount != null"> goal_amount= #{goalAmount},</if>
+				<if test="currentAmount != null">current_amount = #{currentAmount},</if>
+				<if test="status != null">status = #{status}</if>
+			</set>
 		WHERE id = #{id}
 	</update>
 
+	<delete id="deleteProject" parameterType="Long">
+		DELETE FROM project WHERE id = #{id}
+	</delete>
 </mapper>

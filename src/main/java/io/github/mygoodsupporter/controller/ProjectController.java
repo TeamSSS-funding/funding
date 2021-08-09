@@ -1,6 +1,6 @@
 package io.github.mygoodsupporter.controller;
 
-import io.github.mygoodsupporter.domain.Project;
+import io.github.mygoodsupporter.domain.project.Project;
 import io.github.mygoodsupporter.dto.SupportProjectForm;
 import io.github.mygoodsupporter.mapper.UserMapper;
 import io.github.mygoodsupporter.security.UserDetails;
@@ -27,23 +27,19 @@ public class ProjectController {
     // 프로젝트 신청 화면 요청 메이커
     @RequestMapping(value="/projectRequestPage")
     public String projectRequestPage(@AuthenticationPrincipal UserDetails userDetails) {
-        log.debug(userDetails.getUsername());
-        log.debug(userDetails.getEmail());
-        log.debug(userDetails.getUsername());
-        log.debug(userDetails.getAuthorities().toString());
         return "projects/projectRequest";
     }
 
     //프로젝트 신청페이지 메이커
     @RequestMapping(value="/projectRequest")
-    public String projectRequest(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute Project pdto, Model model){
+    public String projectRequest(@ModelAttribute Project pdto, @AuthenticationPrincipal UserDetails userDetails, Model model){
         //현재 로그인된 아이디 가져옴
-        Project project = new Project();
+        Project project = new Project(userDetails.getId(), pdto.getCategoryId(), pdto.getSubtitle());
         project.setUserId(userDetails.getId());
 
         pdto = projectService.projectRequest(pdto);
         model.addAttribute("pdto", pdto);
-        return "projects/projectList";
+        return "redirect:/projects";
     }
 
 
@@ -55,21 +51,21 @@ public class ProjectController {
         return "projects/projectList";
     }
 
-    @GetMapping("/projects/{slug}")
-    public String getProjectBySlugName(@PathVariable("slug") String slug, Model model) {
-        Project project = projectService.getProjectBySlug(slug);
+    @GetMapping("/projects/{projectId}")
+    public String getProjectById(@PathVariable("projectId") Long projectId, Model model) {
+        Project project = projectService.getProjectById(projectId);
         model.addAttribute("project", project);
         model.addAttribute("supportProjectForm", new SupportProjectForm());
         return "projects/project";
     }
 
-    @PostMapping("/projects/{slug}/support")
-    public String supportProject(@PathVariable("slug") String slug, @AuthenticationPrincipal UserDetails userDetails,
+    @PostMapping("/projects/{projectId}/support")
+    public String supportProject(@PathVariable("projectId") Long projectId, @AuthenticationPrincipal UserDetails userDetails,
                                  SupportProjectForm form, Model model) {
-        String memberId =  userDetails.getUsername();
+        String username = userDetails.getUsername();
 
-        projectService.supportProject(memberId, slug, form.getAmount());
+        projectService.supportProject(username, projectId, form.getAmount());
 
-        return "redirect:/projects/" + slug;
+        return "redirect:/projects/" + projectId;
     }
 }
