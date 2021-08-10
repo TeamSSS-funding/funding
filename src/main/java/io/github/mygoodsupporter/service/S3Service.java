@@ -1,13 +1,18 @@
 package io.github.mygoodsupporter.service;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+@Slf4j
 @Service
 @NoArgsConstructor
 public class S3Service {
@@ -44,20 +52,27 @@ public class S3Service {
                 .build();
     }
 
-    public String upload(@RequestParam("filePath") MultipartFile file) throws IOException {
-        String fileName = file.getOriginalFilename();
+    public String upload(@RequestParam("contentsImage") MultipartFile file) throws IOException {
+        SimpleDateFormat date = new SimpleDateFormat("yyyymmddHHmmss");
+        String fileName = file.getOriginalFilename() + "-" + date.format(new Date());
 
         s3Client.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
         return s3Client.getUrl(bucket, fileName).toString();
     }
 
-    public String update(MultipartFile file) throws IOException {
-        String fileName = file.getOriginalFilename();
 
-        s3Client.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
-                .withCannedAcl(CannedAccessControlList.PublicRead));
 
-        return s3Client.getUrl(bucket, fileName).toString();
+    public void delete(String fileName) throws IOException {
+     try {
+
+         s3Client.deleteObject(new DeleteObjectRequest(bucket, fileName) );
+
+     } catch (AmazonServiceException e){
+         e.printStackTrace();
+     } catch (SdkClientException e){
+         e.printStackTrace();
+     }
+
     }
 }

@@ -5,7 +5,7 @@
 
 	<resultMap id="ProjectResultMap" type="Project">
 		<id property="id" column="id"/>
-		<result property="memberId" column="member_id"/>
+		<result property="userId" column="user_id"/>
 		<result property="name" column="name"/>
 		<result property="slug" column="slug"/>
 		<result property="targetAmount" column="target_amount"/>
@@ -40,13 +40,12 @@
 
 	<update id="update" parameterType="Project">
 		UPDATE project SET
-			member_id = #{memberId},
-			name = #{name},
-			slug = #{slug},
-			target_amount = #{targetAmount},
-			current_amount = #{currentAmount},
-			content = #{content},
-		    status = #{status}
+						   user_id = #{userId},
+						   name = #{name},
+						   target_amount = #{targetAmount},
+						   current_amount = #{currentAmount},
+						   content = #{content},
+						   status = #{status}
 		WHERE id = #{id}
 	</update>
 

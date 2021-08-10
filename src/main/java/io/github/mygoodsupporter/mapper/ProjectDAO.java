@@ -9,8 +9,6 @@ import java.util.List;
 public interface ProjectDAO {
 
     List<Project> getProjects();
-    Project getProjectById(Long id);
-    Project getProjectBySlug(String slug);
 
     int insert(Project project);
     void update(Project project);
