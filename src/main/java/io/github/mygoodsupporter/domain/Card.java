@@ -1,5 +1,6 @@
 package io.github.mygoodsupporter.domain;
 
+import io.github.mygoodsupporter.dto.CardDTO;
 import lombok.*;
 import org.springframework.util.Assert;
 
@@ -8,7 +9,7 @@ import org.springframework.util.Assert;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of={"cardNumber"})
-public class Card {
+public class Card extends CardDTO {
     private Long id;
     private Long userId;
     private String cardNumber;
