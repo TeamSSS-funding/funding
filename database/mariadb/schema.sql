@@ -30,8 +30,10 @@ create table project
     current_amount int(10) not null,
     content varchar(255) not null,
     status varchar(255) not null,
-    start_date date,
-    end_date date,
+    start_date date null,
+    end_date date null,
+    title_image_url varchar(500) not null,
+    contents_image_url varchar(500) null,
     constraint project_member_m_id_fk
         foreign key (user_id) references user (id)
 );

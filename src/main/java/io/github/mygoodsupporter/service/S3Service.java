@@ -36,6 +36,7 @@ public class S3Service {
     @Value("${cloud.aws.credentials.secretKey}")
     private String secretKey;
 
+
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 

@@ -12,4 +12,12 @@ public interface ProjectDAO {
 
     int insert(Project project);
     void update(Project project);
+
+    List<Project> projectList(Project project);
+
+    Project projectUpdate(Long id);
+
+    int projectUpdateProcess(Project project);
+
+    void delete(Long id);
 }

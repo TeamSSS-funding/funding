@@ -1,9 +1,7 @@
 package io.github.mygoodsupporter.service;
 
 import io.github.mygoodsupporter.domain.Project;
-import io.github.mygoodsupporter.domain.user.User;
 import io.github.mygoodsupporter.mapper.ProjectDAO;
-import io.github.mygoodsupporter.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,40 +14,26 @@ import java.util.List;
 public class ProjectService {
 
     private final ProjectDAO projectDAO;
-    private final UserMapper userMapper;
+
+    public List<Project> projectList(Project project) {
+        return projectDAO.projectList(project);
+    }
 
     //프로젝트 정보 입력
-    public Project projectRequest(Project pdto) {
-        projectDAO.insert(pdto);
-        return pdto;
-    }
-
-    @Transactional
-    public Long openProject(Project project) {
+    public Project projectRequest(Project project) {
         projectDAO.insert(project);
-        return project.getId();
+        return project;
     }
 
-    @Transactional
-    public void supportProject(String memberId, String slug, int amount) {
-        User user = userMapper.getUserByUsername(memberId);
-        Project project = projectDAO.getProjectBySlug(slug);
-
-        project.supportProject(amount);
-
-        projectDAO.update(project);
-
+    public Project projectUpdate(Long id) {
+        return projectDAO.projectUpdate(id);
     }
 
-    public List<Project> getProjects() {
-        return projectDAO.getProjects();
+    public int updateProces(Project project) {
+        return projectDAO.projectUpdateProcess(project);
     }
 
-    public Project getProjectById(Long id) {
-        return projectDAO.getProjectById(id);
-    }
-
-    public Project getProjectBySlug(String slug) {
-        return projectDAO.getProjectBySlug(slug);
+    public void delete(Long id) {
+        projectDAO.delete(id);
     }
 }
