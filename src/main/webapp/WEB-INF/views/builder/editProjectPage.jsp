@@ -56,27 +56,30 @@
     <section class="container mx-auto px-6">
         <div class="w-full md:flex md:flex-wrap lg:flex lg:flex-wrap justify-center items-center">
             <div class="p-4 w-full md:w-2/3 lg:w-3/5 md:flex md:flex-wrap lg:flex lg:flex-wrap items-center justify-center">
-                <form action="" class="flex flex-col flex-grow justify-center items-center mb-4">
+                <form action="/projects/{userId}/{projectId}/basics" class="flex flex-col flex-grow justify-center items-center mb-4">
                     <label class="block w-full mt-4">프로젝트 이름</label>
-                    <input type="text" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                    <input type="text" name="title" value="${project.title}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
                     <label class="block w-full mt-4">카테고리를 선택해주세요</label>
-                    <select class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-                        <option>Art</option>
-                        <option>Food</option>
-                        <option>Music</option>
+                    <select class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent" name="categoryId">
+                        <c:forEach var="category" items="${categories}">
+                            <option value="${category.id}">${category.name}</option>
+                            <c:if test="${project.categoryId} == ${category.id}">
+                            <option value="${category.id}" selected>${category.name}</option>
+                            </c:if>
+                        </c:forEach>
                     </select>
 
                     <label class="block w-full mt-4">짧은 소개글을 작성해주세요</label>
-                    <input type="text" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                    <input type="text" name="subtitle" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
 
                     <label class="block w-full mt-4">목표 금액을 입력해주세요</label>
-                    <input type="text" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                    <input type="text" name="targetAmount" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
 
                     <label class="block w-full mt-4">프로젝트 시작일을 선택해주세요</label>
-                    <input type="date" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                    <input type="date" name="startDate" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
 
                     <label class="block w-full mt-4">프로젝트 종료일을 선택해주세요</label>
-                    <input type="date" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                    <input type="date" name="endDate" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
 
                     <div class="w-full flex flex-wrap justify-between items-center">
                         <input type="submit" class="flex-grow p-2 mt-8 mr-4 text-white bg-yellow-300 hover:bg-yellow-400 rounded" value="취소하기">

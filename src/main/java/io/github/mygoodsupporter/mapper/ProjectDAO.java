@@ -11,7 +11,7 @@ public interface ProjectDAO {
     List<Project> getProjects();
 
     int insert(Project project);
-    void update(Project project);
+    void update(Long projectId);
 
     List<Project> projectList(Project project);
 

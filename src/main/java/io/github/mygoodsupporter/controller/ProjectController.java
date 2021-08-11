@@ -28,7 +28,7 @@ public class ProjectController {
     private final ProjectService projectService;
     private final CategoryService categoryService;
 
-    //프로젝트 신청 화면 요청 메이커
+    //프로젝트 신청 1단계 화면 요청
     @GetMapping(value="/projects/new")
     public String projectRequestPage(Model model) {
         List<Category> categories = categoryService.getCategories();
@@ -36,19 +36,35 @@ public class ProjectController {
         return "projects/projectRequest";
     }
 
-    //프로젝트 신청페이지 메이커
+    //프로젝트 신청 1단계처리
     @PostMapping(value="/projects/new")
     public String projectRequest(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute ProjectDTO dto) {
         //현재 로그인된 아이디 가져옴
         dto.setUserId(userDetails.getId());
-
         projectService.createProject(dto);
-
         return "redirect:/projects/projectList";
     }
 
+    //프로젝트 신청 2단계 화면 요청
+    @GetMapping(value = "/projects/{userId}/{projectId}/basics")
+    public String basicsPage(@PathVariable("userId") Long userId, @PathVariable("projectId") Long projectId, Model model){
+        Project project = projectService.getProjectById(projectId);
+        List<Category> categories = categoryService.getCategories();
+        model.addAttribute("categories", categories);
+        model.addAttribute("project",project);
+        return "builder/editProjectPage";
+    }
+
+    //프로젝트 신청 2단계 처리
+    @PostMapping(value = "/projects/{userId}/{projectId}/basics")
+    public String basics(@PathVariable("userId") Long userId, @PathVariable("projectId") Long projectId, @ModelAttribute Project project){
+        projectService.basicsUpdate(projectId);
+        return "redirect:/projects/projectList";
+    }
+
+
     @GetMapping(value = "/projects/projectList")
-    private String projectList(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute Project project, Model model){
+    public String projectList(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute Project project, Model model){
         project.setUserId(userDetails.getId());
         List<Project> projectList =  projectService.projectList(project);
         model.addAttribute("projectList", projectList);

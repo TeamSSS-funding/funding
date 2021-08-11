@@ -46,4 +46,9 @@ public class ProjectService {
     public void delete(Long id) {
         projectDAO.delete(id);
     }
+
+
+    public void basicsUpdate(Long projectId) {
+        projectDAO.update(projectId);
+    }
 }
