@@ -1,7 +1,10 @@
 package io.github.mygoodsupporter.controller;
 
-import io.github.mygoodsupporter.domain.Project;
+import io.github.mygoodsupporter.domain.project.Category;
+import io.github.mygoodsupporter.domain.project.Project;
+import io.github.mygoodsupporter.dto.ProjectDTO;
 import io.github.mygoodsupporter.security.UserDetails;
+import io.github.mygoodsupporter.service.CategoryService;
 import io.github.mygoodsupporter.service.ProjectService;
 import io.github.mygoodsupporter.service.S3Service;
 import lombok.RequiredArgsConstructor;
@@ -23,26 +26,24 @@ public class ProjectController {
 
     private final S3Service s3Service;
     private final ProjectService projectService;
+    private final CategoryService categoryService;
 
     //프로젝트 신청 화면 요청 메이커
     @GetMapping(value="/projects/new")
-    public String projectRequestPage() {
+    public String projectRequestPage(Model model) {
+        List<Category> categories = categoryService.getCategories();
+        model.addAttribute("categories", categories);
         return "projects/projectRequest";
     }
 
     //프로젝트 신청페이지 메이커
     @PostMapping(value="/projects/new")
-    public String projectRequest(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute Project project,
-                                 Model model, @RequestParam("contentsImage") MultipartFile file) throws IOException, IOException{
+    public String projectRequest(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute ProjectDTO dto) {
         //현재 로그인된 아이디 가져옴
-        project.setUserId(userDetails.getId());
+        dto.setUserId(userDetails.getId());
 
-        String imgPath = s3Service.upload(file);
-        project.setContentsImageName(imgPath);
+        projectService.createProject(dto);
 
-        projectService.projectRequest(project);
-
-        model.addAttribute("projectList", project);
         return "redirect:/projects/projectList";
     }
 
@@ -54,24 +55,24 @@ public class ProjectController {
         return "projects/projectList";
     }
 
-    @GetMapping(value = "/projects/projectList/update/{id}")
-    public String updatePage(@PathVariable("id") Long id, Model model){
-        Project project = projectService.projectUpdate(id);
+    @GetMapping(value = "/projects/{userId}/{projectId}/edit/basics")
+    public String updatePage(@PathVariable("userId") Long userId, @PathVariable("projectId") Long projectId, Model model){
+        Project project = projectService.getProjectById(projectId);
         model.addAttribute("project",project);
-        return "projects/update";
+        return "builder/editProjectPage";
     }
 
     @PostMapping(value = "/projects/projectList/update/{id}")
     public String update(@ModelAttribute Project updateProject,@RequestParam("contentsImage") MultipartFile file, @PathVariable("id") Long id) throws IOException {
-        Project project = projectService.projectUpdate(id);
+        Project project = projectService.getProjectById(id);
         if(file.getSize() == 0){
-            updateProject.setContentsImageName(project.getContentsImageName());
+            updateProject.setContentsImageUrl(project.getContentsImageUrl());
         } else {
-            String[] fileName = project.getContentsImageName().split("/");
+            String[] fileName = project.getContentsImageUrl().split("/");
             s3Service.delete(fileName[3]);
 
             String imgPath = s3Service.upload(file);
-            updateProject.setContentsImageName(imgPath);
+            updateProject.setContentsImageUrl(imgPath);
         }
         projectService.updateProces(updateProject);
 
@@ -81,8 +82,8 @@ public class ProjectController {
 
     @GetMapping(value = "/projects/projectList/delete/{id}")
     public String delete(@PathVariable("id") Long id) throws IOException {
-        Project project = projectService.projectUpdate(id);
-        String[] fileName = project.getContentsImageName().split("/");
+        Project project = projectService.getProjectById(id);
+        String[] fileName = project.getContentsImageUrl().split("/");
         s3Service.delete(fileName[3]);
         projectService.delete(id);
         return "redirect:/projects/projectList";

@@ -1,6 +1,6 @@
 package io.github.mygoodsupporter.mapper;
 
-import io.github.mygoodsupporter.domain.Project;
+import io.github.mygoodsupporter.domain.project.Project;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public interface ProjectDAO {
 
     List<Project> projectList(Project project);
 
-    Project projectUpdate(Long id);
+    Project getProjectById(Long projectId);
 
     int projectUpdateProcess(Project project);
 

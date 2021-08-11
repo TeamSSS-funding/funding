@@ -3,7 +3,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<html>
+
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -13,7 +15,6 @@
     <link href="/dist/tailwind.css" rel="stylesheet">
 </head>
 <body>
-
 <header class="text-gray-600 body-font">
     <nav class="container mx-auto flex flex-wrap p-5 justify-between items-center">
         <!-- Logo -->
@@ -55,24 +56,38 @@
     <section class="container mx-auto px-6">
         <div class="w-full md:flex md:flex-wrap lg:flex lg:flex-wrap justify-center items-center">
             <div class="p-4 w-full md:w-2/3 lg:w-3/5 md:flex md:flex-wrap lg:flex lg:flex-wrap items-center justify-center">
-                <form action="/projects/new" method="post" class="flex flex-col flex-grow justify-center items-center mb-4">
+                <form action="" class="flex flex-col flex-grow justify-center items-center mb-4">
                     <label class="block w-full mt-4">프로젝트 이름</label>
-                    <input type="text" name="title" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                    <input type="text" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
                     <label class="block w-full mt-4">카테고리를 선택해주세요</label>
-                    <select name="categoryId" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-                        <c:forEach var="category" items="${categories}">
-                            <option value="${category.id}">${category.name}</option>
-                        </c:forEach>
+                    <select class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                        <option>Art</option>
+                        <option>Food</option>
+                        <option>Music</option>
                     </select>
 
-                    <input type="submit" class="flex-grow p-2 mt-8 text-white bg-yellow-300 hover:bg-yellow-400 rounded" value="시작하기">
+                    <label class="block w-full mt-4">짧은 소개글을 작성해주세요</label>
+                    <input type="text" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+
+                    <label class="block w-full mt-4">목표 금액을 입력해주세요</label>
+                    <input type="text" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+
+                    <label class="block w-full mt-4">프로젝트 시작일을 선택해주세요</label>
+                    <input type="date" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+
+                    <label class="block w-full mt-4">프로젝트 종료일을 선택해주세요</label>
+                    <input type="date" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+
+                    <div class="w-full flex flex-wrap justify-between items-center">
+                        <input type="submit" class="flex-grow p-2 mt-8 mr-4 text-white bg-yellow-300 hover:bg-yellow-400 rounded" value="취소하기">
+                        <input type="submit" class="flex-grow p-2 mt-8 text-white bg-yellow-300 hover:bg-yellow-400 rounded" value="저장하기">
+                    </div>
 
                 </form>
             </div>
         </div>
     </section>
 </main>
-
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         let hamburger = document.querySelector('#navbar-hamburger')
@@ -84,6 +99,5 @@
         })
     })
 </script>
-
 </body>
 </html>

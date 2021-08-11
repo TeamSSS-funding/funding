@@ -40,9 +40,9 @@
                 <tr class="stripe-dark">
                     <th class="fw6 tl pa3 bg-white">프로젝트 번호</th>
                     <th class="fw6 tl pa3 bg-white">회원 아이디</th>
-                    <th class="fw6 tl pa3 bg-white">회원 이름</th>
+                    <th class="fw6 tl pa3 bg-white">프로젝트 제목</th>
+                    <th class="fw6 tl pa3 bg-white">프로젝트 부제목</th>
                     <th class="fw6 tl pa3 bg-white">목표 금액</th>
-                    <th class="fw6 tl pa3 bg-white">프로젝트 내용</th>
                     <th class="fw6 tl pa3 bg-white">시작 날짜</th>
                     <th class="fw6 tl pa3 bg-white">종료 날짜</th>
                     <th class="fw6 tl pa3 bg-white">대표 이미지</th>
@@ -57,13 +57,13 @@
                     <tr class="stripe-dark">
                         <td>${projectList.id}</td>
                         <td>${projectList.userId}</td>
-                        <td>${projectList.name}</td>
+                        <td>${projectList.title}</td>
+                        <td>${projectList.subtitle}</td>
                         <td>${projectList.targetAmount}</td>
-                        <td>${projectList.content}</td>
                         <td>${projectList.startDate}</td>
                         <td>${projectList.endDate}</td>
-                        <td>${projectList.titleImageName}</td>
-                        <td><img src="${projectList.contentsImageName}" width="100px" height="100px"></td>
+                        <td>${projectList.titleImageUrl}</td>
+                        <td><img src="${projectList.contentsImageUrl}" width="100px" height="100px"></td>
                         <td>${projectList.status}</td>
                         <td><a href="/projects/projectList/update/${projectList.id}">수정</a> </td>
                         <td><button onclick="deletefn('${projectList.id}')">삭제</button></td>
