@@ -1,41 +1,74 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<title>마이굿서포터</title>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>mygoodsupporter</title>
+	<script defer src="main.js"></script>
+	<link href="dist/tailwind.css" rel="stylesheet">
 </head>
+<body>
 <header class="text-gray-600 body-font">
-	<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-		<a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-400 rounded-full" viewBox="0 0 24 24">
-				<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-			</svg>
+	<nav class="container mx-auto flex flex-wrap p-5 justify-between items-center">
+		<!-- Logo -->
+		<div class="flex items-center title-font font-medium text-gray-900 mb-4 md:mb-0">
+			<!-- Hamburger -->
+			<button id="navbar-hamburger">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-amber-200 rounded-full" viewBox="0 0 24 24">
+					<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+				</svg>
+			</button>
 			<span class="ml-3 text-xl">mygoodsupporter</span>
-		</a>
-		<nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-			<a class="mr-5 hover:text-gray-900">진행중인 프로젝트</a>
-			<a class="mr-5 hover:text-gray-900">오픈예정 프로젝트</a>
-			<a class="mr-5 hover:text-gray-900" href="${pageContext.request.contextPath}/projects">모든 프로젝트</a>
-			<a class="mr-5 hover:text-gray-900" href="/projects/new">프로젝트 신청</a>
-		</nav>
-		<button class="inline-flex items-center bg-yellow-300 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-400 rounded text-base mt-4 md:mt-0"><a href="login">로그인</a>
-			<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-				<path d="M5 12h14M12 5l7 7-7 7"></path>
-			</svg>
-		</button>
-		&nbsp;
-		<button class="inline-flex items-center bg-yellow-400 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-500 rounded text-base mt-4 md:mt-0"><a href="memberJoinPage">회원가입</a>
-			<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-				<path d="M5 12h14M12 5l7 7-7 7"></path>
-			</svg>
-		</button>
-	</div>
+		</div>
+		<!-- Menu -->
+		<div class="hidden w-full order-last lg:flex lg:w-auto lg:order-none text-base"
+			 id="navbar-collapse-menu" >
+			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900">진행중인 프로젝트</a>
+			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900">오픈예정 프로젝트</a>
+			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="${pageContext.request.contextPath}/projects">모든 프로젝트</a>
+			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="projectRequestPage">프로젝트 신청</a>
+		</div>
+		<!-- CTA -->
+		<div class="flex items-center mb-4 md:mb-0">
+			<sec:authorize access="isAnonymous()">
+			<button class="inline-flex justify-center items-center bg-amber-200 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base"><a href="login">로그인</a>
+				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+					<path d="M5 12h14M12 5l7 7-7 7"></path>
+				</svg>
+			</button>
+			&nbsp;
+			<button class="inline-flex items-center bg-amber-200 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base"><a href="joinPage">회원가입</a>
+				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+					<path d="M5 12h14M12 5l7 7-7 7"></path>
+				</svg>
+			</button>
+			</sec:authorize>
+
+			<sec:authorize access="isAuthenticated()">
+				<button class="inline-flex justify-center items-center bg-amber-200 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base"><a href="logout">로그아웃</a>
+					<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+						<path d="M5 12h14M12 5l7 7-7 7"></path>
+					</svg>
+				</button>
+				&nbsp;
+				<button class="inline-flex items-center bg-amber-200 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base"><a href="profile">Mypage</a>
+					<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+						<path d="M5 12h14M12 5l7 7-7 7"></path>
+					</svg>
+				</button>
+			</sec:authorize>
+		</div>
+	</nav>
 </header>
-<section class="text-gray-600 body-font">
-	<div class="container px-5 py-24 mx-auto">
-		<div class="flex flex-wrap -m-4">
+
+<main class="mt-12 lg:mt-32 text-gray-600 body-font">
+	<section class="container mx-auto px-6">
+		<div class="w-full md:flex md:flex-wrap lg:flex lg:flex-wrap items-center -m-4">
 			<div class="lg:w-1/4 md:w-1/2 p-4 w-full">
 				<a class="block relative h-48 rounded overflow-hidden">
 					<img alt="ecommerce" class="object-cover object-center w-full h-full block" src="https://dummyimage.com/420x260">
@@ -117,63 +150,20 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
-<body>
+	</section>
+</main>
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		let hamburger = document.querySelector('#navbar-hamburger')
 
-<%--<div>--%>
-<%--	<sec:authorize access="hasAnyRole('ROLE_ADMIN')">--%>
-<%--		<sec:authentication property="principal.username" />--%>
-<%--		<a href="${pageContext.request.contextPath}/proposals/new">프로젝트 신청 하기</a><br>--%>
-<%--	</sec:authorize>--%>
-<%--</div>--%>
-
-<a href="memberJoinPage">회원가입</a><br>
-<a href="login">로그인</a><br>
-<a href="/projects/new">프로젝트 신청</a><br>
-<a href="/projects/projectList">프로젝트 목록 보기</a>
-
-<sec:authorize access="isAuthenticated()">
-	<form method="post" action = "/logout">
-		<input type="submit" value="logout">
-	</form>
-</sec:authorize>
+		hamburger.addEventListener('click', () => {
+			let menu = document.querySelector('#navbar-collapse-menu')
+			menu.classList.toggle("hidden")
+			menu.classList.toggle("block")
+		})
+	})
+</script>
 
 
-<div>
-	<div>
-		<sec:authorize access="isAnonymous()">
-			anonymous
-		</sec:authorize>
-	</div>
-	<div>
-		<sec:authorize access="isAuthenticated()">
-			<sec:authentication property="principal.username" />
-			<br>
-			<sec:authentication property="principal.email"/>
-			authenticated
-		</sec:authorize>
-	</div>
-	<div>
-		<sec:authorize access="hasRole('ROLE_USER')">
-			<sec:authentication property="principal.username" />
-
-			This content will only be visible to users who have the "ROLE_USER" authority in their list of <tt>GrantedAuthority</tt>s.
-		</sec:authorize>
-	</div>
-	<div>
-		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<sec:authentication property="principal.username"/>
-			ADMIN
-		</sec:authorize></div>
-	<div>
-		<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
-			<sec:authentication property="principal.username" />
-			<sec:authentication property="principal.authorities" />
-		</sec:authorize>
-	</div>
-
-
-</div>
 </body>
 </html>

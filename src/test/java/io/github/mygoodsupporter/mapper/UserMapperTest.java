@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Transactional
-public class UserDAOTest {
+public class UserMapperTest {
 
     @Autowired
     UserMapper userMapper;

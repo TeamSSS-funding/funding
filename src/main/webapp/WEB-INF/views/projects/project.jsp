@@ -13,19 +13,17 @@
             <dt class="f6 b">Id</dt>
             <dd class="ml0">${project.id}</dd>
             <dt class="f6 b mt2">Title</dt>
-            <dd class="ml0">${project.name}</dd>
+            <dd class="ml0">${project.title}</dd>
             <dt class="f6 b mt2">Member Id</dt>
             <dd class="ml0">${project.userId}</dd>
-            <dt class="f6 b mt2">Description</dt>
-            <dd class="ml0">${project.content}</dd>
             <dt class="f6 b mt2">Current Amount</dt>
             <dd class="ml0">${project.currentAmount}</dd>
             <dt class="f6 b mt2">Target Amount</dt>
-            <dd class="ml0">${project.targetAmount}</dd>
+            <dd class="ml0">${project.goalAmount}</dd>
             <dt class="f6 b mt2">Status</dt>
             <dd class="ml0">${project.status}</dd>
         </dl>
-        <form method = "post" action = "/projects/${project.slug}/support" class="pa4 black-80">
+        <form method = "post" action = "/projects/${project.id}/support" class="pa4 black-80">
             <div class="measure">
                 <label for="amount" class="f6 b db mb2">Support Amount</label>
                 <input id="amount" name = "amount" class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number">

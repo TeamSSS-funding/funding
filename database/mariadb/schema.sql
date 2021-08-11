@@ -11,7 +11,7 @@ create table user
 
 create table authority
 (
-    username      varchar(255),
+    username varchar(255),
     authority varchar(255)
 );
 
@@ -22,26 +22,63 @@ CREATE SEQUENCE project_seq
 
 create table project
 (
-    id bigint(20) primary key not null,
+    id bigint(20) primary key auto_increment,
     user_id bigint(20) not null,
-    name varchar(255) not null,
-    slug varchar(255) not null,
-    target_amount int(10) not null,
-    current_amount int(10) not null,
-    content varchar(255) not null,
+    category_id bigint(2) not null,
+    title varchar(255) null,
+    subtitle varchar(255) not null,
+    goal_amount int(10) null,
+    current_amount int(10) null,
     status varchar(255) not null,
-    start_date date null,
-    end_date date null,
+    start_date date,
+    end_date date,
     title_image_url varchar(500) not null,
     contents_image_url varchar(500) null,
-    constraint project_member_m_id_fk
-        foreign key (user_id) references user (id)
+    constraint project_user_user_id_fk
+        foreign key (user_id) references user (id),
+    constraint project_category_id_fk
+        foreign key (category_id) references category (id)
 );
 
-create table cardinfo
+CREATE TABLE category (
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+create table item
 (
-    id bigint auto_increment
-        primary key,
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    project_id BIGINT(20),
+    title varchar(255),
+    constraint item_project_id_fk
+        foreign key (project_id) references project (id)
+            on delete cascade
+);
+
+CREATE TABLE reward (
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    project_id BIGINT(20),
+    title VARCHAR(255),
+    description VARCHAR(255),
+    amount INT(11),
+    CONSTRAINT reward_project_id_fk
+        FOREIGN KEY (project_id) references project (id)
+            ON DELETE CASCADE
+);
+
+CREATE TABLE reward_item (
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    reward_id BIGINT(20),
+    item_id BIGINT(20),
+    quantity int(11),
+    CONSTRAINT reward_item_reward_id_fk FOREIGN KEY (reward_id) REFERENCES reward (id) ON DELETE CASCADE,
+    CONSTRAINT reward_item_item_id_fk FOREIGN KEY (item_id) REFERENCES item (id) ON DELETE CASCADE
+);
+
+create table card
+(
+    id bigint auto_increment primary key,
+    user_id varchar(255) null,
     card_number varchar(255) null,
     expired_date varchar(255) null,
     card_password varchar(255) null,

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.mygoodsupporter.mapper.ItemMapper">
+
+    <select id="getItemsByProjectId" parameterType="Long" resultType="Item">
+        SELECT id, project_id, title
+        FROM item
+        WHERE project_id = #{proejctId}
+    </select>
+
+    <select id="getItemById" parameterType="Long" resultType="Item">
+        SELECT id, project_id, title
+        FROM item
+        WHERE id = #{itemId}
+    </select>
+
+    <insert id="insertItem" parameterType="Item" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO item
+            (project_id, title)
+        VALUES
+            (#{projectId}, #{title})
+    </insert>
+
+    <update id="updateItem" parameterType="Item">
+        UPDATE item SET
+            title = #{title}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteItem" parameterType="Long">
+        DELETE FROM item WHERE id = #{itemId}
+    </delete>
+</mapper>
