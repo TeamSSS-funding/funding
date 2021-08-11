@@ -56,9 +56,14 @@ public class S3Service {
     public String upload(@RequestParam("contentsImage") MultipartFile file) throws IOException {
         SimpleDateFormat date = new SimpleDateFormat("yyyymmddHHmmss");
         String fileName = file.getOriginalFilename() + "-" + date.format(new Date());
-
-        s3Client.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
-                .withCannedAcl(CannedAccessControlList.PublicRead));
+        try {
+            s3Client.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+        } catch (AmazonServiceException e){
+            e.printStackTrace();
+        } catch (SdkClientException e){
+            e.printStackTrace();
+        }
         return s3Client.getUrl(bucket, fileName).toString();
     }
 
@@ -66,14 +71,11 @@ public class S3Service {
 
     public void delete(String fileName) throws IOException {
      try {
-
          s3Client.deleteObject(new DeleteObjectRequest(bucket, fileName) );
-
      } catch (AmazonServiceException e){
          e.printStackTrace();
      } catch (SdkClientException e){
          e.printStackTrace();
      }
-
     }
 }

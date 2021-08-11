@@ -7,6 +7,10 @@ spring:
     password: mygoodsupporter
     driver-class-name: org.mariadb.jdbc.Driver
   mvc:
+    format:
+      date: yyyy-MM-dd
+      date-time: yyyy-MM-dd HH:mm:ss
+      time: HH:mm:ss
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp

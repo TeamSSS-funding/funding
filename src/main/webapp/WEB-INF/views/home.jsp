@@ -10,7 +10,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>mygoodsupporter</title>
 	<script defer src="main.js"></script>
-	<link href="dist/tailwind.css" rel="stylesheet">
+	<link href="/dist/tailwind.css" rel="stylesheet">
 </head>
 <body>
 <header class="text-gray-600 body-font">
@@ -31,7 +31,7 @@
 			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900">진행중인 프로젝트</a>
 			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900">오픈예정 프로젝트</a>
 			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="${pageContext.request.contextPath}/projects">모든 프로젝트</a>
-			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="projectRequestPage">프로젝트 신청</a>
+			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="${pageContext.request.contextPath}/projects/new">프로젝트 신청</a>
 		</div>
 		<!-- CTA -->
 		<div class="flex items-center mb-4 md:mb-0">

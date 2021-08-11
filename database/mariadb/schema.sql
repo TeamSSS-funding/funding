@@ -15,34 +15,30 @@ create table authority
     authority varchar(255)
 );
 
-CREATE SEQUENCE project_seq
-    START WITH 1
-    INCREMENT BY 1
-    NOCACHE;
+CREATE TABLE category (
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
 
 create table project
 (
     id bigint(20) primary key auto_increment,
     user_id bigint(20) not null,
     category_id bigint(2) not null,
-    title varchar(255) null,
-    subtitle varchar(255) not null,
-    goal_amount int(10) null,
-    current_amount int(10) null,
+    title varchar(255) not null,
+    subtitle varchar(255),
+    target_amount int(10),
+    current_amount int(10),
     status varchar(255) not null,
     start_date date,
     end_date date,
-    title_image_url varchar(500) not null,
-    contents_image_url varchar(500) null,
+    title_image_url varchar(500),
+    contents_image_url varchar(500),
     constraint project_user_user_id_fk
         foreign key (user_id) references user (id),
     constraint project_category_id_fk
         foreign key (category_id) references category (id)
-);
-
-CREATE TABLE category (
-    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) UNIQUE NOT NULL
 );
 
 create table item

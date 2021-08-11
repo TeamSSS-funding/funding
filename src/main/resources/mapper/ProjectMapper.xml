@@ -6,24 +6,24 @@
 	<resultMap id="ProjectResultMap" type="Project">
 		<id property="id" column="id"/>
 		<result property="userId" column="user_id"/>
-		<result property="name" column="name"/>
-		<result property="slug" column="slug"/>
+		<result property="categoryId" column="category_id"/>
+		<result property="title" column="title"/>
+		<result property="subtitle" column="subtitle"/>
 		<result property="targetAmount" column="target_amount"/>
 		<result property="currentAmount" column="current_amount"/>
 		<result property="startDate" column="start_date"/>
 		<result property="endDate" column="end_date"/>
-		<result property="content" column="content"/>
 		<result property="status" column="status"/>
-		<result property="titleImageName" column="title_image_url"/>
-		<result property="contentsImageName" column="contents_image_url"/>
+		<result property="titleImageUrl" column="title_image_url"/>
+		<result property="contentsImageUrl" column="contents_image_url"/>
 	</resultMap>
 
 
 	<insert id="insert" parameterType="Project">
 		INSERT INTO project
-		(id, user_id, name, target_amount, start_date, end_date, content, status, title_image_url, contents_image_url)
+		(user_id, category_id, title, status)
 		VALUES
-		(nextval(project_seq), #{userId}, #{name}, #{targetAmount}, #{startDate}, #{endDate}, #{content}, #{status}, #{titleImageName},#{contentsImageName})
+		(#{userId}, #{categoryId}, #{title}, #{status})
 	</insert>
 
 	<select id="projectList" parameterType="Project" resultMap="ProjectResultMap">
@@ -32,33 +32,22 @@
 		WHERE user_id = #{userId}
 	</select>
 
-	<select id="projectUpdate" parameterType="Long" resultMap="ProjectResultMap">
+	<select id="getProjectById" parameterType="Long" resultMap="ProjectResultMap">
 		SELECT *
 		FROM project
 		WHERE id = #{id}
 	</select>
 
-	<update id="projectUpdateProcess" parameterType="Project">
+	<update id="update" parameterType="Project">
 		UPDATE project SET
-						   name = #{name},
+		                   category_id = #{categoryId},
+						   title = #{title},
+						   subtitle = #{subtitle},
 						   target_amount = #{targetAmount},
 						   start_date = #{startDate},
 						   end_date = #{endDate},
-						   content = #{content},
-						   title_image_url = #{titleImageName},
-						   contents_image_url = #{contentsImageName}
-		WHERE id = #{id}
-	</update>
-
-
-	<update id="update" parameterType="Project">
-		UPDATE project SET
-						   user_id = #{userId},
-						   name = #{name},
-						   target_amount = #{targetAmount},
-						   current_amount = #{currentAmount},
-						   content = #{content},
-						   status = #{status}
+						   title_image_url = #{titleImageUrl},
+						   contents_image_url = #{contentsImageUrl}
 		WHERE id = #{id}
 	</update>
 
