@@ -15,6 +15,11 @@ create table authority
     authority varchar(255)
 );
 
+CREATE SEQUENCE project_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
 create table project
 (
     id bigint(20) primary key auto_increment,
@@ -27,6 +32,8 @@ create table project
     status varchar(255) not null,
     start_date date,
     end_date date,
+    title_image_url varchar(500) not null,
+    contents_image_url varchar(500) null,
     constraint project_user_user_id_fk
         foreign key (user_id) references user (id),
     constraint project_category_id_fk
@@ -75,5 +82,6 @@ create table card
     card_number varchar(255) null,
     expired_date varchar(255) null,
     card_password varchar(255) null,
-    date_of_birth varchar(255) null
+    date_of_birth varchar(255) null,
+    userId varchar(255) null
 );
