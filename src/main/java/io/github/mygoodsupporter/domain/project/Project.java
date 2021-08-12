@@ -1,7 +1,6 @@
 package io.github.mygoodsupporter.domain.project;
 
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -24,16 +23,38 @@ public class Project {
     private String titleImageUrl;
     private String contentsImageUrl;
 
+
     @Builder
-    public Project(Long userId, Long categoryId, String title) {
+    public Project(Long userId, Long categoryId, String title, String subtitle, int targetAmount, int currentAmount, LocalDateTime startDate, LocalDateTime endDate, ProjectStatus status, String titleImageUrl, String contentsImageUrl) {
         this.userId = userId;
         this.categoryId = categoryId;
         this.title = title;
-        this.subtitle = "";
-        this.targetAmount = 0;
-        this.currentAmount = 0;
-        this.status = ProjectStatus.PREPARING;
+        this.subtitle = subtitle;
+        this.targetAmount = targetAmount;
+        this.currentAmount = currentAmount;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.titleImageUrl = titleImageUrl;
+        this.contentsImageUrl = contentsImageUrl;
     }
+
+    public static Project createProject(Long userId, Long categoryId, String title) {
+
+        return Project.builder()
+                .userId(userId)
+                .categoryId(categoryId)
+                .title(title)
+                .subtitle(" ")
+                .targetAmount(0)
+                .currentAmount(0)
+                .startDate(null)
+                .endDate(null)
+                .status(ProjectStatus.PREPARING)
+                .titleImageUrl("")
+                .build();
+    }
+
 
     public void supportProject(int amount) {
         currentAmount += amount;
