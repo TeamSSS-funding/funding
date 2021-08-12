@@ -23,23 +23,26 @@ CREATE TABLE category (
 
 create table project
 (
-    id bigint(20) primary key auto_increment,
-    user_id bigint(20) not null,
+    id bigint auto_increment
+        primary key,
+    user_id bigint not null,
     category_id bigint(2) not null,
     title varchar(255) not null,
-    subtitle varchar(255),
-    target_amount int(10),
-    current_amount int(10),
+    subtitle varchar(255) null,
+    target_amount int(10) null,
+    current_amount int(10) null,
     status varchar(255) not null,
-    start_date date,
-    end_date date,
-    title_image_url varchar(500),
-    contents_image_url varchar(500),
-    constraint project_user_user_id_fk
-        foreign key (user_id) references user (id),
+    start_date datetime null,
+    end_date datetime null,
+    title_image_url varchar(500) null,
+    contents_image_url varchar(500) null,
     constraint project_category_id_fk
-        foreign key (category_id) references category (id)
+        foreign key (category_id) references category (id),
+    constraint project_user_user_id_fk
+        foreign key (user_id) references user (id)
 );
+
+
 
 create table item
 (
