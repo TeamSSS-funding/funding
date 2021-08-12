@@ -3,6 +3,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
 
 <!doctype html>
 <html lang="en">
@@ -56,7 +58,7 @@
     <section class="container mx-auto px-6">
         <div class="w-full md:flex md:flex-wrap lg:flex lg:flex-wrap justify-center items-center">
             <div class="p-4 w-full md:w-2/3 lg:w-3/5 md:flex md:flex-wrap lg:flex lg:flex-wrap items-center justify-center">
-                <form action="/projects/{userId}/{projectId}/basics" class="flex flex-col flex-grow justify-center items-center mb-4">
+                <form method="post" action="/projects/${project.userId}/${project.id}/edit/basics" class="flex flex-col flex-grow justify-center items-center mb-4" enctype="multipart/form-data">
                     <label class="block w-full mt-4">프로젝트 이름</label>
                     <input type="text" name="title" value="${project.title}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
                     <label class="block w-full mt-4">카테고리를 선택해주세요</label>
@@ -70,19 +72,28 @@
                     </select>
 
                     <label class="block w-full mt-4">짧은 소개글을 작성해주세요</label>
-                    <input type="text" name="subtitle" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                    <input type="text" name="subtitle" value="${project.subtitle}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
 
                     <label class="block w-full mt-4">목표 금액을 입력해주세요</label>
-                    <input type="text" name="targetAmount" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                    <input type="text" name="targetAmount" value="${project.targetAmount}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
 
                     <label class="block w-full mt-4">프로젝트 시작일을 선택해주세요</label>
-                    <input type="date" name="startDate" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                    <javatime:format value="${project.startDate}" var="startDate" pattern="yyyy-MM-dd"/>
+                    <input type="date" name="startDate" value="${startDate}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+
 
                     <label class="block w-full mt-4">프로젝트 종료일을 선택해주세요</label>
-                    <input type="date" name="endDate" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                    <javatime:format value="${project.endDate}" var="endDate" pattern="yyyy-MM-dd"/>
+                    <input type="date" name="endDate" value="${endDate}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+
+                    <label class="block w-full mt-4">대표 이미지를 선택해주세요</label>
+                    <img src="${project.titleImageUrl}" class="w-full mt-4"><br>
+                    <input type="file" name="titleImageFile" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
 
                     <div class="w-full flex flex-wrap justify-between items-center">
-                        <input type="submit" class="flex-grow p-2 mt-8 mr-4 text-white bg-yellow-300 hover:bg-yellow-400 rounded" value="취소하기">
+                        <a href="/projects/${project.userId}/${project.id}/build" class="flex-grow p-2 mt-8 mr-4 text-white bg-yellow-300 hover:bg-yellow-400 rounded">
+                            취소하기
+                        </a>
                         <input type="submit" class="flex-grow p-2 mt-8 text-white bg-yellow-300 hover:bg-yellow-400 rounded" value="저장하기">
                     </div>
 

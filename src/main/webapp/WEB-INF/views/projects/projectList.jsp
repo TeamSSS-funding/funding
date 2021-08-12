@@ -63,7 +63,7 @@
                         <td><img src="${project.contentsImageUrl}" width="100px" height="100px"></td>
                         <td>${project.status}</td>
                         <td><a href="/projects/projectList/update/${project.id}">수정</a> </td>
-                        <td><a href="/projects/${project.userId}/${project.id}/basics">2단계 기본정보입력</a></td>
+                        <td><a href="/projects/${project.userId}/${project.id}/edit/basics">2단계 기본정보입력</a></td>
                         <td><button onclick="deletefn('${project.id}')">삭제</button></td>
                     </tr>
                 </c:forEach>
