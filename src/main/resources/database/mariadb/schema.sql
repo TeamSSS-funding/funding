@@ -6,7 +6,7 @@ create table user
     name     varchar(255)     not null,
     phone    varchar(255)     not null,
     email    varchar(500)     null,
-    ENABLED    bit default b'1' null
+    ENABLED    bit default 1 null
 );
 
 create table authority
