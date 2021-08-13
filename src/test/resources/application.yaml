@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    include: aws, test
+  mvc:
+    format:
+      date: yyyy-MM-dd
+      date-time: yyyy-MM-dd HH:mm:ss
+      time: HH:mm:ss
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+mybatis:
+  mapper-locations: mapper/*.xml
+  type-aliases-package: io.github.mygoodsupporter.domain
+  configuration:
+    cache-enabled: true
+    default-statement-timeout: 3000
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+
+cloud:
+  aws:
+    s3:
+      bucket: mygoodsupporter
+    region:
+      static: ap-northeast-2
+      auto: false
+
+logging:
+  level:
+    org.springframework: info
+    org.springframework.security: debug
+    io.github.mygoodsupporter.controller: debug
+    io.github.mygoodsupporter.service: debug
+    io.github.mygoodsupporter.mapper: debug
