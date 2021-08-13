@@ -74,7 +74,7 @@ public class ProjectController {
             String imgPath = s3Service.upload(file);
             updateProject.setContentsImageUrl(imgPath);
         }
-        projectService.updateProces(updateProject);
+        projectService.updateProcess(updateProject);
 
 
         return "redirect:/projects/projectList";

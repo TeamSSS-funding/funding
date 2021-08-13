@@ -70,6 +70,13 @@ public class PaymentController {
 
     }
 
+    @GetMapping(value = "payments/selectedReward")
+    private String selectedReward(){
+        return "payments/selectedReward";
+    }
+
+
+
 
 
 

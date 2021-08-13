@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -39,11 +38,16 @@ public class ProjectService {
         return projectDAO.getProjectById(projectId);
     }
 
-    public int updateProces(Project project) {
+    public int updateProcess(Project project) {
         return projectDAO.projectUpdateProcess(project);
     }
 
     public void delete(Long id) {
         projectDAO.delete(id);
     }
+
+    public void deleteProject(long l) {
+    }
+
+
 }
