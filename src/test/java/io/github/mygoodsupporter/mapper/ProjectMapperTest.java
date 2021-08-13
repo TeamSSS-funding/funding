@@ -62,7 +62,7 @@ public class ProjectMapperTest {
     @Test
     void insertProject() {
         //given
-        Project project = new Project(1L, 2L, "new project");
+        Project project = Project.createProject(1L, 2L, "new project");
 
         //when
         projectMapper.insertProject(project);

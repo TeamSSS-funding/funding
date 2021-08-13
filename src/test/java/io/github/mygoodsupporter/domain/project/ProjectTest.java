@@ -10,7 +10,7 @@ public class ProjectTest {
         Project project = Project.builder()
                 .userId(1L)
                 .categoryId(1L)
-                .subtitle("subtitle")
+                .title("title")
                 .build();
     }
 }
