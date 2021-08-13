@@ -56,3 +56,28 @@ create table cardinfo
     date_of_birth varchar(255) null,
     userId varchar(255) null
 );
+
+create table address (
+    id bigint(20) primary key auto_increment,
+    user_id bigint(20) not null,
+    name varchar(255) not null ,
+    postcode varchar(255) not null,
+    phone varchar(255) not null,
+    road varchar(255) not null,
+    jibun varchar(255) null,
+    detail varchar(255) not null,
+    chamgo varchar(255) null,
+    constraint fk_address foreign key (user_id) references user(id) on delete cascade
+);
+
+drop table address1;
+
+create table address1(
+    id bigint(20) primary key auto_increment,
+    user_id bigint(20) not null ,
+    city varchar(255) not null ,
+    street varchar(255) not null ,
+    zipcode varchar(255) not null,
+    constraint fk_address1 foreign key (user_id) references user(id) on delete cascade
+);
+

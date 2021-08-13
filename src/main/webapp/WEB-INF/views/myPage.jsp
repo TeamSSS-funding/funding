@@ -13,7 +13,9 @@
 <body>
 
 <a href="profile/cards">결제 카드 등록</a><br>
-<a href="profile/cardlist">등록된 결제 정보 조회하기</a>
+<a href="profile/cardlist">등록된 결제 정보 조회하기</a><br>
+<a href="profile/addresses">배송지 관리</a>
+
 
 </body>
 </html>
