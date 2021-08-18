@@ -1,6 +1,7 @@
 package io.github.mygoodsupporter.service;
 
 import io.github.mygoodsupporter.domain.project.Project;
+import io.github.mygoodsupporter.dto.ProjectDTO;
 import io.github.mygoodsupporter.exception.ProjectNotFoundException;
 import io.github.mygoodsupporter.mapper.ProjectMapper;
 import org.junit.jupiter.api.Test;
@@ -31,26 +32,34 @@ public class ProjectServiceTest {
         //given
         Long userId = 1L;
         Long categoryId = 1L;
+        String title = "title";
         String subtitle = "subtitle";
+        Long generatedProjectId = 3L;
 
         doAnswer(invocationOnMock -> {
             Project argument = invocationOnMock.getArgument(0, Project.class);
-            argument.setId(3L);
+            argument.setId(generatedProjectId);
             return null;
         }).when(projectMapper).insertProject(any(Project.class));
 
         //when
-        Long projectId = projectService.createProject(userId, categoryId, subtitle);
+        ProjectDTO dto = new ProjectDTO();
+        dto.setUserId(userId);
+        dto.setCategoryId(categoryId);
+        dto.setTitle(title);
+        dto.setSubtitle(subtitle);
+
+        Long projectId = projectService.createProject(dto);
 
         //then
-        assertThat(projectId).isEqualTo(3L);
+        assertThat(projectId).isEqualTo(generatedProjectId);
         then(projectMapper).should().insertProject(any(Project.class));
     }
 
     @Test
     void deleteProject() {
         //given
-        Project saved = new Project(1L, 1L, "subtitle");
+        Project saved = Project.createProject(1L, 1L, "subtitle");
         given(projectMapper.getProjectById(anyLong())).willReturn(saved);
 
         //when

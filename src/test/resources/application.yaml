@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: aws, local
+    include: aws, test
   mvc:
     format:
       date: yyyy-MM-dd
@@ -38,6 +38,3 @@ logging:
     io.github.mygoodsupporter.controller: debug
     io.github.mygoodsupporter.service: debug
     io.github.mygoodsupporter.mapper: debug
-
-
-

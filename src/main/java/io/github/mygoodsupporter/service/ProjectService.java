@@ -72,9 +72,14 @@ public class ProjectService {
         projectMapper.updateProject(project);
     }
 
-
     @Transactional
     public void deleteProject(Long projectId) {
+        Project project = projectMapper.getProjectById(projectId);
+
+        if (project == null) {
+            throw new ProjectNotFoundException();
+        }
+
         projectMapper.deleteProject(projectId);
     }
     

@@ -2,6 +2,7 @@ package io.github.mygoodsupporter.service;
 
 import io.github.mygoodsupporter.domain.project.Project;
 import io.github.mygoodsupporter.domain.project.ProjectStatus;
+import io.github.mygoodsupporter.dto.ProjectDTO;
 import io.github.mygoodsupporter.exception.ProjectNotFoundException;
 import io.github.mygoodsupporter.mapper.ProjectMapper;
 import org.junit.jupiter.api.Test;
@@ -34,10 +35,14 @@ public class ProjectServiceIntegrationTest {
         //given
         Long userId = 1L;
         Long categoryId = 1L;
-        String subtitle = "new Project";
-
+        String title = "new Project";
+        ProjectDTO dto = new ProjectDTO();
+        dto.setUserId(userId);
+        dto.setCategoryId(categoryId);
+        dto.setTitle(title);
         //when
-        Long newProjectId = projectService.createProject(userId, categoryId, subtitle);
+
+        Long newProjectId = projectService.createProject(dto);
 
         //then
         assertThat(newProjectId).isNotNull();
@@ -45,7 +50,7 @@ public class ProjectServiceIntegrationTest {
         Project saved = projectMapper.getProjectById(newProjectId);
         assertThat(saved.getUserId()).isEqualTo(userId);
         assertThat(saved.getCategoryId()).isEqualTo(categoryId);
-        assertThat(saved.getSubtitle()).isEqualTo(subtitle);
+        assertThat(saved.getTitle()).isEqualTo(title);
 
         assertThat(saved.getStatus()).isEqualTo(ProjectStatus.PREPARING);
     }
