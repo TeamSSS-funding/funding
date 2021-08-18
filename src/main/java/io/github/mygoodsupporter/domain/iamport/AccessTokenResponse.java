@@ -7,10 +7,11 @@ import lombok.Setter;
 @Setter
 public class AccessTokenResponse {
 
-    /**
+
+     /**
      * 반환된 access token
      */
-    private String accessToken;
+    private String access_token;
 
     /**
      * 현재 시간
@@ -20,5 +21,6 @@ public class AccessTokenResponse {
     /**
      * 토큰이 만료 될 시간
      */
-    private Integer expiredAt;
-}
+    private Integer expired_at;
+
+    }

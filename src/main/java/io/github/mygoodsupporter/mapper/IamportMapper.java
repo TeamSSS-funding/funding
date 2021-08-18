@@ -37,7 +37,6 @@ public interface IamportMapper {
      * 발급된 빌링키로, 결제를 요청합니다.
      *
      */
-    IamportResponse<Payment> requestPaymentByBillingKey(PaymentBillingRequest data);
 
     /**
      * 저장 된 빌링키를 삭제합니다.
