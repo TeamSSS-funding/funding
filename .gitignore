@@ -1,5 +1,6 @@
 ### 업로드하지마시오!!! Should not be uploaded ###
 application-aws.yaml
+application-iamport.yaml
 
 HELP.md
 target/
