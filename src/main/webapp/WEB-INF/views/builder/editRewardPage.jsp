@@ -3,9 +3,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,12 +12,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>mygoodsupporter</title>
     <link href="/dist/tailwind.css" rel="stylesheet">
-</head>
 <body>
 <header class="text-gray-600 body-font">
     <nav class="container mx-auto flex flex-wrap p-5 justify-between items-center">
         <!-- Logo -->
-        <a href="/" class="flex items-center title-font font-medium text-gray-900 mb-4 md:mb-0">
+        <div class="flex items-center title-font font-medium text-gray-900 mb-4 md:mb-0">
             <!-- Hamburger -->
             <button id="navbar-hamburger">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-400 rounded-full" viewBox="0 0 24 24">
@@ -28,7 +24,7 @@
                 </svg>
             </button>
             <span class="ml-3 text-xl">mygoodsupporter</span>
-        </a>
+        </div>
         <!-- Menu -->
         <div class="hidden w-full order-last lg:flex lg:w-auto lg:order-none text-base"
              id="navbar-collapse-menu" >
@@ -57,47 +53,42 @@
 <main class="mt-0 lg:mt-12 text-gray-600 body-font">
     <section class="container mx-auto px-6">
         <div class="w-full md:flex md:flex-wrap lg:flex lg:flex-wrap justify-center items-center">
-            <div class="p-4 w-full md:w-2/3 lg:w-3/5 md:flex md:flex-wrap lg:flex lg:flex-wrap items-center justify-center">
-                <form method="post" action="/projects/${project.userId}/${project.id}/edit/basics" class="flex flex-col flex-grow justify-center items-center mb-4" enctype="multipart/form-data">
-                    <label class="block w-full mt-4">프로젝트 이름</label>
-                    <input type="text" name="title" value="${project.title}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-                    <label class="block w-full mt-4">카테고리를 선택해주세요</label>
-                    <select class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent" name="categoryId">
-                        <c:forEach var="category" items="${categories}">
-                            <option value="${category.id}">${category.name}</option>
-                            <c:if test="${project.categoryId} == ${category.id}">
-                            <option value="${category.id}" selected>${category.name}</option>
-                            </c:if>
-                        </c:forEach>
-                    </select>
-
-                    <label class="block w-full mt-4">짧은 소개글을 작성해주세요</label>
-                    <input type="text" name="subtitle" value="${project.subtitle}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-
-                    <label class="block w-full mt-4">목표 금액을 입력해주세요</label>
-                    <input type="text" name="targetAmount" value="${project.targetAmount}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-
-                    <label class="block w-full mt-4">프로젝트 시작일을 선택해주세요</label>
-                    <javatime:format value="${project.startDate}" var="startDate" pattern="yyyy-MM-dd"/>
-                    <input type="date" name="startDate" value="${startDate}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-
-
-                    <label class="block w-full mt-4">프로젝트 종료일을 선택해주세요</label>
-                    <javatime:format value="${project.endDate}" var="endDate" pattern="yyyy-MM-dd"/>
-                    <input type="date" name="endDate" value="${endDate}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-
-                    <label class="block w-full mt-4">대표 이미지를 선택해주세요</label>
-                    <img src="${project.titleImageUrl}" class="w-full mt-4"><br>
-                    <input type="file" name="titleImageFile" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-
-                    <div class="w-full flex flex-wrap justify-between items-center">
-                        <a href="/projects/${project.userId}/${project.id}/build" class="flex-grow p-2 mt-8 mr-4 text-white bg-yellow-300 hover:bg-yellow-400 rounded">
-                            취소하기
-                        </a>
-                        <input type="submit" class="flex-grow p-2 mt-8 text-white bg-yellow-300 hover:bg-yellow-400 rounded" value="저장하기">
+            <div class="bg-white">
+                <nav class="flex flex-row sm:flex-row">
+                    <button id="rewards-tab-button" class="text-gray-600 pb-2 px-4 block hover:text-yello-400 focus:outline-none focus:text-black-500 border-b-2 font-base border-yellow-400">
+                        선물
+                    </button>
+                    <button id="items-tab-button" class="text-gray-600 pb-2 px-4 block hover:text-black focus:outline-none">
+                        아이템
+                    </button>
+                </nav>
+            </div>
+            <div id="rewards-tab" class="bg-white flex flex-wrap flex-col">
+                <div>
+                    <h1 class="mt-4 text-lg">내가 만든 선물 <span>0</span></h1>
+                </div>
+            </div>
+            <div id="items-tab" class="bg-white flex flex wrap flex-col">
+                <div>
+                    <h1 class="mt-4 text-lg">내가 만든 아이템 <span class="text-sm">0</span></h1>
+                    <div class="mt-4 text-base border">
+                        <h2 class="p-2">텀블러</h2>
+                        <div class="p-2 border border-t">
+                            <div class=text-xs>
+                                <button>편집하기</button>
+                                <button>삭제하기</button>
+                            </div>
+                        </div>
                     </div>
-
-                </form>
+                </div>
+                <button id="create-item-button" class="flex-grow p-2 mt-4 text-white bg-yellow-300 hover:bg-yellow-400 rounded">아이템 만들기</button>
+                <div id="create-item-form" class="hidden">
+                    <form class="flex flex-col">
+                        <label class="block mt-4">아이템 이름</label>
+                        <input type="text" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                        <button class="flex-grow p-2 mt-4 text-white bg-yellow-300 hover:bg-yellow-400 rounded">아이템 등록</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -111,7 +102,31 @@
             menu.classList.toggle("hidden")
             menu.classList.toggle("block")
         })
+
+        let rewardsTabButton = document.querySelector('#rewards-tab-button')
+        rewardsTabButton.addEventListener('click', () => {
+            let rewardsTab = document.querySelector('#rewards-tab')
+            rewardsTab.classList.toggle('hidden')
+            let itemsTab = document.querySelector('#items-tab')
+            itemsTab.classList.toggle('hidden')
+        })
+
+        // let itemTabButton = document.querySelector.querySelector('#items-tab-button')
+        // itemTabButton.addEventListener('click', () => {
+        //   let rewardsTab = document.querySelector('#rewards-tab')
+        //   rewardsTab.classList.toggle('hidden')
+        //   let itemsTab = document.querySelector('#items-tab')
+        //   itemsTab.classList.toggle('hidden')
+        // })
+
+        let createItemButton = document.querySelector('#create-item-button')
+        createItemButton.addEventListener('click', () => {
+            let createItemForm = document.querySelector('#create-item-form')
+            console.log("toggle")
+            createItemForm.classList.toggle("hidden")
+        })
     })
+
 </script>
 </body>
 </html>

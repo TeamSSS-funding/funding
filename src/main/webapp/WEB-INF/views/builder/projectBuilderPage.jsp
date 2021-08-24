@@ -3,9 +3,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -58,45 +55,73 @@
     <section class="container mx-auto px-6">
         <div class="w-full md:flex md:flex-wrap lg:flex lg:flex-wrap justify-center items-center">
             <div class="p-4 w-full md:w-2/3 lg:w-3/5 md:flex md:flex-wrap lg:flex lg:flex-wrap items-center justify-center">
-                <form method="post" action="/projects/${project.userId}/${project.id}/edit/basics" class="flex flex-col flex-grow justify-center items-center mb-4" enctype="multipart/form-data">
-                    <label class="block w-full mt-4">프로젝트 이름</label>
-                    <input type="text" name="title" value="${project.title}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-                    <label class="block w-full mt-4">카테고리를 선택해주세요</label>
-                    <select class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent" name="categoryId">
-                        <c:forEach var="category" items="${categories}">
-                            <option value="${category.id}">${category.name}</option>
-                            <c:if test="${project.categoryId} == ${category.id}">
-                            <option value="${category.id}" selected>${category.name}</option>
-                            </c:if>
-                        </c:forEach>
-                    </select>
-
-                    <label class="block w-full mt-4">짧은 소개글을 작성해주세요</label>
-                    <input type="text" name="subtitle" value="${project.subtitle}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-
-                    <label class="block w-full mt-4">목표 금액을 입력해주세요</label>
-                    <input type="text" name="targetAmount" value="${project.targetAmount}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-
-                    <label class="block w-full mt-4">프로젝트 시작일을 선택해주세요</label>
-                    <javatime:format value="${project.startDate}" var="startDate" pattern="yyyy-MM-dd"/>
-                    <input type="date" name="startDate" value="${startDate}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-
-
-                    <label class="block w-full mt-4">프로젝트 종료일을 선택해주세요</label>
-                    <javatime:format value="${project.endDate}" var="endDate" pattern="yyyy-MM-dd"/>
-                    <input type="date" name="endDate" value="${endDate}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-
-                    <label class="block w-full mt-4">대표 이미지를 선택해주세요</label>
-                    <img src="${project.titleImageUrl}" class="w-full mt-4"><br>
-                    <input type="file" name="titleImageFile" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
-
-                    <div class="w-full flex flex-wrap justify-between items-center">
-                        <a href="/projects/${project.userId}/${project.id}/build" class="flex-grow p-2 mt-8 mr-4 text-white bg-yellow-300 hover:bg-yellow-400 rounded">
-                            취소하기
-                        </a>
-                        <input type="submit" class="flex-grow p-2 mt-8 text-white bg-yellow-300 hover:bg-yellow-400 rounded" value="저장하기">
+                <div class="flex flex-col w-full justify-center text-center">
+                    <h1>${project.title}</h1>
+                    <h2>by ${project.userId}</h2>
+                    <div>
+                        <span>icon</span>
+                        <a href="/projects/${project.userId}/${project.id}/edit/preview">Preview</a>
                     </div>
+                </div>
 
+                <div class="flex flex-col w-full mt-8">
+                    <h1 class="text-lg">Project Overview</h1>
+
+                    <ul class="mt-4">
+                        <li class="mt-4">
+                            <a href="/projects/${project.userId}/${project.id}/edit/basics">
+                                <article>
+                                    <h1>기본</h1>
+                                    <p>기본적인 정보를 입력해주세요</p>
+                                </article>
+                            </a>
+                        </li>
+                        <li class="mt-4">
+                            <a href="/projects/${project.userId}/${project.id}/edit/rewards">
+                                <article>
+                                    <h1>선물</h1>
+                                    <p>후원자가 받을 보상을 만들어주세요</p>
+                                </article>
+                            </a>
+                        </li>
+                        <li class="mt-4">
+                            <a href="/projects/${project.userId}/${project.id}/edit/story">
+                                <article>
+                                    <h1>스토리</h1>
+                                    <p>프로젝트만의 이야기를 들려주세요</p>
+                                </article>
+                            </a>
+                        </li>
+                        <li class="mt-4">
+                            <a href="/projects/${project.userId}/${project.id}/edit/people">
+                                <article>
+                                    <h1>창작자</h1>
+                                    <p>창작자 정보를 수정주세요</p>
+                                </article>
+                            </a>
+                        </li>
+                        <li class="mt-4">
+                            <a href="/projects/${project.userId}/${project.id}/edit/payment">
+                                <article>
+                                    <h1>결제</h1>
+                                    <p>후원받을 계좌 정보를 등록해주세요</p>
+                                </article>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex flex-col w-full mt-4">
+                    심사 신청하기
+                </div>
+
+                <div class="flex flex-col w-full mt-4">
+                    Promotion
+                </div>
+
+                <form method="post" action="/projects/${project.userId}/${project.id}/delete"
+                      class="mt-4">
+                    <input type="submit" value="프로젝트 지우기">
                 </form>
             </div>
         </div>
