@@ -13,7 +13,8 @@
 <body>
 
 <a href="profile/cards/new">결제 카드 등록</a><br>
-<a href="profile/cards">등록된 결제 정보 조회하기</a>
+<a href="profile/cards">등록된 결제 정보 조회하기</a><br>
+<a href="projects/created">내가 만든 프로젝트 </a><br>
 
 </body>
 </html>

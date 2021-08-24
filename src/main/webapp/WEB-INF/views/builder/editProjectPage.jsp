@@ -34,7 +34,7 @@
              id="navbar-collapse-menu" >
             <a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900">진행중인 프로젝트</a>
             <a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900">오픈예정 프로젝트</a>
-            <a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="${pageContext.request.contextPath}/projects">모든 프로젝트</a>
+            <a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="projectList">모든 프로젝트</a>
             <a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="projectRequestPage">프로젝트 신청</a>
         </div>
         <!-- CTA -->
@@ -64,10 +64,14 @@
                     <label class="block w-full mt-4">카테고리를 선택해주세요</label>
                     <select class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent" name="categoryId">
                         <c:forEach var="category" items="${categories}">
-                            <option value="${category.id}">${category.name}</option>
-                            <c:if test="${project.categoryId} == ${category.id}">
-                            <option value="${category.id}" selected>${category.name}</option>
-                            </c:if>
+                            <c:choose>
+                                <c:when test="${category.id != project.categoryId}">
+                                    <option value="${category.id}">${category.name}</option>
+                                    </c:when>
+                                <c:when test="${category.id == project.categoryId}">
+                                        <option value="${category.id}" selected>${category.name}</option>
+                                </c:when>
+                            </c:choose>
                         </c:forEach>
                     </select>
 
@@ -76,6 +80,7 @@
 
                     <label class="block w-full mt-4">목표 금액을 입력해주세요</label>
                     <input type="text" name="targetAmount" value="${project.targetAmount}" class="block w-full mt-4 focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+
 
                     <label class="block w-full mt-4">프로젝트 시작일을 선택해주세요</label>
                     <javatime:format value="${project.startDate}" var="startDate" pattern="yyyy-MM-dd"/>

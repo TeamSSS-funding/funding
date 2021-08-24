@@ -31,6 +31,10 @@ public class ProjectService {
         return projectMapper.getProjectById(projectId);
     }
 
+    public List<Project> getProjectsByAll() {
+        return projectMapper.getProjectsByAll();
+    }
+
 
     @Transactional
     public Long createProject(ProjectDTO dto) {
@@ -56,7 +60,6 @@ public class ProjectService {
         project.setStartDate(LocalDateTime.of(dto.getStartDate(), LocalTime.MIDNIGHT));
         project.setEndDate(LocalDateTime.of(dto.getEndDate(), LocalTime.MIDNIGHT));
 
-
         if (dto.getTitleImageFile().getSize() > 0) {
             if (project.getTitleImageUrl() == null) {
                 String imgPath = s3Service.upload(dto.getTitleImageFile());
@@ -72,10 +75,15 @@ public class ProjectService {
         projectMapper.updateProject(project);
     }
 
-
     @Transactional
-    public void deleteProject(Long projectId) {
+    public void deleteProject(Long projectId) throws IOException {
+        Project project = projectMapper.getProjectById(projectId);
+        if(project.getContentsImageUrl() != null) {
+            String[] fileName = project.getContentsImageUrl().split("/");
+            s3Service.delete(fileName[3]);
+        }
         projectMapper.deleteProject(projectId);
     }
-    
+
+
 }
