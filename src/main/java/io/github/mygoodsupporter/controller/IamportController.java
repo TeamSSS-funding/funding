@@ -29,11 +29,8 @@ public class IamportController {
     @Autowired
     OrderMapper orderMapper;
 
-    private RestTemplate restTemplate;
-    private HttpHeaders httpHeaders;
-    private ObjectMapper mapper = new ObjectMapper();
-    String restKey = "8126139556072178";
-    String secretKey = "f9e54ede1c1976d03792bdbbf5d123c9c80848c5cd77cbfe69a33fd9bec5162d151408478fc8c8da";
+    @Autowired
+    IamportProps iamportProps;
 
 
     @RequestMapping("/verifyIamport/{imp_uid}")
@@ -61,8 +58,8 @@ public class IamportController {
         headers.add("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
         System.out.println(headers);
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("imp_key", restKey);
-        params.add("imp_secret", secretKey);
+        params.add("imp_key", iamportProps.getRestKey());
+        params.add("imp_secret", iamportProps.getSecretKey());
 
         HttpEntity<MultiValueMap<String, String>> iamportTokenRequest = new HttpEntity<>(params,headers);
 

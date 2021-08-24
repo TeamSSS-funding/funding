@@ -9,3 +9,4 @@ cloud:
   aws:
     stack:
       auto: false
+
