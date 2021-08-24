@@ -84,3 +84,15 @@ create table card
     date_of_birth varchar(255) null,
     userId varchar(255) null
 );
+
+create sequence order_seq;
+
+create table orders (
+    id bigint(20) primary key,
+    user_id bigint(20) not null,
+    project_id bigint(20) not null,
+    reward_id bigint(20) not null,
+    amount int(11),
+    order_date int(11),
+    order_status int(11)
+);
