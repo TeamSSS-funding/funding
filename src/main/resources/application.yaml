@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: aws, local
+    include: aws, local, iamport
   datasource:
     url: jdbc:mariadb://localhost:3306/mygoodsupporter
     username: mygoodsupporter
