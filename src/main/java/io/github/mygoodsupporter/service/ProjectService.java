@@ -60,6 +60,7 @@ public class ProjectService {
         project.setStartDate(LocalDateTime.of(dto.getStartDate(), LocalTime.MIDNIGHT));
         project.setEndDate(LocalDateTime.of(dto.getEndDate(), LocalTime.MIDNIGHT));
 
+
         if (dto.getTitleImageFile().getSize() > 0) {
             if (project.getTitleImageUrl() == null) {
                 String imgPath = s3Service.upload(dto.getTitleImageFile());
@@ -75,6 +76,7 @@ public class ProjectService {
         projectMapper.updateProject(project);
     }
 
+
     @Transactional
     public void deleteProject(Long projectId) throws IOException {
         Project project = projectMapper.getProjectById(projectId);
@@ -84,6 +86,5 @@ public class ProjectService {
         }
         projectMapper.deleteProject(projectId);
     }
-
-
+    
 }
