@@ -1,5 +1,6 @@
 package io.github.mygoodsupporter.dto;
 
+import io.github.mygoodsupporter.domain.Address;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,4 +31,17 @@ public class AddressForm {
 
     @NotBlank(message = "주소를 입력해주세요")
     private String chamgo;
+
+    public static AddressForm fromAddress(Address address) {
+        AddressForm addressForm = new AddressForm();
+        addressForm.setId(address.getId());
+        addressForm.setPhone(address.getPhone());
+        addressForm.setPostcode(address.getPostcode());
+        addressForm.setJibun(address.getJibun());
+        addressForm.setChamgo(address.getChamgo());
+        addressForm.setRoad(address.getRoad());
+        addressForm.setDetail(address.getDetail());
+        addressForm.setName(address.getName());
+        return addressForm;
+    }
 }

@@ -6,7 +6,7 @@
     <title>배송지 추가</title>
 </head>
 <body>
-<form:form action="/profile/addresses" method="post" modelAttribute="address">
+<form:form action="/profile/addresses" method="post" modelAttribute="AddressForm">
     <section class="text-gray-600 body-font">
         <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
             <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col mx-auto w-full mt-10 md:mt-0">
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="detail" class="leading-7 text-sm text-gray-600">상세주소</소abel>
+                    <label for="detail" class="leading-7 text-sm text-gray-600">상세주소</label>
                     <form:input path="detail" type="text" class="form-control" id="sample4_detailAddress" name="detail"
                                 cssClass="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                 cssErrorClass="w-full bg-white rounded border border-red-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>

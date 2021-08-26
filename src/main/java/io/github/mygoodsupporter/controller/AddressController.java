@@ -11,10 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -38,13 +35,13 @@ public class AddressController {
     // 등록 화면
     @GetMapping("/profile/addresses/new")
     public String addAddressPage(Model model) {
-        model.addAttribute("address", new AddressForm());
+        model.addAttribute("AddressForm", new AddressForm());
         return "profile/createAddress";
     }
 
     // 등록
     @PostMapping("/profile/addresses")
-    public String addAddress(@Valid AddressForm form, BindingResult bindingResult, @AuthenticationPrincipal UserDetails userDetails) {
+    public String addAddress(@ModelAttribute("AddressForm") @Valid AddressForm form, BindingResult bindingResult, @AuthenticationPrincipal UserDetails userDetails) {
         if(bindingResult.hasErrors()) {
             return "profile/createAddress";
         }
@@ -57,20 +54,20 @@ public class AddressController {
     @GetMapping("/profile/addresses/{addressId}")
     public String getAddress(@PathVariable("addressId") Long addressId, Model model) {
         Address address = addressService.getAddressById(addressId);
-        AddressForm form = new AddressForm();
-        model.addAttribute("address", address);
+        AddressForm form = AddressForm.fromAddress(address);
+//        model.addAttribute("address", address);
         model.addAttribute("addressForm", form);
         return "profile/updateAddress";
     }
 
     // 수정
     @PostMapping("/profile/addresses/{addressId}/edit")
-    public String editAddress(@Valid AddressForm form, BindingResult bindingResult,
+    public String editAddress(@ModelAttribute("addressForm") @Valid AddressForm addressForm, BindingResult bindingResult,
                               @PathVariable("addressId") Long addressId) {
         if (bindingResult.hasErrors()) {
             return "profile/updateAddress";
         }
-        addressService.updateAddress(addressId, form.getName(), form.getPhone(), form.getPostcode(), form.getRoad(), form.getJibun(), form.getDetail(), form.getChamgo());
+        addressService.updateAddress(addressId, addressForm.getName(), addressForm.getPhone(), addressForm.getPostcode(), addressForm.getRoad(), addressForm.getJibun(), addressForm.getDetail(), addressForm.getChamgo());
         String url = "/profile/addresses/"; // + addressId;
         return "redirect:" + url;
     }

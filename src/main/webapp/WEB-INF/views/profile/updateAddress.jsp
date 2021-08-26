@@ -9,14 +9,17 @@
 <%--    <link href="dist/tailwind.css" rel="stylesheet">--%>
 </head>
 <body>
-<form:form action="/profile/addresses/${address.id}/edit" method="post" modelAttribute="addressForm">
+
+<form:form action="/profile/addresses/${addressForm.id}/edit" method="post" modelAttribute="addressForm">
+    ${addressForm.id}
     <section class="text-gray-600 body-font">
         <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
             <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col mx-auto w-full mt-10 md:mt-0">
                 <h2 class="text-gray-900 text-xl font-medium title-font mb-5 text-center">배송지 등록</h2>
                 <div class="relative mb-4">
+                    <form:input path="id" id="id" value="${addressForm.id}" cssClass="hidden"/>
                     <label for="name" class="leading-7 text-sm text-gray-600">수령인</label>
-                    <form:input path="name" id="name" value="${address.name}"
+                    <form:input path="name" id="name" value="${addressForm.name}"
                                 cssClass="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                 cssErrorClass="w-full bg-white rounded border border-red-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                     <span><form:errors path="name" /></span>
@@ -25,7 +28,7 @@
                 <div class="form-group flex flex-wrap">
                     <label for="postcode" class="w-full block leading-7 text-sm text-gray-600">우편번호</label>
                     <div class="flex flex-wrap">
-                        <form:input path="postcode" type="text" class="form-control" id="sample4_postcode" name="postcode"  onblur="addcheck()" value="${address.postcode}"
+                        <form:input path="postcode" type="text" class="form-control" id="sample4_postcode" name="postcode"  onblur="addcheck()" value="${addressForm.postcode}"
                                     cssClass="mr-2 w-1/2 bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                     cssErrorClass="w-full bg-white rounded border border-red-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                         <span><form:errors path="postcode" /></span>
@@ -37,7 +40,7 @@
 
                 <div class="form-group">
                     <label for="jibun" class="leading-7 text-sm text-gray-600">지번주소</label>
-                    <form:input path="jibun" type="text" class="form-control" id="sample4_jibunAddress" name="jibun" value="${address.jibun}"
+                    <form:input path="jibun" type="text" class="form-control" id="sample4_jibunAddress" name="jibun" value="${addressForm.jibun}"
                                 cssClass="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                 cssErrorClass="w-full bg-white rounded border border-red-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                     <span><form:errors path="jibun" /></span>
@@ -46,7 +49,7 @@
 
                 <div class="form-group">
                     <label for="chamgo" class="leading-7 text-sm text-gray-600">참고항목</label>
-                    <form:input path="chamgo" type="text" class="form-control" id="sample4_extraAddress" name="chamgo" value="${address.chamgo}"
+                    <form:input path="chamgo" type="text" class="form-control" id="sample4_extraAddress" name="chamgo" value="${addressForm.chamgo}"
                                 cssClass="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                 cssErrorClass="w-full bg-white rounded border border-red-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                     <span><form:errors path="chamgo" /></span>
@@ -54,15 +57,15 @@
 
                 <div class="form-group">
                     <label for="road" class="leading-7 text-sm text-gray-600">도로명주소</label>
-                    <form:input path="road" type="text" class="form-control" id="sample4_roadAddress" name="road" value="${address.road}"
+                    <form:input path="road" type="text" class="form-control" id="sample4_roadAddress" name="road" value="${addressForm.road}"
                                 cssClass="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                 cssErrorClass="w-full bg-white rounded border border-red-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                     <span><form:errors path="road" /></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="detail" class="leading-7 text-sm text-gray-600">상세주소</소abel>
-                            <form:input path="detail" type="text" class="form-control" id="sample4_detailAddress" name="detail" value="${address.detail}"
+                    <label for="detail" class="leading-7 text-sm text-gray-600">상세주소</label>
+                            <form:input path="detail" type="text" class="form-control" id="sample4_detailAddress" name="detail" value="${addressForm.detail}"
                                         cssClass="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                         cssErrorClass="w-full bg-white rounded border border-red-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                         <span><form:errors path="detail" /></span>
@@ -70,7 +73,7 @@
 
                 <div class="relative mb-4">
                     <label for="phone" class="leading-7 text-sm text-gray-600">연락처</label>
-                    <form:input path="phone" id="phone" value="${address.phone}"
+                    <form:input path="phone" id="phone" value="${addressForm.phone}"
                                 cssClass="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                 cssErrorClass="w-full bg-white rounded border border-red-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                     <span><form:errors path="phone" /></span>
