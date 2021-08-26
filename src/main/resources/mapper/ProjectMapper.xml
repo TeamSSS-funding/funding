@@ -1,53 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.mygoodsupporter.mapper.ProjectDAO">
+<mapper namespace="io.github.mygoodsupporter.mapper.ProjectMapper">
 
 	<resultMap id="ProjectResultMap" type="Project">
 		<id property="id" column="id"/>
-		<result property="memberId" column="member_id"/>
-		<result property="name" column="name"/>
-		<result property="slug" column="slug"/>
+		<result property="userId" column="user_id"/>
+		<result property="categoryId" column="category_id"/>
+		<result property="title" column="title"/>
+		<result property="subtitle" column="subtitle"/>
 		<result property="targetAmount" column="target_amount"/>
 		<result property="currentAmount" column="current_amount"/>
-		<result property="content" column="content"/>
+		<result property="startDate" column="start_date"/>
+		<result property="endDate" column="end_date"/>
 		<result property="status" column="status"/>
+		<result property="titleImageUrl" column="title_image_url"/>
+		<result property="contentsImageUrl" column="contents_image_url"/>
 	</resultMap>
 
-	<select id="getProjects" resultMap="ProjectResultMap">
-		SELECT id, member_id, name, slug, target_amount, current_amount, content, status
+	<select id="getProjectsByUserId" parameterType="Long" resultMap="ProjectResultMap">
+		SELECT *
 		FROM project
+		WHERE user_id = #{userId}
 	</select>
 
-	<select id="getProjectById" resultMap="ProjectResultMap">
-		SELECT id, member_id, name, slug, target_amount, current_amount, content, status
+	<select id="getProjectById" parameterType="Long" resultMap="ProjectResultMap">
+		SELECT *
 		FROM project
 		WHERE id = #{id}
 	</select>
 
-	<select id="getProjectBySlug" parameterType="String" resultMap="ProjectResultMap">
-		SELECT id, member_id, name, slug, target_amount, current_amount, content, status
-		FROM project
-		WHERE slug= #{slug}
-	</select>
-
-	<insert id="insert" parameterType="Project">
+	<insert id="insertProject" parameterType="Project" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO project
-		    (id, member_id, name, slug, target_amount, current_amount, content, status)
+		(user_id, category_id, title, status)
 		VALUES
-		    (nextval(project_seq), #{memberId}, #{name}, #{slug}, #{targetAmount}, #{currentAmount}, #{content}, #{status})
+		(#{userId}, #{categoryId}, #{title}, #{status})
 	</insert>
 
-	<update id="update" parameterType="Project">
+	<update id="updateProject" parameterType="Project">
 		UPDATE project SET
-			member_id = #{memberId},
-			name = #{name},
-			slug = #{slug},
-			target_amount = #{targetAmount},
-			current_amount = #{currentAmount},
-			content = #{content},
-		    status = #{status}
+		   category_id = #{categoryId},
+		   title = #{title},
+		   subtitle = #{subtitle},
+		   target_amount = #{targetAmount},
+		   start_date = #{startDate},
+		   end_date = #{endDate},
+		   title_image_url = #{titleImageUrl},
+		   contents_image_url = #{contentsImageUrl}
 		WHERE id = #{id}
 	</update>
+
+	<delete id="deleteProject" parameterType="Long">
+		delete from project where id=#{id}
+	</delete>
+
 
 </mapper>

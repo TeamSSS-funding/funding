@@ -10,7 +10,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>mygoodsupporter</title>
 	<script defer src="main.js"></script>
-	<link href="dist/tailwind.css" rel="stylesheet">
+	<link href="/dist/tailwind.css" rel="stylesheet">
 </head>
 <body>
 <header class="text-gray-600 body-font">
@@ -30,8 +30,8 @@
 			 id="navbar-collapse-menu" >
 			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900">진행중인 프로젝트</a>
 			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900">오픈예정 프로젝트</a>
-			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="${pageContext.request.contextPath}/projects">모든 프로젝트</a>
-			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="projectRequestPage">프로젝트 신청</a>
+			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="${pageContext.request.contextPath}/projects/projectList">모든 프로젝트</a>
+			<a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="${pageContext.request.contextPath}/projects/new">프로젝트 신청</a>
 		</div>
 		<!-- CTA -->
 		<div class="flex items-center mb-4 md:mb-0">
@@ -56,7 +56,7 @@
 					</svg>
 				</button>
 				&nbsp;
-				<button class="inline-flex items-center bg-amber-200 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base"><a href="myPage">Mypage</a>
+				<button class="inline-flex items-center bg-amber-200 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base"><a href="profile">Mypage</a>
 					<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
 						<path d="M5 12h14M12 5l7 7-7 7"></path>
 					</svg>

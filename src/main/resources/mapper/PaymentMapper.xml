@@ -4,28 +4,36 @@
 <mapper namespace="io.github.mygoodsupporter.mapper.PaymentMapper">
 
     <!-- 카드 정보 기입 -->
-    <insert id="insertCard" parameterType="Cardinfo" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO cardinfo
-            (card_number, expired_date, card_password, date_of_birth,userId)
-        VALUES (#{card_number}, #{expired_date}, #{card_password}, #{date_of_birth}, #{userId})
+    <insert id="insertCard" parameterType="Card" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO card
+            (user_id, card_number, expired_date, card_password, date_of_birth)
+        VALUES (#{userId},#{cardNumber}, #{expiredDate}, #{cardPassword}, #{dateOfBirth})
     </insert>
 
-    <!-- 카드 정보 조회 -->
-    <select id="cardList" parameterType="Cardinfo" resultMap="CreditCard">
-        SELECT id, card_number, expired_date, card_password, date_of_birth, userId FROM cardinfo WHERE userId = #{userId}
+
+    <select id="getCardListByUserId" parameterType="Long" resultType="Card">
+        SELECT id, user_id, card_number, expired_date, card_password, date_of_birth FROM card WHERE user_id = #{userId}
     </select>
 
-    <resultMap id="CreditCard" type="CardInfo">
-        <id property="id" column="id"/>
-        <result property="card_number" column="card_number"/>
-        <result property="expired_date" column="card_password"/>
-        <result property="date_of_birth" column="date_of_birth"/>
-        <result property="userId" column="userid"/>
-    </resultMap>
 
-    <select id="getCardInfoById" parameterType="Long" resultMap="CreditCard">
-        SELECT id, card_number, expired_date, card_password, date_of_birth, userid
-            FROM cardinfo
+    <select id="getCardById" parameterType="Long" resultType="Card">
+        SELECT id, user_id, card_number, expired_date, card_password, date_of_birth
+            FROM card
             WHERE id = #{id}
     </select>
+
+    <update id="updateCard" parameterType="Card">
+        UPDATE card
+            <set>
+                <if test ="cardNumber != null">card_number=#{cardNumber},</if>
+                <if test ="expiredDate != null">expired_date=#{expiredDate},</if>
+                <if test ="cardPassword != null">card_password=#{cardPassword},</if>
+                <if test ="dateOfBirth != null">date_of_birth=#{dateOfBirth}</if>
+            </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteCard" parameterType="Long">
+        DELETE from card where id = #{id}
+    </delete>
 </mapper>
