@@ -96,3 +96,16 @@ create table orders (
     order_date int(11),
     order_status int(11)
 );
+
+create table address (
+                         id bigint(20) primary key auto_increment,
+                         user_id bigint(20) not null,
+                         name varchar(255) not null ,
+                         postcode varchar(255) not null,
+                         phone varchar(255) not null,
+                         road varchar(255) not null,
+                         jibun varchar(255) null,
+                         detail varchar(255) not null,
+                         chamgo varchar(255) null,
+                         constraint fk_address foreign key (user_id) references user(id) on delete cascade
+);

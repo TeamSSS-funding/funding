@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: aws, local
+    include: aws, local, iamport
   mvc:
     format:
       date: yyyy-MM-dd
