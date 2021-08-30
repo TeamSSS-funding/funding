@@ -18,10 +18,10 @@ public class Card extends CardDTO {
     private String dateOfBirth;
 
     @Builder
-    public Card(Long userId, String cardNumber, String expiredDate, String cardPassword, String dateOfBirth) {
+    public Card(Long id,Long userId, String cardNumber, String expiredDate, String cardPassword, String dateOfBirth) {
 
         Assert.notNull(userId, "userid must not be null");
-
+        this.id = id;
         this.userId = userId;
         this.cardNumber = cardNumber;
         this.expiredDate = expiredDate;
