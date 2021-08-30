@@ -17,8 +17,9 @@ INSERT INTO item (id, project_id, title) VALUES (3, 1, '웅크린선인장 엽�
 INSERT INTO item (id, project_id, title) VALUES (4, 1, '뚜웅장인형');
 
 INSERT INTO reward (id, project_id, title, description, amount) VALUES (1, 1, '선물 없이 후원하기', '그냥 후원하세요', 1000);
-INSERT INTO reward (id, project_id, title, description, amount) VALUES (1, 1, '키링', '그냥 후원하세요', 16000);
-INSERT INTO reward (id, project_id, title, description, amount) VALUES (1, 1, '키링키링', '그냥 후원하세요', 24000);
-INSERT INTO reward (id, project_id, title, description, amount) VALUES (1, 1, '' ||
-                                                                              '선물 없이 후원하기', '그냥 후원하세요', 31000);
-INSERT INTO reward (id, project_id, title, description, amount) VALUES (1, 1, '선물 없이 후원하기', '그냥 후원하세요', 31000);
+INSERT INTO reward (id, project_id, title, description, amount) VALUES (2, 1, '키링', '그냥 후원하세요', 16000);
+INSERT INTO reward (id, project_id, title, description, amount) VALUES (3, 1, '키링키링', '그냥 후원하세요', 24000);
+
+INSERT INTO reward_item (id, reward_id, item_id, quantity) VALUES (1, 2, 1, 1);
+INSERT INTO reward_item (id, reward_id, item_id, quantity) VALUES (2, 3, 1, 2);
+INSERT INTO reward_item (id, reward_id, item_id, quantity) VALUES (3, 3, 4, 1);

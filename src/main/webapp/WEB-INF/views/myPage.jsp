@@ -14,7 +14,9 @@
 
 <a href="profile/cards/new">결제 카드 등록</a><br>
 <a href="profile/cards">등록된 결제 정보 조회하기</a><br>
-<a href="payments/selectedReward">결제 테스트</a>
+<a href="payments/selectedReward">결제 테스트</a><br>
+<a href="projects/created">내가만든 프로젝트 목록 조회</a>
+
 
 </body>
 </html>

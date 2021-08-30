@@ -2,17 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.github.mygoodsupporter.mapper.OrderMapper">
-<!--    <insert id="insertOrder" parameterType="Order">-->
 
-<!--    </insert>-->
+    <insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+            orders (user_id, project_id, reward_id, amount, order_status)
+        VALUES
+            (#{userId}, #{projectId}, #{rewardId}, #{amount}, #{orderStatus})
+    </insert>
 
     <select id="getById" parameterType="Long" resultType="Order">
-        SELECT id, userId, projectId, rewardId, amount, paymentStatus FROM orders WHERE userId = #{id}
+        SELECT id, user_id, project_id, reward_id, amount, order_status
+        FROM orders
+        WHERE id = #{id}
     </select>
+
     <update id="changeStatus" parameterType="Order">
         UPDATE orders
-        set paymentStatus = #{paymentStatus}
-        where id=#{id}
+        SET order_status = #{orderStatus}
+        WHERE id= #{id}
     </update>
 
 </mapper>

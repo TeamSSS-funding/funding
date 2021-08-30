@@ -85,14 +85,12 @@ create table card
     userId varchar(255) null
 );
 
-create sequence order_seq;
-
 create table orders (
-    id bigint(20) primary key,
+    id bigint(20) primary key auto_increment,
     user_id bigint(20) not null,
     project_id bigint(20) not null,
     reward_id bigint(20) not null,
     amount int(11),
     order_date int(11),
-    order_status int(11)
+    order_status varchar(255) not null
 );

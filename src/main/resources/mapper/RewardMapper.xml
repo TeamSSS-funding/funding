@@ -35,7 +35,7 @@
                i.title as item_title
         FROM reward r
                  LEFT OUTER JOIN reward_item ri on r.id = ri.reward_id
-                 JOIN item i on ri.item_id = i.id
+                 LEFT OUTER JOIN item i on ri.item_id = i.id
         WHERE r.project_id = #{projectId}
     </select>
 
@@ -53,7 +53,7 @@
                i.title as item_title
         FROM reward r
             LEFT OUTER JOIN reward_item ri on r.id = ri.reward_id
-            JOIN item i on ri.item_id = i.id
+            LEFT OUTER JOIN item i on ri.item_id = i.id
         WHERE r.id = #{rewardId}
     </select>
 

@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/verifyIamport/**").hasRole("USER")
                 .antMatchers("/myPage").hasRole("USER")
                 .antMatchers("/users/admin/**").hasRole("ADMIN")
+                .antMatchers("/checkouts/", "/checkouts/**").hasRole("USER")
                 .antMatchers("/**").denyAll()
                 .and()
                 .formLogin()
