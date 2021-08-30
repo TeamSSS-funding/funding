@@ -59,7 +59,7 @@ public class PaymentMapperTest {
         paymentMapper.insertCard(card);
 
         //then
-        assertThat(card.getUserId()).isEqualTo(4);
+        assertThat(card.getUserId()).isEqualTo(2);
         assertThat(card.getCardNumber()).isEqualTo("2222-2222-2222-2222");
         assertThat(card.getExpiredDate()).isEqualTo("12/25");
         assertThat(card.getCardPassword()).isEqualTo("12");

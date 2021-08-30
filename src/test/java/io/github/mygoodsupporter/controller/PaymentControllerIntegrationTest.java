@@ -119,7 +119,7 @@ class PaymentControllerIntegrationTest {
               .contentType(MediaType.APPLICATION_FORM_URLENCODED))
               .andDo(print())
               .andExpect(status().is3xxRedirection())
-              .andExpect(redirectedUrl("/profile/cards/" +  card.getId()));
+              .andExpect(redirectedUrl("/profile/cards"));
    }
 
    @Test
