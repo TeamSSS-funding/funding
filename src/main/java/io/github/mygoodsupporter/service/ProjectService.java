@@ -31,6 +31,10 @@ public class ProjectService {
         return projectMapper.getProjectById(projectId);
     }
 
+    public List<Project> getProjectsByAll() {
+        return projectMapper.getProjectsByAll();
+    }
+
 
     @Transactional
     public Long createProject(ProjectDTO dto) {
@@ -72,14 +76,14 @@ public class ProjectService {
         projectMapper.updateProject(project);
     }
 
+
     @Transactional
-    public void deleteProject(Long projectId) {
+    public void deleteProject(Long projectId) throws IOException {
         Project project = projectMapper.getProjectById(projectId);
-
-        if (project == null) {
-            throw new ProjectNotFoundException();
+        if(project.getContentsImageUrl() != null) {
+            String[] fileName = project.getContentsImageUrl().split("/");
+            s3Service.delete(fileName[3]);
         }
-
         projectMapper.deleteProject(projectId);
     }
     

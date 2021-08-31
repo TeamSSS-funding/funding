@@ -69,23 +69,24 @@
 <main class="mt-12 lg:mt-32 text-gray-600 body-font">
 	<section class="container mx-auto px-6">
 		<div class="w-full md:flex md:flex-wrap lg:flex lg:flex-wrap items-center -m-4">
-			<c:forEach var="project" items="${projectList}">
-			<div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-				<a class="block relative h-48 rounded overflow-hidden" href="/projects/${project.userId}/${project.id}">
-					<img alt="ecommerce" class="object-cover object-center w-full h-full block" src="${project.titleImageUrl}">
-				</a>
-				<div class="mt-4">
-				<c:forEach var="category" items="${categories}">
-					<c:if test="${category.id == project.categoryId}">
-						<h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">${category.name}</h3>
-					</c:if>
-				</c:forEach>
-					<h2 class="text-gray-900 title-font text-lg font-medium">${project.title}</h2>
-					<p class="mt-1">달성율</p>
-				</div>
-			</div>
-			</c:forEach>
+			<form action="${pageContext.request.contextPath}/checkouts/new" method="post">
+				<c:forEach var="reward" items="${rewards}">
+					<div>
+						<input type="radio" value="${reward.id}" name="rewardId">${reward.amount}원
+						<h1>${reward.title}</h1>
 
+						<h2>${reward.description}</h2>
+						<div>
+							<c:forEach var="rewardItem" items="${reward.items}">
+								<p>${rewardItem.item.title}</p>
+							</c:forEach>
+						</div>
+					</div>
+				</c:forEach>
+				<button type="submit" class="w-full text-black bg-yellow-300 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-400 rounded text-lg">
+					결제하기
+				</button>
+			</form>
 		</div>
 	</section>
 </main>

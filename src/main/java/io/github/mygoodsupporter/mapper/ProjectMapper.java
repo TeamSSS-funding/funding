@@ -9,6 +9,7 @@ import java.util.List;
 public interface ProjectMapper {
 
     List<Project> getProjects();
+    List<Project> getProjectsByAll();
     List<Project> getProjectsByUserId(Long userId);
 
     Project getProjectById(Long projectId);
@@ -16,5 +17,6 @@ public interface ProjectMapper {
     void insertProject(Project project);
     void updateProject(Project project);
     void deleteProject(Long projectId);
+
 
 }

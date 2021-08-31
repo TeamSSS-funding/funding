@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.mygoodsupporter.mapper.ProjectDetailsMapper">
+
+	<resultMap id="projectDetails" type="io.github.mygoodsupporter.dto.ProjectDetails">
+		<id property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="categoryId" column="category_id"/>
+		<result property="title" column="title"/>
+		<result property="subtitle" column="subtitle"/>
+		<result property="targetAmount" column="target_amount"/>
+		<result property="currentAmount" column="current_amount"/>
+		<result property="startDate" column="start_date"/>
+		<result property="endDate" column="end_date"/>
+		<result property="status" column="status"/>
+		<result property="titleImageUrl" column="title_image_url"/>
+		<result property="contentsImageUrl" column="contents_image_url"/>
+		<association property="category" javaType="Category">
+			<id property="id" column="category_id"/>
+			<result property="name" column="category_name"/>
+		</association>
+		<association property="makerProfile" javaType="io.github.mygoodsupporter.dto.MakerProfile">
+			<id property="id" column="user_id"/>
+			<result property="username" column="username"/>
+			<result property="email" column="email"/>
+			<result property="name" column="name"/>
+			<result property="phone" column="phone"/>
+		</association>
+	</resultMap>
+
+	<select id="getById" parameterType="Long" resultMap="projectDetails">
+		SELECT
+				p.id as id,
+				p.user_id as user_id,
+				p.category_id as category_id,
+				p.title as title,
+				p.subtitle as subtitle,
+				p.target_amount as target_amount,
+				p.current_amount as current_amount,
+				p.start_date as start_date,
+				p.end_date as end_date,
+				p.status as status,
+		        p.title_image_url as title_image_url,
+		        p.contents_image_url as contents_image_url,
+				c.name as category_name,
+				u.username as username,
+				u.email as email,
+				u.name as name,
+				u.phone as phone
+		FROM project p INNER JOIN category c ON p.category_id = c.id
+						INNER JOIN user u ON p.user_id = u.id
+		WHERE p.id = #{id}
+	</select>
+
+	<select id="getAll" resultMap="projectDetails">
+		SELECT *
+		FROM project
+	</select>
+
+</mapper>

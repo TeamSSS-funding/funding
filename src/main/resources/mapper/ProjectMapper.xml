@@ -30,6 +30,11 @@
 		WHERE id = #{id}
 	</select>
 
+	<select id="getProjectsByAll" parameterType="Long" resultMap="ProjectResultMap">
+		SELECT *
+		FROM project
+	</select>
+
 	<insert id="insertProject" parameterType="Project" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO project
 		(user_id, category_id, title, status)

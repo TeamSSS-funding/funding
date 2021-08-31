@@ -1,21 +1,14 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<title>모든 프로젝트 목록</title>
-<script defer src="main.js"></script>
-<link href="/dist/tailwind.css" rel="stylesheet">
-<script>
-
-    function deletefn(id) {
-        location.href="/projects/projectList/delete/" +id;
-    }
-
-</script>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>내가 만든 프로젝트</title>
+    <script defer src="main.js"></script>
+    <link href="/dist/tailwind.css" rel="stylesheet">
+</head>
 <body>
 <header class="text-gray-600 body-font">
     <nav class="container mx-auto flex flex-wrap p-5 justify-between items-center">
@@ -69,10 +62,12 @@
         </div>
     </nav>
 </header>
+
 <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-col text-center w-full mb-20">
-            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">모든 프로젝트</h1>
+            <sec:authentication property="principal" var="user"></sec:authentication>
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">${user.username}님이 만든 프로젝트</h1>
 
         </div>
         <div class="lg:w-2/3 w-full mx-auto overflow-auto">
@@ -87,42 +82,37 @@
                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">종료 날짜</th>
                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">대표 이미지</th>
                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">프로젝트 상태</th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">수정</th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">2단계 정보수정</th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">삭제</th>
                     <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="project" items="${projectList}">
-                    <tr class="stripe-dark">
-                        <td class="px-4 py-3">${project.id}</td>
-                        <td class="px-4 py-3">${project.title}</td>
-                        <td class="px-4 py-3">${project.subtitle}</td>
+
+                <c:forEach var = "project" items="${projectList}">
+                    <tr>
                         <td class="px-4 py-3">
-                            <fmt:formatNumber value="${project.targetAmount}" type="number" pattern="#,###"/>won
-                        </td>
+                            <a href="/projects/${project.userId}/${project.id}/build">${project.id}</a></td>
+                        <td class="px-4 py-3">
+                            <a href="/projects/${project.userId}/${project.id}/build">${project.title}</a></td>
+                        <td class="px-4 py-3">${project.subtitle}</td>
+                        <td class="px-4 py-3">${project.targetAmount}</td>
                         <td class="px-4 py-3">
                             <javatime:format value="${project.startDate}" var="startDate" pattern="yyyy-MM-dd"/>
-                                ${startDate}</td>
-                        <td>
+                            ${startDate}
+                        </td>
+                        <td class="px-4 py-3">
                             <javatime:format value="${project.endDate}" var="endDate" pattern="yyyy-MM-dd"/>
-                                ${endDate}</td>
+                                ${endDate}
+                        </td>
                         <td class="px-4 py-3"><img src="${project.titleImageUrl}" width="100px" height="100px"></td>
                         <td class="px-4 py-3">${project.status}</td>
-                        <td class="px-4 py-3"><a href="/projects/${project.userId}/${project.id}/edit/basics">수정</a> </td>
-                        <td class="px-4 py-3"><a href="/projects/${project.userId}/${project.id}/edit/basics">2단계 기본정보입력</a></td>
-                        <td class="px-4 py-3"><button onclick="deletefn('${project.id}')">삭제</button></td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-                <a href="/">홈</a>
-            </div>
-
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
-    </section>
 
+    </div>
+</section>
 
 </body>
 </html>

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.mygoodsupporter.domain.Order;
+import io.github.mygoodsupporter.domain.OrderStatus;
 import io.github.mygoodsupporter.domain.iamport.AccessTokenResponse;
 import io.github.mygoodsupporter.domain.iamport.IamportResponse;
 import io.github.mygoodsupporter.domain.iamport.Payment;
@@ -16,8 +17,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
@@ -34,20 +37,28 @@ public class IamportController {
 
 
     @RequestMapping("/verifyIamport/{imp_uid}")
-    public String IamportCallback(@PathVariable String imp_uid, Order id){
+    public String IamportCallback(@PathVariable String imp_uid, Model model){
         IamportResponse<AccessTokenResponse> accessToken = requestAccessToken();
         IamportResponse<Payment> billingInfo = paymentRequest(accessToken, imp_uid);
-        //Order dbAmount = orderMapper.getById(id);
-        int verifyAmount = 100;//dbAmount.getAmount();
+        Long orderId = Long.valueOf(billingInfo.getResponse().getMerchant_uid());
+        Order order = orderMapper.getOrderById(orderId);
+        int verifyAmount = order.getAmount();
         int iamportAmount = billingInfo.getResponse().getAmount();
 
-        if(verifyAmount == iamportAmount){
-            log.debug("verifyAmount[" + verifyAmount + "]" + "iamportAmount["
-            +iamportAmount+"]" + "같아욧!!!");
-            orderMapper.changeStatus(id);
-
+        if(verifyAmount != iamportAmount){
+            return "redirect:/checkouts/" + orderId.toString() + "/payments/fail";
         }
+        order.setOrderStatus(OrderStatus.SUCCEED);
+        orderMapper.changeStatus(order);
 
+        return "redirect:/checkouts/" + orderId.toString() + "/payments/complete";
+    }
+
+    @GetMapping("/checkouts/{orderId}/payments/complete")
+    public String orderPage(@PathVariable("orderId") Long orderId, Model model)
+    {
+        Order order = orderMapper.getOrderById(orderId);
+        model.addAttribute("order", order);
         return "payments/complete";
     }
 

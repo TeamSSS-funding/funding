@@ -3,16 +3,14 @@ package io.github.mygoodsupporter.controller;
 import io.github.mygoodsupporter.domain.Card;
 import io.github.mygoodsupporter.dto.CardDTO;
 import io.github.mygoodsupporter.security.UserDetails;
+import io.github.mygoodsupporter.service.OrderService;
 import io.github.mygoodsupporter.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +20,7 @@ import java.util.List;
 public class PaymentController {
 
     private final PaymentService paymentService;
+    private final OrderService orderService;
 
     @GetMapping(value = "/profile")
     private String myPage() {
@@ -75,16 +74,14 @@ public class PaymentController {
         return "payments/selectedReward";
     }
 
+    @PostMapping("/checkouts/new")
+    public String createOrder(@RequestParam("rewardId") Long rewardId, @AuthenticationPrincipal UserDetails userDetails) {
+        Long userId = userDetails.getId();
 
+        Long orderId = orderService.createOrder(userId, rewardId);
 
-
-
-
-
-
-
-
-
-
+        String redirectUrl = "/checkouts/" + orderId.toString() + "/payments/new";
+        return "redirect:" + redirectUrl;
+    }
 
 }
