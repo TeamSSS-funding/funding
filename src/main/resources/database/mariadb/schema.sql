@@ -81,8 +81,7 @@ create table card
     card_number varchar(255) null,
     expired_date varchar(255) null,
     card_password varchar(255) null,
-    date_of_birth varchar(255) null,
-    userId varchar(255) null
+    date_of_birth varchar(255) null
 );
 
 create sequence order_seq;

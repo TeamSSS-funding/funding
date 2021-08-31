@@ -33,7 +33,7 @@ public class PaymentService {
     }
     @Transactional
     public void updateCard(Card card){
-        paymentMapper.updateCard(card);
+          paymentMapper.updateCard(card);
     }
     @Transactional
     public void deleteCard(Long id){

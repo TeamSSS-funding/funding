@@ -23,20 +23,18 @@
                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">카드 유효기간(MM/YY)</th>
                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">카드 비밀번호 앞 2자리</th>
                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">소유주 생년월일</th>
-                    <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+                    <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">사용자 고유ID</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <c:forEach var = "card" items="${cardList}">
                 <tr>
-                    <td class="px-4 py-3">${card.userId}</td>
-
-
-                    <td class="px-4 py-3"><a href="cards/${card.id}"> ${card.cardNumber}</a></td>
+                    <td class="px-4 py-3"><a href="cards/${card.id}" style="color:blue"> ${card.cardNumber}</a></td>
                     <td class="px-4 py-3">${card.expiredDate}</td>
                     <td class="px-4 py-3">${card.cardPassword}</td>
                     <td class="px-4 py-3">${card.dateOfBirth}</td>
+                    <td class="px-4 py-3">${card.userId}</td>
 
                 </tr>
                 </c:forEach>
