@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -6,16 +7,67 @@
 <head>
     <title>배송지 수정</title>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-<%--    <link href="dist/tailwind.css" rel="stylesheet">--%>
+    <link href="/dist/tailwind.css" rel="stylesheet">
 </head>
 <body>
+<div class="">
+    <header class="text-gray-600 body-font">
+        <nav class="container mx-auto flex flex-wrap p-5 justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center title-font font-medium text-gray-900 mb-4 md:mb-0">
+                <!-- Hamburger -->
+                <button id="navbar-hamburger">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-amber-200 rounded-full" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                </button>
+                <span class="ml-3 text-xl"><a href="/">mygoodsupporter</a></span>
+            </div>
+            <!-- Menu -->
+            <div class="hidden w-full order-last lg:flex lg:w-auto lg:order-none text-base"
+                 id="navbar-collapse-menu" >
+                <a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900">진행중인 프로젝트</a>
+                <a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900">오픈예정 프로젝트</a>
+                <a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="${pageContext.request.contextPath}/projects/projectList">모든 프로젝트</a>
+                <a class="block mt-4 lg:inline-block lg:mt-0 lg:mr-5 hover:text-gray-900" href="${pageContext.request.contextPath}/projects/new">프로젝트 신청</a>
+            </div>
+            <!-- CTA -->
+            <div class="flex items-center mb-4 md:mb-0">
+                <sec:authorize access="isAnonymous()">
+                    <button class="inline-flex justify-center items-center bg-amber-200 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base"><a href="login">로그인</a>
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                    &nbsp;
+                    <button class="inline-flex items-center bg-amber-200 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base"><a href="joinPage">회원가입</a>
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </sec:authorize>
 
+                <sec:authorize access="isAuthenticated()">
+                    <button class="inline-flex justify-center items-center bg-amber-200 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base"><a href="logout">로그아웃</a>
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                    &nbsp;
+                    <button class="inline-flex items-center bg-amber-200 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base"><a href="/profile">Mypage</a>
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </sec:authorize>
+            </div>
+        </nav>
+    </header>
 <form:form action="/profile/addresses/${addressForm.id}/edit" method="post" modelAttribute="addressForm">
-    ${addressForm.id}
     <section class="text-gray-600 body-font">
-        <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
-            <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col mx-auto w-full mt-10 md:mt-0">
-                <h2 class="text-gray-900 text-xl font-medium title-font mb-5 text-center">배송지 등록</h2>
+        <div class="container px-5 py-24 mt-10 mx-auto flex flex-wrap items-center">
+            <div class="lg:w-2/6 md:w-1/2 bg-gray-50 rounded-lg p-8 flex flex-col mx-auto w-full mt-10 md:mt-0">
+                <h2 class="text-gray-900 text-2xl font-medium title-font mb-5 text-center">배송지 수정</h2>
                 <div class="relative mb-4">
                     <form:input path="id" id="id" value="${addressForm.id}" cssClass="hidden"/>
                     <label for="name" class="leading-7 text-sm text-gray-600">수령인</label>
@@ -34,7 +86,7 @@
                         <span><form:errors path="postcode" /></span>
                         <span id="addcheck"></span>
                         <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"
-                               class="flex-grow text-gray-700 bg-yellow-300 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-400 rounded text-base"><br>
+                               class="flex-grow text-gray-700 bg-yellow-200 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-300 rounded text-base"><br>
                     </div>
                 </div>
 
@@ -78,7 +130,11 @@
                                 cssErrorClass="w-full bg-white rounded border border-red-300 focus:border-yellow-500 focus:ring-2 focus:ring-border-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                     <span><form:errors path="phone" /></span>
                 </div>
-                <button class="text-black bg-yellow-300 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-400 rounded text-lg">배송지 수정</button>
+                <div class="flex mt-3">
+                <button class="flex-auto mr-1 text-black bg-yellow-200 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-300 rounded text-lg">주소수정</button>
+                <button class="flex-auto ml-1 text-black bg-yellow-200 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-300 rounded text-lg"
+                        type="button" onclick="location.href='/profile/addresses'">돌아가기</button>
+                </div>
             </div>
         </div>
     </section>
@@ -177,6 +233,13 @@
 <%--    street<input type="text" name="street" value="${address.street}"><br>--%>
 <%--    zipcode<input type="text" name="zipcode" value="${address.zipcode}"><br>--%>
 <%--    <input type="submit" value="수정">--%>
-
+    <footer class="mt-20 h-1/6 border-t-2 border-gray-200">
+        <div class="text-center">
+            <%--            <p class="mb-2">My Good Supporter</p>--%>
+            <p class="text-xs pt-10 mb-1">https://github.com/mygoodsupporter/mygoodsupporter</p>
+            <p class="text-xs">COPYRIGHT © MYGOODSUPPORTER ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+</div>
 </body>
 </html>
