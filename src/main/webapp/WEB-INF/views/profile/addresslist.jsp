@@ -29,7 +29,7 @@
         })
     })
 </script>
-<div class="mt-10">
+<div class="">
 <header class="text-gray-600 body-font">
     <nav class="container mx-auto flex flex-wrap p-5 justify-between items-center">
         <!-- Logo -->
@@ -40,7 +40,7 @@
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                 </svg>
             </button>
-            <span class="ml-3 text-xl">mygoodsupporter</span>
+            <span class="ml-3 text-xl"><a href="/">mygoodsupporter</a></span>
         </div>
         <!-- Menu -->
         <div class="hidden w-full order-last lg:flex lg:w-auto lg:order-none text-base"
@@ -73,7 +73,7 @@
                     </svg>
                 </button>
                 &nbsp;
-                <button class="inline-flex items-center bg-amber-200 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base"><a href="profile">Mypage</a>
+                <button class="inline-flex items-center bg-amber-200 border-0 py-1 px-3 focus:outline-none hover:bg-yellow-300 rounded text-base"><a href="/profile">Mypage</a>
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
                         <path d="M5 12h14M12 5l7 7-7 7"></path>
                     </svg>
@@ -126,10 +126,10 @@
         </div>
     </div>
 </section>
-    <footer class="my-20">
+    <footer class="mt-20 h-1/6 border-t-2 border-gray-200">
         <div class="text-center">
 <%--            <p class="mb-2">My Good Supporter</p>--%>
-            <p class="text-xs mb-1">https://github.com/mygoodsupporter/mygoodsupporter</p>
+            <p class="text-xs pt-10 mb-1">https://github.com/mygoodsupporter/mygoodsupporter</p>
             <p class="text-xs">COPYRIGHT © MYGOODSUPPORTER ALL RIGHTS RESERVED.</p>
         </div>
     </footer>
