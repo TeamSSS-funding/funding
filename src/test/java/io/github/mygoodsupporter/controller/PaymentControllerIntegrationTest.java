@@ -54,7 +54,7 @@ class PaymentControllerIntegrationTest {
 
       userService.createUser(user);
 
-      card = new Card(4L,"2222-2222-2222-2222", "12/25","12","900111");
+      card = new Card(4L,2L,"2222-2222-2222-2222", "12/25","12","900111");
       paymentMapper.insertCard(card);
    }
 
@@ -119,7 +119,7 @@ class PaymentControllerIntegrationTest {
               .contentType(MediaType.APPLICATION_FORM_URLENCODED))
               .andDo(print())
               .andExpect(status().is3xxRedirection())
-              .andExpect(redirectedUrl("/profile/cards/" +  card.getId()));
+              .andExpect(redirectedUrl("/profile/cards"));
    }
 
    @Test

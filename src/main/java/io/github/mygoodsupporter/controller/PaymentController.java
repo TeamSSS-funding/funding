@@ -59,7 +59,7 @@ public class PaymentController {
     private String updateCard(@PathVariable("cardId") Long id, @ModelAttribute Card card) {
         card.setId(id);
         paymentService.updateCard(card);
-        return "redirect:/profile/cards/{cardId}";
+        return "redirect:/profile/cards";
     }
 
     @PostMapping(value = "/profile/cards/{cardId}/delete")

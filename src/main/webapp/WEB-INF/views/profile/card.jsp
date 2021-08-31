@@ -7,8 +7,7 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-
-
+<sec:authentication property="principal" var="user"></sec:authentication>
 <form action="${pageContext.request.contextPath}/profile/cards/${cardId}/edit" method="post">
 <section class="text-gray-600 body-font">
 
@@ -35,10 +34,18 @@
                 <label for="dateOfBirth" class="leading-7 text-sm text-gray-600">소유주 생년월일</label>
                 <input type="text" id="dateOfBirth" name="dateOfBirth" value="${card.dateOfBirth}" class="w-full bg-white rounded border border-gray-300 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
             </div>
+            <div>
+                <input type="hidden" id="userId" name="userId" value="${user.id}">
+            </div>
             <div class="relative mb-4">
             <button class="text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">정보 수정하기</button>
-            <button onclick="document.querySelector('#deleteCardForm').submit();" class="text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">삭제하기</button>
-            <p class="text-xs text-gray-500 mt-3"><input type="checkbox">결제사 정보제공 동의</p>
+            <button id="deleteCardButton" class="text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">삭제하기</button>
+            <p class="text-xs text-gray-500 mt-3">
+                <label for="agreement1">
+                    <input id="agreement1" name="agreement1" type="checkbox"/>
+                    결제사 정보제공 동의
+                </label>
+            </p>
             </div>
         </div>
     </div>
@@ -47,5 +54,15 @@
 
 <form id="deleteCardForm" action="/profile/cards/${card.id}/delete" method="post" style="visibility: hidden;">
 </form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const deleteButton = document.querySelector('#deleteCardButton');
+        deleteButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            document.querySelector('#deleteCardForm').submit();
+        })
+    })
+</script>
 </body>
 </html>

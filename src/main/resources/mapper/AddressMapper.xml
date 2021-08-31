@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.mygoodsupporter.mapper.AddressMapper">
+    <resultMap id="address" type="Address">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="name" column="name"/>
+        <result property="postcode" column="postcode"/>
+        <result property="phone" column="phone"/>
+        <result property="road" column="road"/>
+        <result property="jibun" column="jibun"/>
+        <result property="detail" column="detail"/>
+        <result property="chamgo" column="chamgo"/>
+    </resultMap>
+
+    <!-- 배송지 목록 조회 -->
+<!--    <select id="addressList" resultMap="AddressResultMap">-->
+<!--        select * from address where user_id = #{id}-->
+<!--    </select>-->
+
+    <!-- 배송지 추가 -->
+<!--    <insert id="newAddress" parameterType="Address" useGeneratedKeys="true" keyProperty="id">-->
+<!--        insert into address(user_id,name,postcode,phone,road,jibun,detail,chamgo)-->
+<!--        values (#{id},#{name},#{postcode},#{phone},#{road},#{jibun},#{detail},#{chamgo})-->
+<!--    </insert>-->
+
+    <!-- 배송지 수정 화면 출력 -->
+    <!-- 배송지 수정 -->
+    <!-- 배송지 삭제 -->
+
+    <select id="getAddressesByUserId" parameterType="Long" resultMap="address">
+        SELECT *
+--                id, user_id, city, street, zipcode
+        FROM address
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="getAddressById" parameterType="Long" resultMap="address">
+        SELECT *
+--                id, user_id, city, street, zipcode
+        FROM address
+        WHERE id = #{addressId}
+    </select>
+
+    <insert id="insertAddress" parameterType="Address" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO address
+            (id, user_id, name, postcode, phone, road, jibun, detail, chamgo)
+        VALUES
+            (#{id}, #{userId}, #{name}, #{postcode}, #{phone}, #{road}, #{jibun}, #{detail}, #{chamgo})
+    </insert>
+
+    <update id="updateAddress" parameterType="Address">
+        UPDATE address
+        <set>
+            <if test="name != ''">name = #{name},</if>
+            <if test="postcode != ''">postcode = #{postcode},</if>
+            <if test="phone != ''">phone =#{phone},</if>
+            <if test="road != ''">road =#{road},</if>
+            <if test="jibun != ''">jibun =#{jibun},</if>
+            <if test="detail != ''">detail =#{detail},</if>
+            <if test="chamgo != ''">chamgo =#{chamgo},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteAddress" parameterType="Long">
+        DELETE FROM address WHERE id = #{addressId}
+    </delete>
+</mapper>
