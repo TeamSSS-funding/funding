@@ -10,7 +10,7 @@
             (#{userId}, #{projectId}, #{rewardId}, #{amount}, #{orderStatus})
     </insert>
 
-    <select id="getById" parameterType="Long" resultType="Order">
+    <select id="getOrderById" parameterType="Long" resultType="Order">
         SELECT id, user_id, project_id, reward_id, amount, order_status
         FROM orders
         WHERE id = #{id}

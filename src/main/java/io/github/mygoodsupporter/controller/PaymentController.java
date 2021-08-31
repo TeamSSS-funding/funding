@@ -75,7 +75,6 @@ public class PaymentController {
     }
 
     @PostMapping("/checkouts/new")
-    @ResponseBody
     public String createOrder(@RequestParam("rewardId") Long rewardId, @AuthenticationPrincipal UserDetails userDetails) {
         Long userId = userDetails.getId();
 

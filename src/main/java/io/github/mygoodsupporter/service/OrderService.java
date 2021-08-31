@@ -4,7 +4,6 @@ import io.github.mygoodsupporter.domain.Order;
 import io.github.mygoodsupporter.domain.OrderStatus;
 import io.github.mygoodsupporter.domain.project.Reward;
 import io.github.mygoodsupporter.mapper.OrderMapper;
-import io.github.mygoodsupporter.mapper.RewardMapper;
 import io.github.mygoodsupporter.service.project.RewardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,5 +32,10 @@ public class OrderService {
 
         orderMapper.insertOrder(order);
         return order.getId();
+    }
+
+
+    public Order getOrderById(Long orderId) {
+        return orderMapper.getOrderById(orderId);
     }
 }
