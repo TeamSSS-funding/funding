@@ -21,7 +21,7 @@
         IMP.request_pay({
             pg : 'kakaopay',
             pay_method : 'card',
-            merchant_uid : 'merchant_' + new Date().getTime(),
+            merchant_uid :
             name : '주문명:결제테스트',
             amount : 100,
             buyer_email : 'iamport@siot.do',
@@ -37,6 +37,7 @@
                     url: "/verifyIamport/" + rsp.imp_uid, //cross-domain error가 발생하지 않도록 주의해주세요
                     type: 'POST',
                     dataType: 'json',
+
 
                 })
 

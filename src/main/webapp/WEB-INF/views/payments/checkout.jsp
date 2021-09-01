@@ -35,6 +35,15 @@
                     url: "/verifyIamport/" + rsp.imp_uid, //cross-domain error가 발생하지 않도록 주의해주세요
                     type: 'POST',
                     dataType: 'json',
+                    data: {
+                        imp_uid: rsp.imp_uid,
+                        merchant_uid: ${order.id}
+                    }
+                }).done((data) => {
+                    console.log(data);
+                    window.location.href = "/checkouts/${order.id}/payments/complete";
+                }).fail(() => {
+                    window.location.href = "/checkouts/${order.id}/payments/fail";
                 })
 
             } else {
