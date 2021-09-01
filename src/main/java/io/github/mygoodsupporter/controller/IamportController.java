@@ -12,10 +12,7 @@ import io.github.mygoodsupporter.domain.iamport.Payment;
 import io.github.mygoodsupporter.mapper.OrderMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -23,6 +20,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 @Slf4j
@@ -37,21 +35,26 @@ public class IamportController {
 
 
     @RequestMapping("/verifyIamport/{imp_uid}")
-    public String IamportCallback(@PathVariable String imp_uid, Model model){
+    public ResponseEntity<String> IamportCallback(@RequestParam String imp_uid, @RequestParam String merchant_uid, Model model) throws JsonProcessingException {
         IamportResponse<AccessTokenResponse> accessToken = requestAccessToken();
         IamportResponse<Payment> billingInfo = paymentRequest(accessToken, imp_uid);
-        Long orderId = Long.valueOf(billingInfo.getResponse().getMerchant_uid());
+        Long orderId = Long.valueOf(merchant_uid);
         Order order = orderMapper.getOrderById(orderId);
         int verifyAmount = order.getAmount();
         int iamportAmount = billingInfo.getResponse().getAmount();
 
+        ObjectMapper objectMapper = new ObjectMapper();
         if(verifyAmount != iamportAmount){
-            return "redirect:/checkouts/" + orderId.toString() + "/payments/fail";
+
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
         order.setOrderStatus(OrderStatus.SUCCEED);
         orderMapper.changeStatus(order);
 
-        return "redirect:/checkouts/" + orderId.toString() + "/payments/complete";
+        String json = objectMapper.writeValueAsString(order);
+        ResponseEntity<String> response = new ResponseEntity<>(json, HttpStatus.OK);
+        return response;
     }
 
     @GetMapping("/checkouts/{orderId}/payments/complete")
