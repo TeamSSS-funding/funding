@@ -10,8 +10,6 @@ import io.github.mygoodsupporter.domain.iamport.AccessTokenResponse;
 import io.github.mygoodsupporter.domain.iamport.IamportResponse;
 import io.github.mygoodsupporter.domain.iamport.Payment;
 import io.github.mygoodsupporter.mapper.OrderMapper;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -19,10 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.Serializable;
 
 @Slf4j
 @Controller
@@ -35,40 +34,27 @@ public class IamportController {
     IamportProps iamportProps;
 
 
-    @PostMapping("/verifyIamport/{imp_uid}")
-    public ResponseEntity<String> IamportCallback(@RequestParam String imp_uid, @RequestParam String merchant_uid) throws JsonProcessingException {
+    @RequestMapping("/verifyIamport/{imp_uid}")
+    public ResponseEntity<String> IamportCallback(@RequestParam String imp_uid, @RequestParam String merchant_uid, Model model) throws JsonProcessingException {
         IamportResponse<AccessTokenResponse> accessToken = requestAccessToken();
         IamportResponse<Payment> billingInfo = paymentRequest(accessToken, imp_uid);
         Long orderId = Long.valueOf(merchant_uid);
         Order order = orderMapper.getOrderById(orderId);
-        int amountToBePaid = order.getAmount();
-        int amount = billingInfo.getResponse().getAmount();
+        int verifyAmount = order.getAmount();
+        int iamportAmount = billingInfo.getResponse().getAmount();
 
         ObjectMapper objectMapper = new ObjectMapper();
-        if(amountToBePaid != amount){
-            TransactionStatement tst = new TransactionStatement(orderId.toString(), "Invalid amount");
-            String json = objectMapper.writeValueAsString(tst);
-            ResponseEntity<String> response = new ResponseEntity<>(json, HttpStatus.BAD_REQUEST);
-            return response;
+        if(verifyAmount != iamportAmount){
+
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         order.setOrderStatus(OrderStatus.SUCCEED);
         orderMapper.changeStatus(order);
-        TransactionStatement tst = new TransactionStatement(orderId.toString(), "succeed");
-        String json = objectMapper.writeValueAsString(tst);
+
+        String json = objectMapper.writeValueAsString(order);
         ResponseEntity<String> response = new ResponseEntity<>(json, HttpStatus.OK);
         return response;
-    }
-
-
-    @Getter @Setter
-    class TransactionStatement implements Serializable {
-        private String orderId;
-        private String status;
-        public TransactionStatement(String orderId, String status) {
-            this.orderId = orderId;
-            status = status;
-        }
     }
 
     @GetMapping("/checkouts/{orderId}/payments/complete")

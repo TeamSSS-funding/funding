@@ -30,7 +30,6 @@
         }, function(rsp) { //callback
             if ( rsp.success ) {
                 console.log(rsp)
-                const redirectUrl = "/checkouts/" + ${order.id} + "/payments";
                 //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
                 jQuery.ajax({
                     url: "/verifyIamport/" + rsp.imp_uid, //cross-domain error가 발생하지 않도록 주의해주세요
@@ -38,15 +37,15 @@
                     dataType: 'json',
                     data: {
                         imp_uid: rsp.imp_uid,
-                        merchant_uid: rsp.merchant_uid
+                        merchant_uid: ${order.id}
                     }
                 }).done((data) => {
                     console.log(data);
-                    window.location.href = redirectUrl + "/complete";
-                }).fail((data) => {
-                    console.log(data);
-                    window.location.href= redirectUrl + "/fail";
+                    window.location.href = "/checkouts/${order.id}/payments/complete";
+                }).fail(() => {
+                    window.location.href = "/checkouts/${order.id}/payments/fail";
                 })
+
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
