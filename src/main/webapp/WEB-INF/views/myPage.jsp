@@ -75,7 +75,8 @@
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-row w-full text-center mb-16 justify-start items-center">
             <div class="rounded-full h-32 w-32 flex items-center justify-center bg-yellow-200 border-0 border-yellow-300"></div>
-            <div class="ml-8 text-3xl">이름</div>
+            <sec:authentication property="principal" var="user"></sec:authentication>
+            <div class="ml-8 text-3xl">${user.username}님 환영합니다.</div>
         </div>
         <div class="w-full mx-auto overflow-auto mt-10 flex flex-wrap md:flex md:flex-wrap border-t-2 border-gray-400">
             <div class="mt-8 pb-7 w-full md:w-1/2 ">
@@ -91,7 +92,7 @@
                 <a class="pl-5 text-xl" href="profile/addresses">배송지 관리</a>
             </div>
             <div class="mt-8 pb-7 w-full md:w-1/2 ">
-                <a class="pl-5 text-xl" href="">어쩌구 저쩌구</a>
+                <a class="pl-5 text-xl" href="/projects/created">내가 만든 프로젝트</a>
             </div>
             <div class="mt-8 pb-7 w-full md:w-1/2 ">
                 <a class="pl-5 text-xl" href="">요렇게 저렇게</a>
