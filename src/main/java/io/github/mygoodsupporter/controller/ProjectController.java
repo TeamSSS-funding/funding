@@ -78,11 +78,19 @@ public class ProjectController {
         }
     }
 
+
     @GetMapping(value = "/projects/projectList")
     public String projectList(Model model){
         List<Project> projectList =  projectService.getProjectsByAll();
         model.addAttribute("projectList", projectList);
         return "projects/projectList";
+    }
+
+    @GetMapping("/projects/created")
+    public String getMyProject(@AuthenticationPrincipal UserDetails userDetails, Model model){
+        List<Project> projectList = projectService.getProjectsByUserId(userDetails.getId());
+        model.addAttribute("projectList",projectList);
+        return "projects/projectCreated";
     }
 
     @GetMapping(value = "/projects/projectList/delete/{id}")
@@ -91,12 +99,5 @@ public class ProjectController {
         return "redirect:/projects/projectList";
     }
 
-    @GetMapping("/projects/created")
-    public String getMyProject(@AuthenticationPrincipal UserDetails userDetails, Model model){
-        List<Project> projectList = projectService.getProjectsByUserId(userDetails.getId());
-        log.debug(userDetails.getId().toString());
-        model.addAttribute("projectList",projectList);
-        return "projects/projectCreated";
-    }
 
 } 

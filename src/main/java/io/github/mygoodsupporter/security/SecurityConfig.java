@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/idcheck").permitAll()
                 .antMatchers("/projects").permitAll()
                 .antMatchers("/test").permitAll()
+                .antMatchers("/redirection").permitAll()
                 .antMatchers("/projects/**/**").permitAll()
                 .antMatchers("/projects**").authenticated()
                 .antMatchers("/projects/**/**/**").authenticated()

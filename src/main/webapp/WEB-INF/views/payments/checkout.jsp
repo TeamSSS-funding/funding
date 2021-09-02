@@ -121,19 +121,25 @@
                 </div>
                 <p class="leading-relaxed mb-4">${projectDetails.subtitle}</p>
                 <div class="flex border-t border-gray-200 py-2">
-                    <span class="text-gray-500">${reward.title}</span>
-                    <span class="ml-auto text-gray-900">${reward.id}</span>
+                    <span class="text-gray-500">선택 리워드</span>
+                    <span class="ml-auto text-gray-900">${reward.title}</span>
                 </div>
-                <div class="flex border-t border-gray-200 py-2">
+                <div class="flex flex-wrap border-t border-gray-200 py-2 justify-items-stretch">
                     <span class="text-gray-500">아이템 목록</span>
-                    <span class="ml-auto text-gray-900">${reward.items}</span>
+                    <c:forEach var="rewardItem" items="${reward.items}">
+                        <c:choose>
+                            <c:when test="${rewardItem.rewardId eq order.rewardId}">
+                                <p class="w-full ml-auto text-gray-900 text-right">${rewardItem.item.title}</p>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>
                 </div>
                 <div class="flex border-t border-b mb-6 border-gray-200 py-2">
                     <span class="text-gray-500">수량</span>
                     <span class="ml-auto text-gray-900">1</span>
                 </div>
                 <div class="flex flex-wrap">
-                    <span class="w-full title-font font-medium text-2xl text-gray-900">${order.amount}</span>
+                    <span class="w-full title-font font-medium text-2xl text-gray-900">${order.amount}원</span>
                     <button class="w-1/3 flex ml-auto text-white bg-yellow-300 border-0 py-2 focus:outline-none hover:bg-yellow-400 rounded">카드 결제</button>
                     <button class="w-1/3 flex ml-auto text-white bg-yellow-300 border-0 py-2 focus:outline-none hover:bg-yellow-400 rounded" onclick="iamport()">카카오페이 결제</button>
                 </div>
