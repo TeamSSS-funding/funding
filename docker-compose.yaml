@@ -9,6 +9,6 @@ services:
       MARIADB_PASSWORD: mygoodsupporter
       MARIADB_DATABASE: mygoodsupporter
     ports:
-      - 3306:3306
+      - "3306:3306"
     volumes:
       - ./src/main/resources/database/mariadb:/docker-entrypoint-initdb.d

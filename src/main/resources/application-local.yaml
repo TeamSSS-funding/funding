@@ -9,6 +9,9 @@ spring:
       - org.springframework.cloud.aws.autoconfigure.context.ContextInstanceDataAutoConfiguration
       - org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration
       - org.springframework.cloud.aws.autoconfigure.context.ContextRegionProviderAutoConfiguration
+  jpa:
+    hibernate:
+      ddl-auto: create
 
 cloud:
   aws:
